@@ -1,0 +1,149 @@
+#HEADER#
+Version : 3
+EOF : '^'
+EOR : '~'
+
+#DEFINITION#
+
+AGENT_REF^ADDRESS_1^ADDRESS_2^ADDRESS_3^ADDRESS_4^TOWN^POSTCODE1^POSTCODE2^SUMMARY^DESCRIPTION^BRANCH_ID^STATUS_ID^BEDROOMS^PRICE^PRICE_QUALIFIER^PROP_SUB_ID^CREATE_DATE^UPDATE_DATE^DISPLAY_ADDRESS^PUBLISHED_FLAG^LET_DATE_AVAILABLE^LET_FURN_ID^LET_RENT_FREQUENCY^TRANS_TYPE_ID^MEDIA_IMAGE_00^MEDIA_IMAGE_01^MEDIA_IMAGE_02^MEDIA_IMAGE_03^MEDIA_IMAGE_04^MEDIA_IMAGE_05^MEDIA_IMAGE_06^MEDIA_IMAGE_07^MEDIA_IMAGE_08^MEDIA_IMAGE_09^MEDIA_IMAGE_10^MEDIA_IMAGE_11^MEDIA_IMAGE_12^MEDIA_IMAGE_13^MEDIA_IMAGE_14^MEDIA_IMAGE_15^MEDIA_IMAGE_16^MEDIA_IMAGE_17^MEDIA_IMAGE_18^MEDIA_IMAGE_19^MEDIA_FLOOR_PLAN_00^MEDIA_FLOOR_PLAN_TEXT_00^MEDIA_FLOOR_PLAN_01^MEDIA_FLOOR_PLAN_TEXT_01^MEDIA_IMAGE_60^MEDIA_IMAGE_TEXT_60^MEDIA_IMAGE_61^MEDIA_IMAGE_TEXT_61^MEDIA_DOCUMENT_50^MEDIA_DOCUMENT_TEXT_50^MEDIA_DOCUMENT_51^MEDIA_DOCUMENT_TEXT_51^MEDIA_DOCUMENT_52^MEDIA_DOCUMENT_TEXT_52^MEDIA_DOCUMENT_53^MEDIA_DOCUMENT_TEXT_53^MEDIA_DOCUMENT_00^MEDIA_DOCUMENT_TEXT_00^MEDIA_DOCUMENT_01^MEDIA_DOCUMENT_TEXT_01^MEDIA_VIRTUAL_TOUR_01^MEDIA_VIRTUAL_TOUR_TEXT_01^MEDIA_VIRTUAL_TOUR_02^MEDIA_VIRTUAL_TOUR_TEXT_02^~
+
+#DATA#
+WG1_2213959^Berkeley Avenue^^^^Leeds^LS8^3RH^Property description  Westgate Estate Agents are please to offer this two bedroom terraced property in a popular district with convenient access to the city centre and local amenities.  The accommodation briefly comprises lounge, Kitchen, first floor landing, double bedroom, bathroom and second bedroom to the 2nd floor a further double bedroom. In addition the property has a useful cellar area. Externally the property has a front yard.^Back to Back Terraced property in a popular district with convenient access to the city centre and local amenities.
+
+The accommodation briefly comprises lounge, Kitchen, first floor landing, double bedroom, bathroom and second bedroom to the 2nd floor with further double bedroom. In addition the property has a useful cellar area. Externally the property has a front Yard.
+
+GROUND FLOOR
+
+Lounge ( 5.33m x 3.27m )
+Having double glazed bay window to the front and central heating radiator.
+
+Kitchen ( 3.34 x 1.50m )
+Fitted with a range of base and wall units with work surfaces over, stainless steel sink and drainer unit, electric oven, gas hob, with cooker hood, tiled to splash back and door to the side.
+
+Cellar 
+Currently used for storage.
+
+First Floor Landing  
+Having access to bedrooms one and two and the house bathroom.
+
+Bathroom (2.17m x 2.48)  
+Fitted with a suite that comprises bath, wash hand basin, WC, double glazed window to the rear and central heating radiator.
+
+Bedroom One ( 2.17m x 2.48m )
+Having double glazed window to the front  central heating radiator.
+
+Second Floor Landing 
+
+Bedroom Two 11' 5" x 6' 8" ( 3.48m x 2.03m )
+Having double glazed window to the rear and central heating radiator.
+
+
+DIRECTIONS
+Please see the map or contact the office for further details^WG1^0^2^59995^4^26^^^Berkeley Avenue Leeds LS8 3RH^1^2015-08-23 00:00:00^4^0^1^WG1_2213959_IMG_00.JPG^WG1_2213959_IMG_01.JPG^WG1_2213959_IMG_02.JPG^WG1_2213959_IMG_03.JPG^WG1_2213959_IMG_04.JPG^^^^^^^^^^^^^^^^^^^^WG1_2213959_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2232844^Ashton Place^^^^Leeds^LS8^5PB^Westgate Estate Agents are pleased to offer this 3 bedroom back to back house with front Garden. On the Ground floor there is a Living Room, Kitchen and a Basement . On the 1st floor there is a Double Bedroom and bathroom. On the 2nd floor there are 2 bedrooms with dormers. This house has a gas central heating system and UPVC double glazing.^Entrance
+
+UPVC Door leading in from the front of the property and two windows to the side.
+
+Lounge (4.25m x 3.85m)
+ Ceiling coving and ceiling rose.  Central heating radiator and UPVC window to the front of the property.  Laminate flooring.
+
+Kitchen (3.43m x 1.97m)
+
+Fitted kitchen with a range of wall and base units and contrasting work surfaces. Stainless steel sink with drainer, plumbing for washing machine, electric oven, double glazed window to the front of the property and door leading to the cellar.  Upvc window to the front of the property.
+
+Cellar 
+Ideal for storage use.
+
+1st Floor Landing 
+Stairs from the ground floor
+
+Bedroom 1 (4.40m x 3.85m )
+Central heating radiator, double glazed window to the front of the property.  Coving to the ceiling.
+
+
+Bathroom  (2.57m x 1.98m)
+ 
+Comprising of hand wash basin, wc and bath with shower over. Lino flooring, central heating radiator, double glazed window to the front of the property.
+
+
+Bedroom 2 (3.35m x 2.66m) 
+
+Central heating radiator, double glazed window to the front of the property.  Coving to the ceiling.
+
+
+Bedroom 3 (4.40m x 2.56m) 
+Central heating radiator, double glazed window to the front of the property.  Coving to the ceiling.
+
+
+^WG1^0^3^79995^0^26^^^Ashton Place, LS8 5PB^1^2015-07-29 00:00:00^4^0^1^WG1_2232844_IMG_00.JPG^WG1_2232844_IMG_01.JPG^WG1_2232844_IMG_02.JPG^WG1_2232844_IMG_03.JPG^WG1_2232844_IMG_04.JPG^WG1_2232844_IMG_05.JPG^WG1_2232844_IMG_06.JPG^^^^^^^^^^^^^^^^^^WG1_2232844_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240762^Tilbury Mount^^^^Leeds^LS11^0DB^Westgate Estate Agents are pleased to offer this well presented Two Bedroom Through Terrace house situated close to Leeds City Centre & Motorways M621/M1. The accommodation is arranged over Three floors and briefly comprises: Lounge/ Dining Room, kitchen, bathroom, Two bedrooms.  The property benefits from Gas central heating, double glazing, garden. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Two Bedroom Through Terrace house situated close to Leeds City Centre & Motorways M621/M1. The accommodation is arranged over Three floors and briefly comprises: Lounge/ Dining Room, kitchen, bathroom, Two bedrooms.  The property benefits from Gas central heating, double glazing, garden. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^5^2^480^0^26^^^Tilbury Mount Leeds^1^2015-09-14 00:00:00^4^1^2^WG1_2240762_IMG_00.JPG^WG1_2240762_IMG_01.JPG^WG1_2240762_IMG_02.JPG^^^^^^^^^^^^^^^^^^^^^^WG1_2240762_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2243121^Stanley Terrace^^^^Leeds^LS9^7AF^Westgate Estate Agents are pleased to offer this well presented Four Bedroom through terrace house situated in a popular residential area. The accommodation is arranged over three floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and four bedrooms.  The property benefits from Gas central heating, double glazing, a front yard and on street parking. This property is available on a part furnished or fully furnished basis. Walking distance to st James hospital Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Four Bedroom through terrace house situated in a popular residential area. The accommodation is arranged over three floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and four bedrooms.  The property benefits from Gas central heating, double glazing, a front yard and on street parking. This property is available on a part furnished or fully furnished basis. Walking distance to st James hospital Viewing highly recommended.^WG1^0^4^600^0^26^^^Stanley Terrace Leeds LS9 7AF^1^2015-09-28 00:00:00^4^1^2^WG1_2243121_IMG_00.JPG^WG1_2243121_IMG_01.JPG^^^^^^^^^^^^^^^^^^^^^^^WG1_2243121_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240747^Dewsbury Road^^^^Leeds^LS11^7LG^Westgate Estate Agents are pleased to offer this well presented Three Bedroom Semi-Detached house situated in a popular residential area. The accommodation is arranged over two floors and briefly comprises: Lounge, kitchen dinner, bathroom and three bedrooms.  The property benefits from Gas central heating, double glazing, garden and off street parking. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Three Bedroom Semi-Detached house situated in a popular residential area. The accommodation is arranged over two floors and briefly comprises: Lounge, kitchen dinner, bathroom and three bedrooms.  The property benefits from Gas central heating, double glazing, garden and off street parking. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^5^3^650^0^3^^^Dewsbury Road Leeds^1^2015-09-14 00:00:00^2^1^2^WG1_2240747_IMG_00.JPG^^^^^^^^^^^^^^^^^^^^^^^^WG1_2240747_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240736^Westbourne Place^^^^Leeds^LS11^6EJ^Westgate Estate Agents are pleased to offer this well presented Three Bedroom terrace house situated in a popular residential area. The accommodation is arranged over three floors and briefly comprises: Lounge/kitchen dinner, bathroom and four bedrooms.  The property benefits from Gas central heating, double glazing, a front yard and on street parking. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Three Bedroom terrace house situated in a popular residential area. The accommodation is arranged over three floors and briefly comprises: Lounge/kitchen dinner, bathroom and four bedrooms.  The property benefits from Gas central heating, double glazing, a front yard and on street parking. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^0^3^480^0^26^^^Westbourne Place Leeds^1^2015-09-14 00:00:00^0^1^2^WG1_2240736_IMG_00.JPG^^^^^^^^^^^^^^^^^^^^^^^^WG1_2240736_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240751^Nowell Terrace^^^^Leeds^LS9^6HX^Westgate Estate Agents are pleased to offer this well presented Four Bedroom Through Terrace house situated in a popular residential area. The accommodation is arranged over three floors and briefly comprises: Lounge, kitchen dinner, bathroom and four bedrooms.  The property benefits from Gas central heating, double glazing, garden and on street parking. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Four Bedroom Through Terrace house situated in a popular residential area. The accommodation is arranged over three floors and briefly comprises: Lounge, kitchen dinner, bathroom and four bedrooms.  The property benefits from Gas central heating, double glazing, garden and on street parking. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^5^4^550^0^1^^^Nowell Terrace Leeds^1^2015-09-14 00:00:00^4^1^2^WG1_2240751_IMG_00.JPG^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240758^Becketts Park Drive^^^^Leeds^LS6^3PJ^Westgate Estate Agents are pleased to offer this well presented Six Bedroom Semi-Detached house situated in a popular residential area of Headingley. The accommodation is arranged over Three floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and Six bedrooms.  The property benefits from Gas central heating, double glazing, gardens and garage. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Six Bedroom Semi-Detached house situated in a popular residential area of Headingley. The accommodation is arranged over Three floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and Six bedrooms.  The property benefits from Gas central heating, double glazing, gardens and garage. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^0^6^1300^0^3^^^Becketts Park Drive Headingley Leeds^1^2015-09-14 00:00:00^4^1^2^WG1_2240758_IMG_00.JPG^WG1_2240758_IMG_01.JPG^WG1_2240758_IMG_02.JPG^^^^^^^^^^^^^^^^^^^^^^WG1_2240758_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240754^Street Lane^^^^Leeds^LS17^6EX^Westgate Estate Agents are pleased to offer this well presented Three Bedroom Semi-Detached house situated in a popular residential area. The accommodation is arranged over two floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and three bedrooms.  The property benefits from Gas central heating, double glazing, gardens and garage. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Three Bedroom Semi-Detached house situated in a popular residential area. The accommodation is arranged over two floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and three bedrooms.  The property benefits from Gas central heating, double glazing, gardens and garage. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^0^3^800^0^3^^^Street Lane, Moortown, Leeds LS17^1^2015-09-14 00:00:00^4^1^2^WG1_2240754_IMG_00.JPG^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2240760^Allerton Grange Avenue^^^^Leeds^LS17^6PR^Westgate Estate Agents are pleased to offer this well presented Four Bedroom Semi-Detached house situated in a popular residential area of Moortown. The accommodation is arranged over Three floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and ground floor wc and Four bedrooms.  The property benefits from Gas central heating, double glazing, gardens and garage. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^Westgate Estate Agents are pleased to offer this well presented Four Bedroom Semi-Detached house situated in a popular residential area of Moortown. The accommodation is arranged over Three floors and briefly comprises: Lounge, Dining Room, kitchen, bathroom and ground floor wc and Four bedrooms.  The property benefits from Gas central heating, double glazing, gardens and garage. This property is available on a part furnished or fully furnished basis. Viewing highly recommended.^WG1^0^4^995^0^3^^^Allerton Grange Avenue Leeds^1^2015-09-14 00:00:00^4^1^2^WG1_2240760_IMG_00.JPG^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2237054^Stanley Terrace^^^^Leeds^LS9^7AF^A well presented FOUR BEDROOM THROUGH TERRACE property situated in this popular location. The property comprises TWO RECEPTION ROOMS, kitchen, four bedrooms and bathroom. The property also benefits from an enclosed rear yard as well as central heating & double glazing!^Through terraced property in a popular district with convenient access to the city centre and local amenities.
+
+The accommodation briefly comprises lounge, Dining Room and Kitchen, first floor landing, double bedroom, bathroom and second bedroom to the 2nd floor two further double bedrooms. In addition the property has a useful cellar area. Externally the property has a rear garden.
+
+GROUND FLOOR
+
+Lounge 13' 8" x 9' 1" ( 4.17m x 3.3m )
+Having double glazed bay window to the front and central heating radiator.
+
+Dining Room 13' 6" x 12' 1" ( 4.11m x 3.68m )
+Having double glazed window to the rear, central heating radiator and door to the cellar.
+
+Kitchen 9' x 6' 11" ( 2.74m x 2.11m )
+Fitted with a range of beech style wall and base units with work surfaces over, stainless steel sink and drainer unit, electric oven, gas hob, with cooker hood, tiled to splash back and door to the side.
+
+Cellar 
+Currently used for storage.
+
+First Floor Landing  
+Having access to bedrooms one and two and the house bathroom.
+
+Bedroom One 12' 1" x 11' 5" ( 3.68m x 3.48m )
+Having double glazed window to the front, walk in storage cupboard and central heating radiator.
+
+Bedroom Two 11' 5" x 6' 8" ( 3.48m x 2.03m )
+Having double glazed window to the rear and central heating radiator.
+
+Bathroom 
+Fitted with a coloured suite that comprises bath, wash hand basin, WC, double glazed window to the rear and central heating radiator.
+
+Second Floor Landing 
+Having access to bedrooms three and four.
+
+Bedroom Three 11' x 11' 6" ( 3.35m x 3.51m )
+Having double glazed dormer window to the front and central heating radiator.
+
+Bedroom Four 11' x 6' 9" extending to 11' 10" ( 3.35m x 2.06m extending to 3.61m )
+Having double glazed dormer window to the front and central heating radiator.
+
+
+DIRECTIONS
+Please see the map or contact the office for further details^WG1^0^4^99995^5^1^^^Stanley Terrace Leeds LS9 7AF^1^2015-08-21 00:00:00^4^0^1^WG1_2237054_IMG_00.JPG^WG1_2237054_IMG_01.JPG^WG1_2237054_IMG_02.JPG^WG1_2237054_IMG_03.JPG^WG1_2237054_IMG_04.JPG^WG1_2237054_IMG_05.JPG^WG1_2237054_IMG_06.JPG^^^^^^^^^^^^^^^^^^WG1_2237054_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+WG1_2233420^Bexley Grove^^^^Leeds^LS8^5NZ^Westgate Estate Agents are pleased to offer this 2 bedroom back to back house with front Garden. On the Ground floor there is a Living Room, Kitchen and a Basement . On the 1st floor there is a Double Bedroom and bathroom. On the 2nd floor there is a further Double Bedroom. This house has a gas central heating system and UPVC double glazing.^Entrance
+UPVC Door leading in from the front of the property and two windows to the side.
+Lounge ( 4.21m x 3.98m )
+Ceiling coving and ceiling rose.  Central heating radiator and UPVC window to the front of the property.  Laminate flooring.
+Kitchen (2.95m x 1.52m)
+Fitted kitchen with a range of wall and base units and contrasting work surfaces. Stainless steel sink with drainer, plumbing for washing machine, electric oven, double glazed window to the front of the property and door leading to the cellar.  Upvc window to the front of the property.
+Cellar 
+Ideal for storage use.
+1st Floor Landing 
+Stairs from the ground floor
+Bedroom 1 (4.20m x 3.67m )
+Central heating radiator, double glazed window to the front of the property.  Coving to the ceiling.
+
+Bathroom  
+Comprising of hand wash basin, wc and bath with shower over. Lino flooring, central heating radiator, double glazed window to the front of the property.
+
+Bedroom 2 (5.83m x 3.56m) 
+Central heating radiator, Velux Window.  Coving to the ceiling.
+Externally 
+A small yard to the front of the property with wall boundary and steps leading to the front UPVC door.^WG1^0^2^79995^5^26^^^Bexley Grove, Harehills^1^2015-08-23 00:00:00^4^0^1^WG1_2233420_IMG_00.JPG^WG1_2233420_IMG_01.JPG^WG1_2233420_IMG_02.JPG^WG1_2233420_IMG_03.JPG^WG1_2233420_IMG_04.JPG^WG1_2233420_IMG_05.JPG^^^^^^^^^^^^^^^^^^^WG1_2233420_IMG_60.JPG^EPC^^^^^^^^^^^^^^^^Virtual Tour 1^^Virtual Tour 2^~
+#END#

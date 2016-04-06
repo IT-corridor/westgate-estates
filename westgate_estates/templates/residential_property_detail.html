@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %} 
+{% block title %} Property details {% endblock %}
+#{% block left_panel %}{% endblock %}
+{% block main %}
+<div class="col-md-12 middle">
+    
+    
+    
+    
+    <div class="row">
+
+            <div class="col-md-3">
+                <p class="lead">Shop Name</p>
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Category 1</a>
+                    <a href="#" class="list-group-item">Category 2</a>
+                    <a href="#" class="list-group-item">Category 3</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="thumbnail">
+                    <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" %}" alt="">
+                    <div class="caption-full">
+                        <h4 class="pull-right">Rent per month: £{{ object.PRICE }}</h4>
+                        <h4><a href="#">{{ object.DISPLAY_ADDRESS }}</a></h4>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td>Bedrooms:</td>
+                                        <td>{{ object.BEDROOMS }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-8">
+                                <p>{{ object.DESCRIPTION }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+</div> 
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %} 
+{% block title %} Residential Properties {% endblock %}
+#{% block left_panel %}{% endblock %}
+{% block main %}
+<div class="col-md-12 middle">
+        {% for property in object_list %}
+        <div class="row">
+
+            <div class="col-sm-4">
+                    <a href="{% url 'residential_property_detail' property.SLUG %}">
+                    <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ property.AGENT_REF }}_IMG_00.JPG" %}" alt="">
+                </a>
+            </div>
+            <div class="col-sm-8">
+                <a href="{% url 'residential_property_detail' property.SLUG %}"><h3>{{ property.DISPLAY_ADDRESS }}</h3></a>
+                <h4>Bedrooms: {{ property.BEDROOMS }}</h4>
+                <p>{{ property.SUMMARY }}</p>
+                <a href="{% url 'residential_property_detail' property.SLUG %}" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> More details</span></a>
+            </div>
+            <hr />
+        </div>     
+        {% empty %}
+        <div class="row">
+            <div class="col-sm-4">
+                No properties to display.
+            </div>
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}
