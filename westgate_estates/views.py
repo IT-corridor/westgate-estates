@@ -1,17 +1,23 @@
 from django.http import HttpResponse
-from django.views.generic.detail import DetailView
-from django.views.generic.list import ListView
+from django.views import generic
 from .models import Residential
     
-class ResidentialListView(ListView):
+class ResidentialListView(generic.ListView):
 
-    model = Residential
+    # model = Residential
     template_name = 'residential_property_list.html'
     #queryset = Residential.objects.filter(publisher__name='Acme Publishing')
     context_object_name = 'residentiallist'
     # add filter for TRANS_TYPE_ID
+    def get_queryset(self):
+        """
+        Return the last five published polls (not including those set to be
+        published in the future).
+        """
+        return Residential.objects.all()
+
     
-class ResidentialDetailView(DetailView):
+class ResidentialDetailView(generic.DetailView):
 
     model = Residential
     template_name = 'residential_property_detail.html'

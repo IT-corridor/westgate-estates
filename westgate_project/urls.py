@@ -3,10 +3,11 @@ from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
+from django.views.i18n import set_language  
 
 from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
-
+import westgate_estates.views
 
 admin.autodiscover()
 
@@ -14,18 +15,18 @@ admin.autodiscover()
 # You can also change the ``home`` view to add your own functionality
 # to the project's homepage.
 
-urlpatterns = i18n_patterns("",
+urlpatterns = i18n_patterns(
     # Change the admin prefix here to use an alternate URL for the
     # admin interface, which would be marginally more secure.
-    ("^admin/", include(admin.site.urls)),
+    url("^admin/", include(admin.site.urls)),
 )
 
 if settings.USE_MODELTRANSLATION:
-    urlpatterns += patterns('',
-        url('^i18n/$', 'django.views.i18n.set_language', name='set_language'),
-    )
+    urlpatterns += [
+        url('^i18n/$', set_language, name='set_language'),
+    ]
 
-urlpatterns += patterns('',
+urlpatterns += [
     # We don't want to presume how your homepage works, so here are a
     # few patterns you can use to set it up.
 
@@ -36,8 +37,9 @@ urlpatterns += patterns('',
     # one homepage pattern, so if you use a different one, comment this
     # one out.
 
-    url("^$", direct_to_template, {"template": "index.html"}, name="home"),
-
+    url("^$", direct_to_template, {"template": "home.html"}, name="home"),
+    url('^residential/properties/$', westgate_estates.views.ResidentialListView.as_view(), name='residential_property_list',),
+    url('^residential/properties/(?P<slug>[-\w]+)/$', westgate_estates.views.ResidentialDetailView.as_view(), name='residential_property_detail'),
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
     # This pattern gives us a normal ``Page`` object, so that your
@@ -74,7 +76,7 @@ urlpatterns += patterns('',
     # ``mezzanine.urls``, go right ahead and take the parts you want
     # from it, and use them directly below instead of using
     # ``mezzanine.urls``.
-    ("^", include("mezzanine.urls")),
+    url("^", include("mezzanine.urls")),
 
     # MOUNTING MEZZANINE UNDER A PREFIX
     # ---------------------------------
@@ -92,7 +94,7 @@ urlpatterns += patterns('',
 
     # ("^%s/" % settings.SITE_PREFIX, include("mezzanine.urls"))
 
-)
+]
 
 # Adds ``STATIC_URL`` to the context of error pages, so that error
 # pages can use JS, CSS and images.

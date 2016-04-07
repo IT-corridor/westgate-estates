@@ -4,10 +4,6 @@
 #{% block left_panel %}{% endblock %}
 {% block main %}
 <div class="col-md-12 middle">
-    
-    
-    
-    
     <div class="row">
 
             <div class="col-md-3">
@@ -39,11 +35,34 @@
                                 <p>{{ object.DESCRIPTION }}</p>
                             </div>
                         </div>
+                        <div id="map" style="height: 240px;"></div>
                     </div>
                 </div>
             </div>
         </div>
     
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,        
+        });
+        var geocoder = new google.maps.Geocoder();
+
+        var address = "{{ object.DISPLAY_ADDRESS }}";
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
     
 </div> 
 {% endblock %}

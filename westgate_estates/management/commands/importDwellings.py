@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 import re
-from westgate_estates.models import Residential
+from westgate_estates.models import *
 
 class Command(BaseCommand):
    
@@ -136,7 +136,7 @@ class Command(BaseCommand):
         dwelling.MEDIA_VIRTUAL_TOUR_TEXT_02 = dwellingData[67]
         return dwelling
 
-    def makeTestResidential1():
+    def makeTestResidential1(self):
 
         dwelling = Residential.objects.create()
         dwelling.AGENT_REF = "WG1_1234567"
@@ -209,10 +209,10 @@ class Command(BaseCommand):
         dwelling.MEDIA_VIRTUAL_TOUR_TEXT_02 = ""
         dwelling.save()
 
-    def makeTestResidential2():
+    def makeTestResidential2(self):
 
         dwelling = Residential.objects.create()
-        dwelling.AGENT_REF = "WG1_7654321"
+        dwelling.AGENT_REF = "WG1_765312"
         dwelling.ADDRESS_1 = "Dog Palace"
         dwelling.ADDRESS_2 = "Woofington Road"
         dwelling.ADDRESS_3 = "Boneyard"

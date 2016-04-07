@@ -90,7 +90,7 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dev.westgate-estate.co.uk']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -196,7 +196,22 @@ ROOT_URLCONF = "%s.urls" % PROJECT_APP
 # or "C:/www/django/templates".
 # Always use forward slashes, even on Windows.
 # Don't forget to use absolute paths, not relative paths.
-TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
+#TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
+
+TEMPLATES = [{u'APP_DIRS': True,
+              u'BACKEND': u'django.template.backends.django.DjangoTemplates',
+              u'DIRS': (u'/root/work/westgate/wg2016/templates',),
+              u'OPTIONS': {u'builtins': [u'mezzanine.template.loader_tags'],
+                           u'context_processors': (u'django.contrib.auth.context_processors.auth',
+                                                   u'django.contrib.messages.context_processors.messages',
+                                                   u'django.core.context_processors.debug',
+                                                   u'django.core.context_processors.i18n',
+                                                   u'django.core.context_processors.static',
+                                                   u'django.core.context_processors.media',
+                                                   u'django.core.context_processors.request',
+                                                   u'django.core.context_processors.tz',
+                                                   u'mezzanine.conf.context_processors.settings',
+                                                   u'mezzanine.pages.context_processors.page')}}]
 
 
 ################
@@ -204,7 +219,6 @@ TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
 ################
 
 INSTALLED_APPS = (
-    "westgate_estates",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -222,25 +236,12 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
+    "westgate_estates",         
     # "mezzanine.accounts",
     # "mezzanine.mobile",
 )
 
-# List of processors used by RequestContext to populate the context.
-# Each one should be a callable that takes the request object as its
-# only parameter and returns a dictionary to add to the context.
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.static",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-    "django.core.context_processors.tz",
-    "mezzanine.conf.context_processors.settings",
-    "mezzanine.pages.context_processors.page",
-)
+
 
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
