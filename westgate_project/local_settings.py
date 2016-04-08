@@ -43,14 +43,14 @@ FABRIC = {
     "SSH_USER": "root",  # VPS SSH username
     "SSH_PASS":  '1d&JiL4v|v1qGh6:r^?0ZNaqMqom\E[,9PIILzgvc~V(4*PVj"T@h^B6~=K~v1A', # SSH password (consider key-based authentication)    
     "VIRTUALENV_HOME":  "/home/root/do", # Absolute remote path for virtualenvs
-    "PROJECT_NAME": "westgate-estate", # Unique identifier for project
+    "PROJECT_NAME": "westgate_estates", # Unique identifier for project
     "GUNICORN_PORT": 8000, # Port gunicorn will listen on
     "REPO_URL": "https://jason5001001@bitbucket.org/jason5001001/westgate-estates.git", # Git or Mercurial remote repo URL for the project
     "HOSTS": ["139.162.200.178"],  # The IP address of your VPS
     "DOMAINS": ALLOWED_HOSTS,  # Edit domains in ALLOWED_HOSTS
     "REQUIREMENTS_PATH": "requirements.txt",  # Project's pip requirements
     "LOCALE": "en_US.UTF-8",  # Should end with ".UTF-8"
-    "DB_PASS": "",  # Live database password
+    "DB_PASS": "westgate@123",  # Live database password
     "ADMIN_PASS": "westgate@123",  # Live admin user password
     "SECRET_KEY": SECRET_KEY,
     "NEVERCACHE_KEY": NEVERCACHE_KEY,
