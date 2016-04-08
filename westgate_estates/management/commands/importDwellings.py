@@ -28,7 +28,7 @@ class Command(BaseCommand):
     
     def getData(self):
         self.stdout.write('Doing stuff...')
-        f = open("./Data-Parser/WG1.BLM", "r")
+        f = open("/home/root/blm_data/WG1.BLM", "r")
         file_contents = f.read()
         buffer = re.split('#[A-Z]+#', file_contents)
         header = buffer[2].strip()
