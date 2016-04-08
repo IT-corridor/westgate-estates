@@ -41,8 +41,8 @@ ALLOWED_HOSTS = ["dev.westgate-estate.co.uk"]
 FABRIC = {
     "DEPLOY_TOOL": "git",  # Deploy with "git", "hg", or "rsync"
     "SSH_USER": "root",  # VPS SSH username
-    "SSH_PASS":  "1d&JiL4v|v1qGh6:r^?0ZNaqMqom\E[,9PIILzgvc~V(4*PVj"T@h^B6~=K~v1A", # SSH password (consider key-based authentication)    
-    "VIRTUALENV_HOME":  "/home/waff/do", # Absolute remote path for virtualenvs
+    "SSH_PASS":  '1d&JiL4v|v1qGh6:r^?0ZNaqMqom\E[,9PIILzgvc~V(4*PVj"T@h^B6~=K~v1A', # SSH password (consider key-based authentication)    
+    "VIRTUALENV_HOME":  "/home/root/do", # Absolute remote path for virtualenvs
     "PROJECT_NAME": "westgate-estate", # Unique identifier for project
     "GUNICORN_PORT": 8000, # Port gunicorn will listen on
     "REPO_URL": "https://jason5001001@bitbucket.org/jason5001001/westgate-estates.git", # Git or Mercurial remote repo URL for the project
