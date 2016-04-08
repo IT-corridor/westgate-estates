@@ -192,21 +192,32 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
-TEMPLATES = [{u'APP_DIRS': True,
-              u'BACKEND': u'django.template.backends.django.DjangoTemplates',
-              u'DIRS': (os.path.join(PROJECT_ROOT, "templates"),),
-              u'OPTIONS': {u'builtins': [u'mezzanine.template.loader_tags'],
-                           u'context_processors': (u'django.contrib.auth.context_processors.auth',
-                                                   u'django.contrib.messages.context_processors.messages',
-                                                   u'django.core.context_processors.debug',
-                                                   u'django.core.context_processors.i18n',
-                                                   u'django.core.context_processors.static',
-                                                   u'django.core.context_processors.media',
-                                                   u'django.core.context_processors.request',
-                                                   u'django.core.context_processors.tz',
-                                                   u'mezzanine.conf.context_processors.settings',
-                                                   u'mezzanine.pages.context_processors.page')}}]
-
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [
+            os.path.join(PROJECT_ROOT, "templates")
+        ],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.debug",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.static",
+                "django.template.context_processors.media",
+                "django.template.context_processors.request",
+                "django.template.context_processors.tz",
+                "mezzanine.conf.context_processors.settings",
+                "mezzanine.pages.context_processors.page",
+            ],
+            "builtins": [
+                "mezzanine.template.loader_tags",
+            ],
+        },
+    },
+]
 
 ################
 # APPLICATIONS #
