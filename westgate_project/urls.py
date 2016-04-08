@@ -38,7 +38,8 @@ urlpatterns += [
     # one out.
 
     url("^$", direct_to_template, {"template": "home.html"}, name="home"),
-    url('^residential/properties/$', westgate_estates.views.ResidentialListView.as_view(), name='residential_property_list',),
+    # url('^residential/properties/$', westgate_estates.views.ResidentialListView.as_view(), name='residential_property_list',),
+    url('^residential/properties/$', westgate_estates.views.residentiallist, name='residential_property_list',),
     url('^residential/properties/(?P<slug>[-\w]+)/$', westgate_estates.views.ResidentialDetailView.as_view(), name='residential_property_detail'),
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------

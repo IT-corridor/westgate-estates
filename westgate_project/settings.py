@@ -90,7 +90,7 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['dev.westgate-estate.co.uk']
+ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -192,15 +192,9 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, *MEDIA_URL.strip("/").split("/"))
 # Package/module name to import the root urlpatterns from for the project.
 ROOT_URLCONF = "%s.urls" % PROJECT_APP
 
-# Put strings here, like "/home/html/django_templates"
-# or "C:/www/django/templates".
-# Always use forward slashes, even on Windows.
-# Don't forget to use absolute paths, not relative paths.
-#TEMPLATE_DIRS = (os.path.join(PROJECT_ROOT, "templates"),)
-
 TEMPLATES = [{u'APP_DIRS': True,
               u'BACKEND': u'django.template.backends.django.DjangoTemplates',
-              u'DIRS': (u'/root/work/westgate/wg2016/templates',),
+              u'DIRS': (os.path.join(PROJECT_ROOT, "templates"),),
               u'OPTIONS': {u'builtins': [u'mezzanine.template.loader_tags'],
                            u'context_processors': (u'django.contrib.auth.context_processors.auth',
                                                    u'django.contrib.messages.context_processors.messages',

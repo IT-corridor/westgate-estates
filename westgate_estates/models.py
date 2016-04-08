@@ -2,138 +2,137 @@ from django.db import models
 from autoslug import AutoSlugField
 
 TRANS_TYPE_ID = (
-    ('1', 'Resale'),
-    ('2', 'Lettings'),
+    (1, 'Resale'),
+    (2, 'Lettings'),
 )
 
 STATUS_ID = (
-    ('0', 'Available'),
-    ('1', 'SSTC(Sales only)'),
-    ('2', 'SSTCM(Scottish Sales only'),
-    ('3', 'Under offer(Sales only'),
-    ('4', 'Reserved(Sales only'),
-    ('5', 'Let Agreed(Lettings only')
+    (0, 'Available'),
+    (1, 'SSTC(Sales only)'),
+    (2, 'SSTCM(Scottish Sales only'),
+    (3, 'Under offer(Sales only'),
+    (4, 'Reserved(Sales only'),
+    (5, 'Let Agreed(Lettings only')
 )
 
 PRICE_QUALIFIER = (
-    ('0', 'Default'),
-    ('1', 'POA'),
-    ('2', 'Guide Price'),
-    ('3', 'Fixed Price'),
-    ('4', 'Offers in Excess'),
-    ('5', 'OIRO'),
-    ('6', 'Sales by Tender'),
-    ('7', 'From(new homes and commercial only)'),
-    ('9', 'Shared Ownership'),
-    ('10', 'Offers Over'),
-    ('11', 'Part Buy Part Rent'),
-    ('12', 'Shared Equity'),
-    ('14', 'Equity Loan'),
-    ('15', 'Offers Invited')    
+    (0, 'Default'),
+    (1, 'POA'),
+    (2, 'Guide Price'),
+    (3, 'Fixed Price'),
+    (4, 'Offers in Excess'),
+    (5, 'OIRO'),
+    (6, 'Sales by Tender'),
+    (7, 'From(new homes and commercial only)'),
+    (9, 'Shared Ownership'),
+    (10, 'Offers Over'),
+    (11, 'Part Buy Part Rent'),
+    (12, 'Shared Equity'),
+    (14, 'Equity Loan'),
+    (15, 'Offers Invited')    
 )
 
 # class PROP_SUB_ID(models.Model):
 #     value = models.CharField(max_length=50, unique=True)
 
 PUBLISHED_FLAG = (
-    ('0', 'Hidden/invisible'),
-    ('1', 'Visible'),
+    (0, 'Hidden/invisible'),
+    (1, 'Visible'),
 )
 
 LET_FURN_ID = (
-    ('0', 'Furnished'),
-    ('1', 'Part Furnished'),
-    ('2', 'Unfurnished'),
-    ('3', 'Not Specified'),
-    ('4', 'Furnished/ Un Furnished'),
+    (0, 'Furnished'),
+    (1, 'Part Furnished'),
+    (2, 'Unfurnished'),
+    (3, 'Not Specified'),
+    (4, 'Furnished/ Un Furnishedf'),
 )
 
 LET_RENT_FREQUENCY= (
-    ('0', 'Weekly'),
-    ('1', 'Monthly'),
-    ('2', 'Quarterly'),
-    ('3', 'Annual'),
-    ('5', 'Per person per week(Students Lettings only)'),
+    (0, 'Weekly'),
+    (1, 'Monthly'),
+    (2, 'Quarterly'),
+    (3, 'Annual'),
+    (5, 'Per person per week(Students Lettings only)'),
 )
 
 class Residential(models.Model):
     AGENT_REF = models.CharField(max_length=12, unique=True)
     SLUG = AutoSlugField(populate_from='AGENT_REF', always_update=True, unique=True)
     ADDRESS_1 = models.CharField(max_length=250)
-    ADDRESS_2 = models.CharField(max_length=250)
-    ADDRESS_3 = models.CharField(max_length=250)
-    ADDRESS_4 = models.CharField(max_length=250)
+    ADDRESS_2 = models.CharField(max_length=250, blank=True)
+    ADDRESS_3 = models.CharField(max_length=250, blank=True)
+    ADDRESS_4 = models.CharField(max_length=250, blank=True)
     TOWN = models.CharField(max_length=60)
     POSTCODE1 = models.CharField(max_length=12)
     POSTCODE2 = models.CharField(max_length=12)
     SUMMARY = models.CharField(max_length=1200)
-    DESCRIPTION = models.CharField(max_length=1200)
+    DESCRIPTION = models.CharField(max_length=1500)
     BRANCH_ID = models.CharField(max_length=60)
-    STATUS_ID = models.CharField(choices=STATUS_ID, max_length=50)
-    BEDROOMS = models.CharField(max_length=6)
-    PRICE = models.CharField(max_length=12)
-    PRICE_QUALIFIER = models.CharField(choices=PRICE_QUALIFIER, max_length=50)
+    STATUS_ID = models.IntegerField(choices=STATUS_ID)
+    BEDROOMS = models.IntegerField()
+    PRICE = models.FloatField()
+    PRICE_QUALIFIER = models.IntegerField(choices=PRICE_QUALIFIER)
     # PROP_SUB_ID = models.CharField(choices=PROP_SUB_ID, null=True)
     PROP_SUB_ID = models.CharField(max_length=100)
-    CREATE_DATE = models.CharField(max_length=20)
-    UPDATE_DATE = models.CharField(max_length=20)
+    CREATE_DATE = models.CharField(max_length=20, blank=True)
+    UPDATE_DATE = models.CharField(max_length=20, blank=True)
     DISPLAY_ADDRESS = models.CharField(max_length=350)
-    PUBLISHED_FLAG = models.CharField(choices=PUBLISHED_FLAG, max_length=50)
+    PUBLISHED_FLAG = models.IntegerField(choices=PUBLISHED_FLAG)
     LET_DATE_AVAILABLE = models.CharField(max_length=30)
-    LET_FURN_ID = models.CharField(choices=LET_FURN_ID, max_length=50)
-    LET_RENT_FREQUENCY = models.CharField(choices=LET_RENT_FREQUENCY, max_length=50)
-    TRANS_TYPE_ID = models.CharField(choices=TRANS_TYPE_ID, max_length=50)
-    MEDIA_IMAGE_00 = models.CharField(max_length=200)
-    MEDIA_IMAGE_01 = models.CharField(max_length=200)
-    MEDIA_IMAGE_02 = models.CharField(max_length=200)
-    MEDIA_IMAGE_03 = models.CharField(max_length=200)
-    MEDIA_IMAGE_04 = models.CharField(max_length=200)
-    MEDIA_IMAGE_05 = models.CharField(max_length=200)
-    MEDIA_IMAGE_06 = models.CharField(max_length=200)
-    MEDIA_IMAGE_07 = models.CharField(max_length=200)
-    MEDIA_IMAGE_08 = models.CharField(max_length=200)
-    MEDIA_IMAGE_09 = models.CharField(max_length=200)
-    MEDIA_IMAGE_10 = models.CharField(max_length=200)
-    MEDIA_IMAGE_11 = models.CharField(max_length=200)
-    MEDIA_IMAGE_12 = models.CharField(max_length=200)
-    MEDIA_IMAGE_13 = models.CharField(max_length=200)
-    MEDIA_IMAGE_14 = models.CharField(max_length=200)
-    MEDIA_IMAGE_15 = models.CharField(max_length=200)
-    MEDIA_IMAGE_16 = models.CharField(max_length=200)
-    MEDIA_IMAGE_17 = models.CharField(max_length=200)
-    MEDIA_IMAGE_18 = models.CharField(max_length=200)
-    MEDIA_IMAGE_19 = models.CharField(max_length=200)
-    MEDIA_FLOOR_PLAN_00 = models.CharField(max_length=200)
-    MEDIA_FLOOR_PLAN_TEXT_00 = models.CharField(max_length=200)
-    MEDIA_FLOOR_PLAN_01 = models.CharField(max_length=200)
-    MEDIA_FLOOR_PLAN_TEXT_01 = models.CharField(max_length=200)
-    MEDIA_IMAGE_60 = models.CharField(max_length=200)
-    MEDIA_IMAGE_TEXT_60 = models.CharField(max_length=200)
-    MEDIA_IMAGE_61 = models.CharField(max_length=200)
-    MEDIA_IMAGE_TEXT_61 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_50 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_TEXT_50 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_51 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_TEXT_51 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_52 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_TEXT_52 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_53 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_TEXT_53 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_00 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_TEXT_00 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_01 = models.CharField(max_length=200)
-    MEDIA_DOCUMENT_TEXT_01 = models.CharField(max_length=200)
-    MEDIA_VIRTUAL_TOUR_01 = models.CharField(max_length=200)
-    MEDIA_VIRTUAL_TOUR_TEXT_01 = models.CharField(max_length=200)
-    MEDIA_VIRTUAL_TOUR_02 = models.CharField(max_length=200)
-    MEDIA_VIRTUAL_TOUR_TEXT_02 = models.CharField(max_length=200)
+    LET_FURN_ID = models.IntegerField(choices=LET_FURN_ID)
+    LET_RENT_FREQUENCY = models.IntegerField(choices=LET_RENT_FREQUENCY)
+    TRANS_TYPE_ID = models.IntegerField(choices=TRANS_TYPE_ID)
+    MEDIA_IMAGE_00 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_02 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_03 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_04 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_05 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_06 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_07 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_08 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_09 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_10 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_11 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_12 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_13 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_14 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_15 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_16 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_17 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_18 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_19 = models.CharField(max_length=200, blank=True)
+    MEDIA_FLOOR_PLAN_00 = models.CharField(max_length=200, blank=True)
+    MEDIA_FLOOR_PLAN_TEXT_00 = models.CharField(max_length=200, blank=True)
+    MEDIA_FLOOR_PLAN_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_FLOOR_PLAN_TEXT_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_60 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_TEXT_60 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_61 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_TEXT_61 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_50 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_TEXT_50 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_51 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_TEXT_51 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_52 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_TEXT_52 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_53 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_TEXT_53 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_00 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_TEXT_00 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_DOCUMENT_TEXT_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_VIRTUAL_TOUR_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_VIRTUAL_TOUR_TEXT_01 = models.CharField(max_length=200, blank=True)
+    MEDIA_VIRTUAL_TOUR_02 = models.CharField(max_length=200, blank=True)
+    MEDIA_VIRTUAL_TOUR_TEXT_02 = models.CharField(max_length=200, blank=True)
     
     def get_absolute_url(self):
         return reverse('residential_property_detail', args=(self.SLUG,))
         
     def __unicode__(self):
-        return self.AGENT_REF + ' ' + self.ADDRESS_1
-
+        return self.DISPLAY_ADDRESS
 
 class Commercial(models.Model):
     owner_name = models.CharField(max_length=72)

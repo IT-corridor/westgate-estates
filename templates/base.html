@@ -46,6 +46,7 @@
 
 <script>
   $(function() {
+    // For price in search form
     $( "#price-slider-range" ).slider({
       range: true,
       min: 300,
@@ -58,6 +59,21 @@
     });
     $( "#property_price_low" ).val( $( "#price-slider-range" ).slider( "values", 0 ) );
     $( "#property_price_high" ).val( $( "#price-slider-range" ).slider( "values", 1 ) );
+
+    // for bedroom in search form
+    $( "#bedroom-slider-range" ).slider({
+      range: true,
+      min: 1,
+      max: 12,
+      values: [ 2, 7 ],
+      slide: function( event, ui ) {
+        $( "#property_bedroom_low" ).val( ui.values[ 0 ] );
+        $( "#property_bedroom_high" ).val( ui.values[ 1 ] );
+      }
+    });
+    $( "#property_bedroom_low" ).val( $( "#bedroom-slider-range" ).slider( "values", 0 ) );
+    $( "#property_bedroom_high" ).val( $( "#bedroom-slider-range" ).slider( "values", 1 ) );
+
   });
 </script>
 </head>
@@ -113,13 +129,13 @@
 <div class="container">
 <div class="row">
 
-<div class="col-md-2 left">
+<div class="col-md-1 left">
     {% block left_panel %}
     <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
     {% endblock %}
 </div>
 
-<div class="col-md-7 middle">
+<div class="col-md-8 middle">
     {% block main %}{% endblock %}
 </div>
 
@@ -127,15 +143,75 @@
     <div class="panel panel-default">
     <div class="panel-body">
     {% block right_panel %}
+      <form action="{% url "residential_property_list" %}" method="post">
+        {% csrf_token %}
         <p>
           <label>Price : </label>
           <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-          <input type="text" id="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+          <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
           <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-          <input type="text" id="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
-        </p>
-         
+          <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+        </p>         
         <div id="price-slider-range"></div>    
+        <br/>
+
+        <p>
+          <label>Bedroom : </label>
+          <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+          <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+          <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 15px; padding: 0;">        
+        </p>         
+        <div id="bedroom-slider-range"></div>    
+        <br/>
+
+        <label>Trans_Type</label>
+        <select style="width: 94%; margin-bottom: 10px;" name="trans_type">
+          <option value="-1">Select Trans Type</option>
+          <option value="1">Resale</option>
+          <option value="2">Lettings</option>
+        </select>
+
+        <label>Price_Qualifier</label>
+        <select style="width: 94%; margin-bottom: 10px;" name="price_qualifier">
+          <option value="-1">Select Price Qualifier</option>
+          <option value="0">Default</option>
+          <option value="1">POA</option>
+          <option value="2">Guide Price</option>
+          <option value="3">Fixed Price</option>
+          <option value="4">Offers in Excess</option>
+          <option value="5">OIRO</option>
+          <option value="6">Sales by Tender</option>
+          <option value="7">From(new homes and commercial only)</option>
+          <option value="9">Shared Ownership</option>
+          <option value="10">Offers Over</option>
+          <option value="11">Part Buy Part Rent</option>
+          <option value="12">Shared Equity</option>
+          <option value="14">Equity Loan</option>
+          <option value="15">Offers Invited</option>          
+        </select>
+
+        <label>Let_Furn</label>
+        <select style="width: 94%; margin-bottom: 10px;" name="let_furn">
+          <option value="-1">Select Let Furn</option>
+          <option value="0">Furnished</option>
+          <option value="1">Part Furnished</option>
+          <option value="2">Unfurnished</option>
+          <option value="3">Not Specified</option>
+          <option value="4">Furnished/ Un Furnished</option>
+        </select>      
+
+        <label>Let_Rent_Frequency</label>
+        <select style="width: 94%; margin-bottom: 10px;" name="let_rent_frequency">
+          <option value="-1">Select Let Rent Frequency</option>
+          <option value="0">Weekly</option>
+          <option value="1">Monthly</option>
+          <option value="2">Quarterly</option>
+          <option value="3">Annual</option>
+          <option value="5">Per person per week(Students Lettings only)</option>
+        </select>      
+
+        <input type="submit" class="btn btn-default" value="Search">
+      </form>
     {% endblock %}
     </div>
     </div>

@@ -63,7 +63,7 @@ class Command(BaseCommand):
         print "\n" + dwellingData[0]  + "//////////////////////////////////////////////////////////" + "\n"
         dwelling = Residential.objects.create()
         dwellingPopulated = self.populateResidential(dwelling, dwellingData)
-        dwellingPopulated.save()
+        #dwellingPopulated.save()
     
     def populateResidential(self, dwelling, dwellingData):
         dwelling.AGENT_REF          = dwellingData[0]
@@ -77,19 +77,19 @@ class Command(BaseCommand):
         dwelling.SUMMARY            = dwellingData[8].decode('utf-8', 'replace')
         dwelling.DESCRIPTION        = dwellingData[9].decode('utf-8', 'replace')
         dwelling.BRANCH_ID          = dwellingData[10]
-        dwelling.STATUS_ID          = dwellingData[11]
-        dwelling.BEDROOMS           = dwellingData[12]
-        dwelling.PRICE              = dwellingData[13]
-        dwelling.PRICE_QUALIFIER    = dwellingData[14]
+        dwelling.STATUS_ID          = int(dwellingData[11])
+        dwelling.BEDROOMS           = int(dwellingData[12])
+        dwelling.PRICE              = float(dwellingData[13])
+        dwelling.PRICE_QUALIFIER    = int(dwellingData[14])
         dwelling.PROP_SUB_ID        = dwellingData[15]
         dwelling.CREATE_DATE        = dwellingData[16]
         dwelling.UPDATE_DATE        = dwellingData[17]
         dwelling.DISPLAY_ADDRESS    = dwellingData[18]
-        dwelling.PUBLISHED_FLAG     = dwellingData[19]
+        dwelling.PUBLISHED_FLAG     = int(dwellingData[19])
         dwelling.LET_DATE_AVAILABLE = dwellingData[20]
-        dwelling.LET_FURN_ID        = dwellingData[21]
-        dwelling.LET_RENT_FREQUENCY = dwellingData[22]
-        dwelling.TRANS_TYPE_ID      = dwellingData[23]
+        dwelling.LET_FURN_ID        = int(dwellingData[21])
+        dwelling.LET_RENT_FREQUENCY = int(dwellingData[22])
+        dwelling.TRANS_TYPE_ID      = int(dwellingData[23])
         dwelling.MEDIA_IMAGE_00     = dwellingData[24]
         dwelling.MEDIA_IMAGE_01     = dwellingData[25]
         dwelling.MEDIA_IMAGE_02     = dwellingData[26]
@@ -151,14 +151,14 @@ class Command(BaseCommand):
         dwelling.DESCRIPTION = "A house is a place where lives. They usually have doors and windows. The best kind of house has a cinema room full of cats."
         dwelling.BRANCH_ID = "WG1"
         dwelling.STATUS_ID = "0"
-        dwelling.BEDROOMS = "2"
-        dwelling.PRICE = "555"
-        dwelling.PRICE_QUALIFIER = "0"
+        dwelling.BEDROOMS = 2
+        dwelling.PRICE = 555
+        dwelling.PRICE_QUALIFIER = 0
         dwelling.PROP_SUB_ID = "26"
         dwelling.CREATE_DATE = "19/09/2015 19:05"
         dwelling.UPDATE_DATE = "19/09/2015 20:55"
         dwelling.DISPLAY_ADDRESS = "2 Street Street"
-        dwelling.PUBLISHED_FLAG = "1"
+        dwelling.PUBLISHED_FLAG = 1
         dwelling.LET_DATE_AVAILABLE = "01/11/2015"
         dwelling.LET_FURN_ID = "Unfurnished"
         dwelling.LET_RENT_FREQUENCY = "12 Months"

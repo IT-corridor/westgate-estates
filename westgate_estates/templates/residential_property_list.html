@@ -4,7 +4,10 @@
 #{% block left_panel %}{% endblock %}
 {% block main %}
 <div class="col-md-12 middle">
-        {% for property in object_list %}
+        {% if residentiallist %}
+            <div id="map" style="height: 500px; margin-bottom: 12px;"></div>
+        {% endif %}
+        {% for property in residentiallist %}
         <div class="row">
 
             <div class="col-sm-4">
@@ -27,5 +30,34 @@
             </div>
         </div>
         {% endfor %}
+    {% if residentiallist %}
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: {lat: 53.8, lng: -1.55}
+        });
+        var geocoder = new google.maps.Geocoder();
+        {% for property in residentiallist %}
+            geocodeAddress(geocoder, map, "{{ property.DISPLAY_ADDRESS }}");
+        {% endfor %}
+      }
+
+      function geocodeAddress(geocoder, resultsMap, address) {
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            //resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            //alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
+    {% endif %}
 </div>
 {% endblock %}
