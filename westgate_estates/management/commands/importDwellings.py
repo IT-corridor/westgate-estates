@@ -61,9 +61,10 @@ class Command(BaseCommand):
     def makeResidential(self, dwellingData):
         print 'Create'
         print "\n" + dwellingData[0]  + "//////////////////////////////////////////////////////////" + "\n"
-        dwelling = Residential.objects.create()
+        # dwelling = Residential.objects.create()
+        dwelling = Residential()
         dwellingPopulated = self.populateResidential(dwelling, dwellingData)
-        #dwellingPopulated.save()
+        dwellingPopulated.save()
     
     def populateResidential(self, dwelling, dwellingData):
         dwelling.AGENT_REF          = dwellingData[0]
