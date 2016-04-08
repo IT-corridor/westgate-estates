@@ -49,11 +49,14 @@
     // For price in search form
     $( "#price-slider-range" ).slider({
       range: true,
-      min: 300,
+      min: 100,
       max: 99999,
-      values: [ 12375, 90000 ],
+      values: [ 300, 90000 ],
       slide: function( event, ui ) {
-        $( "#property_price_low" ).val( ui.values[ 0 ] );
+        val_str = ui.values[ 0 ]
+        $( "#property_price_low" ).val( val_str );
+        width = 8*val_str.length;
+        $( "#property_price_low" ).css('width', width+'px');
         $( "#property_price_high" ).val( ui.values[ 1 ] );
       }
     });
@@ -139,11 +142,17 @@
 </div>
 
 <div class="col-md-3 right">
+    <ul class="nav nav-tabs">
+      <li role="presentation" id="tab_resale" class="active"><a href="javascript:set_trans_type(1);">Resale</a></li>
+      <li role="presentation" id="tab_rent"><a href="javascript:set_trans_type(2);">Rent</a></li>
+    </ul>
     <div class="panel panel-default">
     <div class="panel-body">
     {% block right_panel %}
       <form action="{% url "residential_property_list" %}" method="post">
         {% csrf_token %}
+
+        
         <p>
           <label>Price : </label>
           <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
@@ -163,12 +172,7 @@
         <div id="bedroom-slider-range"></div>    
         <br/>
 
-        <label>Trans_Type</label>
-        <select style="width: 94%; margin-bottom: 10px;" name="trans_type">
-          <option value="-1">Select Trans Type</option>
-          <option value="1">Resale</option>
-          <option value="2">Lettings</option>
-        </select>
+        <input type="hidden" name="trans_type" id="trans_type_id" value="1">
 
         <label>Price_Qualifier</label>
         <select style="width: 94%; margin-bottom: 10px;" name="price_qualifier">
@@ -211,6 +215,19 @@
 
         <input type="submit" class="btn btn-default" value="Search">
       </form>
+      <script type="text/javascript">
+        function set_trans_type(type)
+        {
+            $('#trans_type_id').val(type);
+            if (type == 1) {
+              $('#tab_resale').addClass('active');
+              $('#tab_rent').removeClass('active');
+            } else {
+              $('#tab_resale').removeClass('active');
+              $('#tab_rent').addClass('active');            
+            }
+        }
+      </script>
     {% endblock %}
     </div>
     </div>
