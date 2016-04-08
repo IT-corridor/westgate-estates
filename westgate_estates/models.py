@@ -57,15 +57,15 @@ LET_RENT_FREQUENCY= (
 )
 
 class Residential(models.Model):
-    AGENT_REF = models.CharField(max_length=12, unique=True)
+    AGENT_REF = models.CharField(max_length=52, unique=True)
     SLUG = AutoSlugField(populate_from='AGENT_REF', always_update=True, unique=True)
     ADDRESS_1 = models.CharField(max_length=250)
     ADDRESS_2 = models.CharField(max_length=250, blank=True)
     ADDRESS_3 = models.CharField(max_length=250, blank=True)
     ADDRESS_4 = models.CharField(max_length=250, blank=True)
     TOWN = models.CharField(max_length=60)
-    POSTCODE1 = models.CharField(max_length=12)
-    POSTCODE2 = models.CharField(max_length=12)
+    POSTCODE1 = models.CharField(max_length=52)
+    POSTCODE2 = models.CharField(max_length=52)
     SUMMARY = models.TextField()
     DESCRIPTION = models.TextField()
     BRANCH_ID = models.CharField(max_length=60)
