@@ -4,17 +4,25 @@
 
 <head>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
 <meta name="description" content="{% block meta_description %}{% endblock %}">
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
 <link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">  
+{% ifinstalled mezzanine.blog %}
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+{% endifinstalled %}
 
 {% compress css %}
 <link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/westgate.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
 <link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
+<link rel="stylesheet" href="{% static "css/flaticon.css" %}">
 {% if LANGUAGE_BIDI %}
 <link rel="stylesheet" href="{% static "css/bootstrap-rtl.css" %}">
 {% endif %}
@@ -33,9 +41,13 @@
 <script src="{% static "js/bootstrap.js" %}"></script>
 <script src="{% static "js/bootstrap-extras.js" %}"></script>
 <script src="{% static "js/jquery-ui.js" %}"></script>
+<script src="{% static "js/search.js" %}"></script>
 
 {% block extra_js %}{% endblock %}
 {% endcompress %}
+
+<link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 <!--[if lt IE 9]>
 <script src="{% static "js/html5shiv.js" %}"></script>
@@ -44,65 +56,33 @@
 
 {% block extra_head %}{% endblock %}
 
-<script>
-  $(function() {
-    // For price in search form
-    $( "#price-slider-range" ).slider({
-      range: true,
-      min: 100,
-      max: 99999,
-      values: [ 300, 90000 ],
-      slide: function( event, ui ) {
-        val_str = ui.values[ 0 ]+'';
-        $( "#property_price_low" ).val( val_str );
-        $( "#property_price_low" ).width(8*val_str.length);
-        $( "#property_price_high" ).val( ui.values[ 1 ] );
-      }
-    });
-    $( "#property_price_low" ).val( $( "#price-slider-range" ).slider( "values", 0 ) );
-    $( "#property_price_high" ).val( $( "#price-slider-range" ).slider( "values", 1 ) );
-
-    // for bedroom in search form
-    $( "#bedroom-slider-range" ).slider({
-      range: true,
-      min: 1,
-      max: 12,
-      values: [ 2, 7 ],
-      slide: function( event, ui ) {
-        $( "#property_bedroom_low" ).val( ui.values[ 0 ] );
-        $( "#property_bedroom_high" ).val( ui.values[ 1 ] );
-      }
-    });
-    $( "#property_bedroom_low" ).val( $( "#bedroom-slider-range" ).slider( "values", 0 ) );
-    $( "#property_bedroom_high" ).val( $( "#bedroom-slider-range" ).slider( "values", 1 ) );
-
-  });
-</script>
 </head>
 
 <body id="{% block body_id %}body{% endblock %}">
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-<div class="container">
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">{% trans "Toggle Navigation" %}</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    {% block navbar_title %}
-    {% if settings.SITE_TITLE %}<a class="navbar-brand" href="/">{{ settings.SITE_TITLE }}</a>{% endif %}
-    {% if settings.SITE_TAGLINE %}<p class="navbar-text visible-lg">{{ settings.SITE_TAGLINE }}</p>{% endif %}
-    {% endblock%}
-</div>
-<div class="navbar-collapse collapse">
-    {% block navbar_search_form %}{% search_form "all" %}{% endblock %}
-    {% block navbar_dropdown_menu %}{% page_menu "pages/menus/dropdown.html" %}{% endblock%}
-</div>
-</div>
-</div>
+<nav class="navbar navbar-inverse navbar-fixed-top topnav" role="navigation">
+    <div class="navbar-inner">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">{% trans "Toggle Navigation" %}</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    <a class="btn btn-link navbar-btn navbar-brand" href="/">
+                        <img alt="Brand" class="img-responsive wg-logo" src="{% static "img/i-logo.png" %}">
+                    </a>
+            </div>
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+                {% search_form "all" %}
+                {% page_menu "pages/menus/dropdown.html" %}
+            </div>
+        </div>
+    </div>
+</nav>
 
+{% block meta_main %}
 <div class="container">
 
 {% nevercache %}
@@ -235,27 +215,35 @@
 </div>
 </div>
 
+{% endblock %}
+<!-- Footer -->
 <footer>
-<div class="container">
-{% page_menu "pages/menus/footer.html" %}
-
-<div class="row">
-<p class="site-info text-center">
-    {% trans "Powered by" %}
-    <a href="http://mezzanine.jupo.org">Mezzanine</a>{% ifinstalled cartridge.shop %},
-    <a href="http://cartridge.jupo.org">Cartridge</a>{% endifinstalled %}
-    {% trans "and" %}
-    <a href="http://www.djangoproject.com">Django</a>
-    <span class="separator">|</span>
-    {% trans "Theme by" %} <a target="_blank" href="http://getbootstrap.com">Bootstrap</a>
-    {% ifinstalled mezzanine.mobile %}
-    <span class="separator">|</span>
-    <a href="{% url "set_device" "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
-    {% endifinstalled %}
-</p>
-</div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="list-inline">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="#services">Services</a>
+                    </li>
+                    <li class="footer-menu-divider">&sdot;</li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted small">Copyright &copy; Westgate Estates. All Rights Reserved. Website by <a href="rik-deakin">Rik</a></p>
+            </div>
+        </div>
+    </div>
 </footer>
+
 
 {% block footer_js %}
 {% include "includes/footer_scripts.html" %}
