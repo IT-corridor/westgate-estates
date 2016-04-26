@@ -48,7 +48,7 @@ LET_FURN_ID = (
     (4, 'Furnished/ Un Furnishedf'),
 )
 
-LET_RENT_FREQUENCY= (
+LET_RENT_FREQUENCY = (
     (0, 'Weekly'),
     (1, 'Monthly'),
     (2, 'Quarterly'),

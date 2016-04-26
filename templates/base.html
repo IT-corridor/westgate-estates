@@ -110,106 +110,102 @@
 <div class="container">
 <div class="row">
 
-<div class="col-md-1 left">
-    {% block left_panel %}
-    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
-    {% endblock %}
-</div>
-
-<div class="col-md-8 middle">
+<div class="col-md-offset-1 col-md-8 middle">
     {% block main %}{% endblock %}
 </div>
 
 <div class="col-md-3 right">
-    <ul class="nav nav-tabs">
-      <li role="presentation" id="tab_resale" class="active"><a href="javascript:set_trans_type(1);">Resale</a></li>
-      <li role="presentation" id="tab_rent"><a href="javascript:set_trans_type(2);">Rent</a></li>
+  {% block right_panel %}
+<!--     <ul class="nav nav-tabs">
+      <li role="presentation" id="tab_resale" class="active"><a href="javascript:set_trans_type(1);">For Sale</a></li>
+      <li role="presentation" id="tab_rent"><a href="javascript:set_trans_type(2);">To Rent</a></li>
     </ul>
-    <div class="panel panel-default">
-    <div class="panel-body">
-    {% block right_panel %}
-      <form action="{% url "residential_property_list" %}" method="post">
-        {% csrf_token %}
+ -->
+    <ul class="nav nav-tabs">
+        <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
+        <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
+    </ul>
 
-        
-        <p>
-          <label>Price : </label>
-          <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-          <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 30px; padding: 0;">
-          <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-          <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
-        </p>         
-        <div id="price-slider-range"></div>    
-        <br/>
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div class="tab-pane fade in active" id="for_sale">
+          <div class="panel panel-default">
+          <div class="panel-body">
 
-        <p>
-          <label>Bedroom : </label>
-          <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
-          <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-          <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 15px; padding: 0;">        
-        </p>         
-        <div id="bedroom-slider-range"></div>    
-        <br/>
+            <form id="sale_form">
+              {% csrf_token %}
+              <p>
+                <label>Price : </label>
+                <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 30px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+              </p>         
+              <div id="price-slider-range"></div>    
+              <br/>
 
-        <input type="hidden" name="trans_type" id="trans_type_id" value="1">
+              <p>
+                <label>Number of Bedrooms : </label>
+                <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 15px; padding: 0;">        
+              </p>         
+              <div id="bedroom-slider-range"></div>    
+              <br/>
 
-        <label>Price_Qualifier</label>
-        <select style="width: 94%; margin-bottom: 10px;" name="price_qualifier">
-          <option value="-1">Select Price Qualifier</option>
-          <option value="0">Default</option>
-          <option value="1">POA</option>
-          <option value="2">Guide Price</option>
-          <option value="3">Fixed Price</option>
-          <option value="4">Offers in Excess</option>
-          <option value="5">OIRO</option>
-          <option value="6">Sales by Tender</option>
-          <option value="7">From(new homes and commercial only)</option>
-          <option value="9">Shared Ownership</option>
-          <option value="10">Offers Over</option>
-          <option value="11">Part Buy Part Rent</option>
-          <option value="12">Shared Equity</option>
-          <option value="14">Equity Loan</option>
-          <option value="15">Offers Invited</option>          
-        </select>
+              <input type="hidden" name="trans_type" value="1">
+              <input type="hidden" name="let_furn" value="-1">
 
-        <label>Let_Furn</label>
-        <select style="width: 94%; margin-bottom: 10px;" name="let_furn">
-          <option value="-1">Select Let Furn</option>
-          <option value="0">Furnished</option>
-          <option value="1">Part Furnished</option>
-          <option value="2">Unfurnished</option>
-          <option value="3">Not Specified</option>
-          <option value="4">Furnished/ Un Furnished</option>
-        </select>      
+              <input type="button" class="btn btn-default" value="Search" onclick="search_residental('sale_form');">
+            </form>
+          </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="to_rent">
+          <div class="panel panel-default">
+          <div class="panel-body">
 
-        <label>Let_Rent_Frequency</label>
-        <select style="width: 94%; margin-bottom: 10px;" name="let_rent_frequency">
-          <option value="-1">Select Let Rent Frequency</option>
-          <option value="0">Weekly</option>
-          <option value="1">Monthly</option>
-          <option value="2">Quarterly</option>
-          <option value="3">Annual</option>
-          <option value="5">Per person per week(Students Lettings only)</option>
-        </select>      
+            <form id="rent_form">
+              {% csrf_token %}
+              <p>
+                <label>Price : </label>
+                <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 30px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+              </p>         
+              <div id="rent-price-slider-range"></div>    
+              <br/>
 
-        <input type="submit" class="btn btn-default" value="Search">
-      </form>
-      <script type="text/javascript">
-        function set_trans_type(type)
-        {
-            $('#trans_type_id').val(type);
-            if (type == 1) {
-              $('#tab_resale').addClass('active');
-              $('#tab_rent').removeClass('active');
-            } else {
-              $('#tab_resale').removeClass('active');
-              $('#tab_rent').addClass('active');            
-            }
-        }
-      </script>
-    {% endblock %}
+              <p>
+                <label>Number of Bedrooms : </label>
+                <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 15px; padding: 0;">        
+              </p>         
+              <div id="rent-bedroom-slider-range"></div>    
+              <br/>
+
+              <input type="hidden" name="trans_type" value="2">
+
+              <label>Furnished ?</label>
+              <select style="width: 94%; margin-bottom: 10px;" name="let_furn">
+                <option value="-1">Please select...</option>
+                <option value="0">Furnished</option>
+                <option value="1">Part Furnished</option>
+                <option value="2">Unfurnished</option>
+                <option value="3">Not Specified</option>
+                <option value="4">Furnished/ Un Furnished</option>
+              </select>      
+
+              <input type="button" class="btn btn-default" value="Search" onclick="search_residental('rent_form');">
+            </form>
+          </div>
+          </div>
+        </div>
     </div>
-    </div>
+
+   {% endblock %}
 </div>
 
 </div>
@@ -243,7 +239,6 @@
         </div>
     </div>
 </footer>
-
 
 {% block footer_js %}
 {% include "includes/footer_scripts.html" %}
