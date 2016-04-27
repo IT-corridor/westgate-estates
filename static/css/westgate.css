@@ -183,3 +183,15 @@ li.dropdown a {
 .topnav {
     font-size: 12px;
 }
+
+.marker_dialog
+{
+    width:380px;
+}
+
+.marker_photo 
+{
+    width:192px;
+    float:left;
+    margin: 8px 12px 0 0;
+}
