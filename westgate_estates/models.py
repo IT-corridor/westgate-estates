@@ -56,6 +56,7 @@ LET_RENT_FREQUENCY = (
     (5, 'Per person per week(Students Lettings only)'),
 )
 
+
 class Residential(models.Model):
     AGENT_REF = models.CharField(max_length=52, unique=True)
     SLUG = AutoSlugField(populate_from='AGENT_REF', always_update=True, unique=True)
@@ -134,6 +135,7 @@ class Residential(models.Model):
     def __unicode__(self):
         return self.DISPLAY_ADDRESS
 
+
 class Commercial(models.Model):
     owner_name = models.CharField(max_length=72)
     owner_address = models.CharField(max_length=250)
@@ -159,3 +161,8 @@ class Commercial(models.Model):
     
     def __unicode__(self):
         return self.name
+
+
+class Residential_Favorite(models.Model):
+    user = models.ForeignKey('auth.User', null=True)
+    residential = models.ForeignKey(Residential)

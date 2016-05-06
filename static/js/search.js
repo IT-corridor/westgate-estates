@@ -70,3 +70,34 @@ function search_residental(form_id)
     $('.middle').html(result);
   });
 }
+
+function save_search(form_id, logged_in) {
+  if (logged_in === 'False')
+    alert('Please login first!');
+}
+
+function toggle_favorite(obj, id, logged_in)
+{
+  // if (logged_in === 'False')
+  //   alert('Please login first!');
+
+  img = $(obj).attr('src');
+  if (img == '/static/img/d_star.png') {
+    $('.favorite_star.star'+id).attr('src', '/static/img/e_star.png');
+    $('#favor_msg').html('This property has been added to your favourites. ');
+
+    $.post('/residential/favorite/', {'id': id, 'operation':1})
+    .success(function(result){
+      console.log('Favorite added @@@');
+    });
+
+  } else {
+    $('.favorite_star.star'+id).attr('src', '/static/img/d_star.png');
+    $('#favor_msg').html('This property has been removed from your favourites.');
+
+    $.post('/residential/favorite/', {'id': id, 'operation':0})
+    .success(function(result){
+      console.log('Favorite removed ###');
+    });
+  }
+}

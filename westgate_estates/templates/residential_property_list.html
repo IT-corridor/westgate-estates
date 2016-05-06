@@ -15,6 +15,11 @@
             </div>
             <div class="col-sm-8">
                 <a href="{% url 'residential_property_detail' property.SLUG %}"><h3>{{ property.DISPLAY_ADDRESS }}</h3></a>
+                {% if property.id in favorites %}
+                <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ property.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >
+                {% else %}
+                <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ property.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                
+                {% endif %}
                 <h4>Bedrooms: {{ property.BEDROOMS }}</h4>
                 <p>{{ property.SUMMARY }}</p>
                 <a href="{% url 'residential_property_detail' property.SLUG %}" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> More details</span></a>
@@ -36,18 +41,18 @@
         });
         var geocoder = new google.maps.Geocoder();
         {% for property in residentiallist %}
-            geocodeAddress(geocoder, map, "{{ property.DISPLAY_ADDRESS }}","{% url 'residential_property_detail' property.SLUG %}","{{ STATIC_URL }}img/properties/{{ property.AGENT_REF.strip }}_IMG_00.JPG","{{ property.BEDROOMS }}", "{{ property.SUMMARY }}");
+            geocodeAddress(geocoder, map, "{{ property.DISPLAY_ADDRESS }}","{% url 'residential_property_detail' property.SLUG %}","{{ STATIC_URL }}img/properties/{{ property.AGENT_REF.strip }}_IMG_00.JPG","{{ property.BEDROOMS }}", "{{ property.SUMMARY }}", "{{ property.id }}");
         {% endfor %}
       }
 
-      function geocodeAddress(geocoder, resultsMap, address, url, img_src, bedrooms, summary) {
+      function geocodeAddress(geocoder, resultsMap, address, url, img_src, bedrooms, summary, id) {
         geocoder.geocode({'address': address}, function(results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             //resultsMap.setCenter(results[0].geometry.location);
             var contentString = '<div class="marker_dialog"><a href="'+url+
                 '"><h4>'+address+'</h4></a><img class="marker_photo" src="'+img_src+
                 '"><h5>Bedrooms: '+bedrooms+
-                '</h5><p>'+summary+
+                '</h5><img src="/static/img/d_star.png" class="favorite_star pin star'+id+'" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, '+id+', \'{{ user.is_authenticated }}\');" data-toggle="modal" data-target="#favorite_dlg"><p>'+summary+
                 '</p><a href="'+url+
                 '" class="btn btn-default btn-xs"> More details</span></a></div> ';
 
@@ -62,6 +67,7 @@
 
             marker.addListener('click', function() {
               infowindow.open(resultsMap, marker);
+              $('.favorite_star.pin.star'+id).attr('src',$('.favorite_star.list.star'+id).attr('src'));
             });
           } else {
             //alert('Geocode was not successful for the following reason: ' + status);

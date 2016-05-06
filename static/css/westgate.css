@@ -195,3 +195,32 @@ li.dropdown a {
     float:left;
     margin: 8px 12px 0 0;
 }
+
+.favorite_star
+{
+    width: 18px;
+    float: right; 
+    cursor: pointer;
+}
+
+.favorite_star.list
+{
+    margin: -34px 20px 5px 0px;
+}
+
+.favorite_star.pin
+{
+    margin: -28px 12px 5px 0px;
+}
+
+.favorite_star.detail
+{
+    margin: 10px 8px 5px 16px;
+}
+
+.favorite_star_header
+{
+    width: 20px;
+    cursor: pointer;
+    margin: 14px 8px 5px 16px;
+}

@@ -41,6 +41,7 @@ urlpatterns += [
     # url('^residential/properties/$', westgate_estates.views.ResidentialListView.as_view(), name='residential_property_list',),
     url('^residential/properties/$', westgate_estates.views.residentiallist, name='residential_property_list',),
     url('^residential/properties/(?P<slug>[-\w]+)/$', westgate_estates.views.ResidentialDetailView.as_view(), name='residential_property_detail'),
+    url('^residential/favorite/$', westgate_estates.views.update_residential_favorite, name='update_residential_favorite',),    
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
     # This pattern gives us a normal ``Page`` object, so that your

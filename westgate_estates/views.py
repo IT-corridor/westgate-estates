@@ -1,7 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
-from .models import Residential, LET_RENT_FREQUENCY
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
+from .models import *
     
 
 def residentiallist(request):
@@ -23,8 +26,11 @@ def residentiallist(request):
         if let_furn != -1:
             residentials = residentials.filter(LET_FURN_ID=let_furn)
 
+    favorites = Residential_Favorite.objects.all()
+    favorites = [item.residential_id for item in favorites]
+
     return render(request, 'residential_property_list.html',
-                  {'residentiallist': residentials})
+                  {'residentiallist': residentials, 'favorites': favorites})
 
 
 class ResidentialDetailView(generic.DetailView):
@@ -39,4 +45,19 @@ class ResidentialDetailView(generic.DetailView):
         # Call the base implementation first to get a context
         context = super(ResidentialDetailView, self).get_context_data(**kwargs)        
         context['Let_Rent_Period'] = dict(LET_RENT_FREQUENCY).get(kwargs['object'].LET_RENT_FREQUENCY)
+        context['is_favor'] = Residential_Favorite.objects.filter(residential_id=kwargs['object'].id).exists()
         return context
+
+
+@csrf_exempt
+def update_residential_favorite(request):
+    rid = request.POST.get('id')
+    operation = request.POST.get('operation')
+
+    if operation == '1':
+        Residential_Favorite.objects.create(residential_id=int(rid))
+    else:
+        Residential_Favorite.objects.get(residential_id=rid).delete()
+
+    return HttpResponse('Your link is invalid or expired!') 
+

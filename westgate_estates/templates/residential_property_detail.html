@@ -16,9 +16,15 @@
 
         <div class="col-md-9">
             <div class="thumbnail">
-                <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" %}" alt="">
+                <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
                 <div class="caption-full">
-                    <h4 class="pull-right">Rent per month: £{{ object.PRICE }}</h4>
+                    {% if is_favor %}
+                    <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
+                    {% else %}
+                    <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
+                    {% endif %}
+                    <h4 class="pull-right">£{{ object.PRICE }} / month</h4>
+                    
                     <h4><a href="#">{{ object.DISPLAY_ADDRESS }}</a></h4>
                     <div class="row">
                         <div class="col-md-4">
