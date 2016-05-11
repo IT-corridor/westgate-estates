@@ -62,7 +62,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top topnav" role="navigation">
     <div class="navbar-inner">
         <div class="container topnav">
-            <div class="navbar-header">
+              <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">{% trans "Toggle Navigation" %}</span>
                     <span class="icon-bar"></span>
@@ -72,13 +72,17 @@
                     <a class="btn btn-link navbar-btn navbar-brand" href="/">
                         <img alt="Brand" class="img-responsive wg-logo" src="{% static "img/i-logo.png" %}">
                     </a>
-            </div>
-            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
-                <a href="#"><img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star_header" title="Click this icon to see all your favourites"></a>
-
-                {% search_form "all" %}
-                {% page_menu "pages/menus/dropdown.html" %}
-            </div>
+                    {% page_menu "pages/menus/dropdown.html" %}
+              </div>
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="/profile/"><img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star_header" title="Click this icon to see all your favourites"></a></li>            
+                {% if user.is_authenticated %}
+                  <li><a href="/accounts/logout/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                {% else %}
+                  <li><a href="/accounts/signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="/accounts/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {% endif %}
+              </ul>
         </div>
     </div>
 </nav>
@@ -117,11 +121,6 @@
 
 <div class="col-md-3 right">
   {% block right_panel %}
-<!--     <ul class="nav nav-tabs">
-      <li role="presentation" id="tab_resale" class="active"><a href="javascript:set_trans_type(1);">For Sale</a></li>
-      <li role="presentation" id="tab_rent"><a href="javascript:set_trans_type(2);">To Rent</a></li>
-    </ul>
- -->
     <ul class="nav nav-tabs">
         <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
         <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
@@ -138,7 +137,7 @@
               <p>
                 <label>Price : </label>
                 <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-                <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 30px; padding: 0;">
+                <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
                 <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
               </p>         
@@ -149,7 +148,7 @@
                 <label>Number of Bedrooms : </label>
                 <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-                <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 15px; padding: 0;">        
+                <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
               </p>         
               <div id="bedroom-slider-range"></div>    
               <br/>
@@ -158,7 +157,7 @@
               <input type="hidden" name="let_furn" value="-1">
 
               <input type="button" class="btn btn-default" value="Search" onclick="search_residental('sale_form');">
-              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search('sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
+              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
             </form>
           </div>
           </div>
@@ -172,7 +171,7 @@
               <p>
                 <label>Price : </label>
                 <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-                <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 30px; padding: 0;">
+                <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
                 <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
               </p>         
@@ -183,7 +182,7 @@
                 <label>Number of Bedrooms : </label>
                 <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-                <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 15px; padding: 0;">        
+                <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
               </p>         
               <div id="rent-bedroom-slider-range"></div>    
               <br/>
@@ -191,7 +190,7 @@
               <input type="hidden" name="trans_type" value="2">
 
               <label>Furnished ?</label>
-              <select style="width: 94%; margin-bottom: 10px;" name="let_furn">
+              <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="let_furn_rent">
                 <option value="-1">Please select...</option>
                 <option value="0">Furnished</option>
                 <option value="1">Part Furnished</option>
@@ -201,7 +200,7 @@
               </select>      
 
               <input type="button" class="btn btn-default" value="Search" onclick="search_residental('rent_form');">
-              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search('rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
+              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
             </form>
           </div>
           </div>
@@ -241,7 +240,7 @@
         </div>
         <div class="modal-body">
           <p id="favor_msg">This property has been added to your favourites. </p>
-          <a href="#">View all of your favourites?</a>
+          <a href="/profile">View all of your favourites?</a>
         </div>
       </div>
     </div>

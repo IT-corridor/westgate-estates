@@ -1,5 +1,7 @@
 from django.db import models
+from django.conf import settings
 from autoslug import AutoSlugField
+
 
 TRANS_TYPE_ID = (
     (1, 'Resale'),
@@ -164,5 +166,23 @@ class Commercial(models.Model):
 
 
 class Residential_Favorite(models.Model):
-    user = models.ForeignKey('auth.User', null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     residential = models.ForeignKey(Residential)
+
+    def __unicode__(self):
+        return self.user.username+': '+self.residential.DISPLAY_ADDRESS
+
+class Save_Search(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    r_low_price = models.FloatField(default=300)
+    r_high_price = models.FloatField(default=90000)
+    r_low_bedroom = models.IntegerField(default=2)
+    r_high_bedroom = models.IntegerField(default=7)
+    r_furnished = models.IntegerField(choices=LET_FURN_ID, blank=True, null=True)
+    s_low_price = models.FloatField(default=300)
+    s_high_price = models.FloatField(default=90000)
+    s_low_bedroom = models.IntegerField(default=2)
+    s_high_bedroom = models.IntegerField(default=7)
+
+    def __unicode__(self):
+        return self.user.username

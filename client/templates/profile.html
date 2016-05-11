@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load staticfiles %} 
+
+{% block meta_main %}
+<div class="row">
+<div class="col-md-offset-1 col-md-10">
+	<h3>Provide your information</h3>
+	<div class="well well-warning">
+		{{ clientform.errors }}
+	</div>	
+	<div class="row">
+	<div class="col-md-10">
+	<form method="post" class="form-horizontal" role="form">
+	  {% csrf_token %}
+
+	  {% for elem in clientform %}
+	  <div class="form-group">
+	    <label class="control-label col-sm-2" for="id_{{elem.name}}">{{elem.label}}</label>
+	    <div class="col-sm-6">
+	      {{ elem }}
+	    </div>
+	  </div>	
+	  {% endfor %}
+
+	  <div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-6">
+	      <button type="submit" class="btn btn-warning">Save</button>
+	    </div>
+	  </div>		
+
+	</form>
+	</div>		
+	</div>
+</div>
+</div>
+<hr/>
+{% if flag == 'edit' %}
+<div class="row">
+<div class="col-md-offset-1 col-md-8">
+	<h3> Save your search </h3>
+	{% if save_search %}
+          <div class="panel panel-default col-md-5">
+          <div class="panel-body">
+
+            <form id="sale_form">
+              {% csrf_token %}
+              <p>
+                <label>Price : </label>
+                <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+              </p>         
+              <div id="price-slider-range"></div>    
+              <br/>
+
+              <p>
+                <label>Number of Bedrooms : </label>
+                <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+              </p>         
+              <div id="bedroom-slider-range"></div>    
+              <br/>
+
+              <input type="hidden" name="trans_type" value="1">
+              <input type="hidden" name="let_furn" value="-1">
+
+              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
+            </form>
+          </div>
+          </div>
+          <div class="panel panel-default col-md-5 col-md-offset-1">
+          <div class="panel-body">
+
+            <form id="rent_form">
+              {% csrf_token %}
+              <p>
+                <label>Price : </label>
+                <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+              </p>         
+              <div id="rent-price-slider-range"></div>    
+              <br/>
+
+              <p>
+                <label>Number of Bedrooms : </label>
+                <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+              </p>         
+              <div id="rent-bedroom-slider-range"></div>    
+              <br/>
+
+              <input type="hidden" name="trans_type" value="2">
+
+              <label>Furnished ?</label>
+              <select style="margin-bottom: 12px; margin-left: 12px;" name="let_furn" id="let_furn_rent">
+                <option value="-1">Please select...</option>
+                <option value="0">Furnished</option>
+                <option value="1">Part Furnished</option>
+                <option value="2">Unfurnished</option>
+                <option value="3">Not Specified</option>
+                <option value="4">Furnished/ Un Furnished</option>
+              </select>      
+
+              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
+            </form>
+          </div>
+          </div>
+
+	{% endif %}
+	<div class="col-md-12">
+	<p>To edit or save a search go to the search page(link to search page), enter your search details and click the 'Save your search' button.</p>
+	</div>
+</div>
+</div>
+<hr/>
+<div class="row">
+<div class="col-md-offset-1 col-md-8">
+	<h3> Favorite Properties </h3>
+    {% include 'residential_property_list.html' %}
+</div>
+</div>
+<script>
+  {% if save_search %}
+    var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
+    var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
+    var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
+    var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
+    var let_furn = {{ save_search.r_furnished }};
+  {% else %}
+    var price_range_sale = [300, 90000];
+    var bedroom_range_sale = [2, 7];
+    var price_range_rent = [300, 90000];
+    var bedroom_range_rent = [2, 7];
+  {% endif %}
+</script>
+{% endif %}
+{% endblock %}

@@ -1,13 +1,13 @@
 $(function() {
-  var price_range = [ 300, 90000 ];
-  var bedroom_range = [2, 7]
+  // var price_range = [ 300, 90000 ];
+  // var bedroom_range = [2, 7]
 
   // For price in search form
   $( "#price-slider-range" ).slider({
     range: true,
     min: 100,
     max: 99999,
-    values: price_range,
+    values: price_range_sale,
     slide: function( event, ui ) {
       val_str = ui.values[ 0 ]+'';
       $( "#property_price_low" ).val( val_str );
@@ -23,7 +23,7 @@ $(function() {
     range: true,
     min: 1,
     max: 12,
-    values: bedroom_range,
+    values: bedroom_range_sale,
     slide: function( event, ui ) {
       $( "#property_bedroom_low" ).val( ui.values[ 0 ] );
       $( "#property_bedroom_high" ).val( ui.values[ 1 ] );
@@ -37,7 +37,7 @@ $(function() {
     range: true,
     min: 100,
     max: 99999,
-    values: price_range,
+    values: price_range_rent,
     slide: function( event, ui ) {
       val_str = ui.values[ 0 ]+'';
       $( "#rent-property_price_low" ).val( val_str );
@@ -53,7 +53,7 @@ $(function() {
     range: true,
     min: 1,
     max: 12,
-    values: bedroom_range,
+    values: bedroom_range_rent,
     slide: function( event, ui ) {
       $( "#rent-property_bedroom_low" ).val( ui.values[ 0 ] );
       $( "#rent-property_bedroom_high" ).val( ui.values[ 1 ] );
@@ -61,6 +61,8 @@ $(function() {
   });
   $( "#rent-property_bedroom_low" ).val( $( "#rent-bedroom-slider-range" ).slider( "values", 0 ) );
   $( "#rent-property_bedroom_high" ).val( $( "#rent-bedroom-slider-range" ).slider( "values", 1 ) );
+
+  $('#let_furn_rent').val(let_furn);
 });
 
 function search_residental(form_id)
@@ -71,15 +73,35 @@ function search_residental(form_id)
   });
 }
 
-function save_search(form_id, logged_in) {
+function login_check(e, logged_in)
+{
   if (logged_in === 'False')
-    alert('Please login first!');
+  {
+    e.stopPropagation();
+    var r = confirm("Please login first!");
+    if (r == true) {
+        location.href = '/accounts/login/';
+    } else {
+        return false;
+    }
+  }  
+  return true;
 }
 
-function toggle_favorite(obj, id, logged_in)
+function save_search(e, form_id, logged_in) {
+  if (!login_check(e, logged_in))
+    return false;
+
+    $.post('/residential/save_search/', $('#'+form_id).serialize()+'&form_id='+form_id)
+    .success(function(result){
+      console.log('Search is saved successfully!');
+    });
+}
+
+function toggle_favorite(e, obj, id, logged_in)
 {
-  // if (logged_in === 'False')
-  //   alert('Please login first!');
+  if (!login_check(e, logged_in))
+    return false;
 
   img = $(obj).attr('src');
   if (img == '/static/img/d_star.png') {

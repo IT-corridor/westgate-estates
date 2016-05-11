@@ -219,6 +219,15 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
 ################
 # APPLICATIONS #
 ################
@@ -232,6 +241,7 @@ INSTALLED_APPS = (
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.staticfiles",
+
     "mezzanine.boot",
     "mezzanine.conf",
     "mezzanine.core",
@@ -240,14 +250,23 @@ INSTALLED_APPS = (
     "mezzanine.blog",
     "mezzanine.forms",
     "mezzanine.galleries",
-    "mezzanine.twitter",
     "westgate_estates",         
     # "mezzanine.accounts",
     # "mezzanine.mobile",
+    'client',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.google',
 )
 
+AUTH_USER_MODEL = 'client.Client'
 
-
+SITE_ID = 1
 # List of middleware classes to use. Order is important; in the request phase,
 # these middleware classes will be applied in the order given, and in the
 # response phase the middleware will be applied in reverse order.
@@ -326,3 +345,5 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+LOGIN_REDIRECT_URL = "/residential/properties/"

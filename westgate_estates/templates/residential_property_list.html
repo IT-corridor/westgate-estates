@@ -1,4 +1,4 @@
-{% extends request.is_ajax|yesno:"ajax.html,base.html" %}
+{% extends parent_tempate %}
 
 {% block main %}
 
@@ -16,9 +16,9 @@
             <div class="col-sm-8">
                 <a href="{% url 'residential_property_detail' property.SLUG %}"><h3>{{ property.DISPLAY_ADDRESS }}</h3></a>
                 {% if property.id in favorites %}
-                <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ property.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >
+                <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ property.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >
                 {% else %}
-                <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ property.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                
+                <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ property.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                
                 {% endif %}
                 <h4>Bedrooms: {{ property.BEDROOMS }}</h4>
                 <p>{{ property.SUMMARY }}</p>
@@ -52,7 +52,7 @@
             var contentString = '<div class="marker_dialog"><a href="'+url+
                 '"><h4>'+address+'</h4></a><img class="marker_photo" src="'+img_src+
                 '"><h5>Bedrooms: '+bedrooms+
-                '</h5><img src="/static/img/d_star.png" class="favorite_star pin star'+id+'" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, '+id+', \'{{ user.is_authenticated }}\');" data-toggle="modal" data-target="#favorite_dlg"><p>'+summary+
+                '</h5><img src="/static/img/d_star.png" class="favorite_star pin star'+id+'" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, '+id+', \'{{ user.is_authenticated }}\');" data-toggle="modal" data-target="#favorite_dlg"><p>'+summary+
                 '</p><a href="'+url+
                 '" class="btn btn-default btn-xs"> More details</span></a></div> ';
 
@@ -76,6 +76,20 @@
       }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
+    <script>
+      {% if save_search %}
+        var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
+        var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
+        var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
+        var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
+        var let_furn = {{ save_search.r_furnished }};
+      {% else %}
+        var price_range_sale = [300, 90000];
+        var bedroom_range_sale = [2, 7];
+        var price_range_rent = [300, 90000];
+        var bedroom_range_rent = [2, 7];
+      {% endif %}
+    </script>
     {% endif %}
 </div>
 {% endblock %}

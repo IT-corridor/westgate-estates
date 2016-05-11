@@ -19,9 +19,9 @@
                 <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
                 <div class="caption-full">
                     {% if is_favor %}
-                    <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
+                    <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
                     {% else %}
-                    <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
+                    <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
                     {% endif %}
                     <h4 class="pull-right">£{{ object.PRICE }} / month</h4>
                     
@@ -73,6 +73,19 @@
       }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
-    
+    <script>
+      {% if save_search %}
+        var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
+        var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
+        var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
+        var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
+        var let_furn = {{ save_search.r_furnished }};
+      {% else %}
+        var price_range_sale = [300, 90000];
+        var bedroom_range_sale = [2, 7];
+        var price_range_rent = [300, 90000];
+        var bedroom_range_rent = [2, 7];
+      {% endif %}
+    </script>    
 </div> 
 {% endblock %}

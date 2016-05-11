@@ -8,6 +8,7 @@ from django.views.i18n import set_language
 from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 import westgate_estates.views
+import client.views
 
 admin.autodiscover()
 
@@ -42,6 +43,10 @@ urlpatterns += [
     url('^residential/properties/$', westgate_estates.views.residentiallist, name='residential_property_list',),
     url('^residential/properties/(?P<slug>[-\w]+)/$', westgate_estates.views.ResidentialDetailView.as_view(), name='residential_property_detail'),
     url('^residential/favorite/$', westgate_estates.views.update_residential_favorite, name='update_residential_favorite',),    
+    url('^residential/save_search/$', westgate_estates.views.save_search, name='save_search',),        
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^profile/', client.views.profile, name='user_profile'),
+
     # HOMEPAGE AS AN EDITABLE PAGE IN THE PAGE TREE
     # ---------------------------------------------
     # This pattern gives us a normal ``Page`` object, so that your
