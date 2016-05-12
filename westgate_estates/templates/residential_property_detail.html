@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %} 
-{% block title %} Property details {% endblock %}
+{% block title %} {{object.ADDRESS_1}} {% endblock %}
 #{% block left_panel %}{% endblock %}
 {% block main %}
 <div class="col-md-12 middle">
@@ -23,7 +23,7 @@
                     {% else %}
                     <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
                     {% endif %}
-                    <h4 class="pull-right">£{{ object.PRICE }} / month</h4>
+                    <h4 class="pull-right">£{{ object.PRICE }} {% if object.TRANS_TYPE_ID == 2 %}/ month {% endif %}</h4>
                     
                     <h4><a href="#">{{ object.DISPLAY_ADDRESS }}</a></h4>
                     <div class="row">
@@ -81,10 +81,10 @@
         var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
         var let_furn = {{ save_search.r_furnished }};
       {% else %}
-        var price_range_sale = [300, 90000];
-        var bedroom_range_sale = [2, 7];
-        var price_range_rent = [300, 90000];
-        var bedroom_range_rent = [2, 7];
+        var price_range_sale = [100, 99999];
+        var bedroom_range_sale = [1, 12];
+        var price_range_rent = [100, 99999];
+        var bedroom_range_rent = [1, 12];
       {% endif %}
     </script>    
 </div> 

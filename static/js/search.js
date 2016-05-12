@@ -98,10 +98,20 @@ function save_search(e, form_id, logged_in) {
     });
 }
 
-function toggle_favorite(e, obj, id, logged_in)
+function toggle_favorite(e, obj, id, logged_in, flag_profile)
 {
+  var flag = false;
   if (!login_check(e, logged_in))
     return false;
+
+  if (flag_profile) {
+    flag = confirm("Are you sure you would like to remove this property from your favourites?");
+    if (flag == true) {
+        e.stopPropagation();
+    } else {
+        return false;
+    }
+  }
 
   img = $(obj).attr('src');
   if (img == '/static/img/d_star.png') {
@@ -121,5 +131,10 @@ function toggle_favorite(e, obj, id, logged_in)
     .success(function(result){
       console.log('Favorite removed ###');
     });
+  }
+
+  if(flag == true) {
+    location.href = '/profile/#favorites_profile';
+    location.reload();
   }
 }

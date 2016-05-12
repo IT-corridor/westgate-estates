@@ -54,9 +54,8 @@ def profile(request):
 	context = {
 		'clientform': form,
 		'flag': flag,
-		'save_search': save_search,
-		'favorites': favorites,
 		'residentiallist': residentials,
+		'favorites': favorites,
 		'parent_tempate': 'ajax.html',
 		'save_search': save_search,
 	}

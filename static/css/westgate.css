@@ -184,6 +184,12 @@ li.dropdown a {
 .marker_dialog
 {
     width:380px;
+    overflow: hidden;
+}
+
+.gm-style-iw1 div {
+    overflow:hidden;
+    height:1%;    
 }
 
 .marker_photo 

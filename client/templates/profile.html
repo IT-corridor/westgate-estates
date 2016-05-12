@@ -4,7 +4,7 @@
 {% block meta_main %}
 <div class="row">
 <div class="col-md-offset-1 col-md-10">
-	<h3>Provide your information</h3>
+	<h3>Edit your profile</h3>
 	<div class="well well-warning">
 		{{ clientform.errors }}
 	</div>	
@@ -35,11 +35,13 @@
 </div>
 <hr/>
 {% if flag == 'edit' %}
-<div class="row">
+<div class="row" id="save_search_profile">
 <div class="col-md-offset-1 col-md-8">
 	<h3> Save your search </h3>
 	{% if save_search %}
-          <div class="panel panel-default col-md-5">
+          <div class="col-md-5">
+          <div class="panel panel-default ">
+          <div class="panel-heading">To Buy</div>
           <div class="panel-body">
 
             <form id="sale_form">
@@ -70,7 +72,10 @@
             </form>
           </div>
           </div>
-          <div class="panel panel-default col-md-5 col-md-offset-1">
+          </div>
+          <div class="col-md-5 col-md-offset-1">          
+          <div class="panel panel-default ">
+          <div class="panel-heading">To Rent</div>
           <div class="panel-body">
 
             <form id="rent_form">
@@ -110,6 +115,7 @@
             </form>
           </div>
           </div>
+          </div>
 
 	{% endif %}
 	<div class="col-md-12">
@@ -118,7 +124,7 @@
 </div>
 </div>
 <hr/>
-<div class="row">
+<div class="row" id="favorites_profile">
 <div class="col-md-offset-1 col-md-8">
 	<h3> Favorite Properties </h3>
     {% include 'residential_property_list.html' %}
@@ -132,10 +138,10 @@
     var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
     var let_furn = {{ save_search.r_furnished }};
   {% else %}
-    var price_range_sale = [300, 90000];
-    var bedroom_range_sale = [2, 7];
-    var price_range_rent = [300, 90000];
-    var bedroom_range_rent = [2, 7];
+    var price_range_sale = [100, 99999];
+    var bedroom_range_sale = [1, 12];
+    var price_range_rent = [100, 99999];
+    var bedroom_range_rent = [1, 12];
   {% endif %}
 </script>
 {% endif %}

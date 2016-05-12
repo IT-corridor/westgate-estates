@@ -174,15 +174,15 @@ class Residential_Favorite(models.Model):
 
 class Save_Search(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    r_low_price = models.FloatField(default=300)
-    r_high_price = models.FloatField(default=90000)
-    r_low_bedroom = models.IntegerField(default=2)
-    r_high_bedroom = models.IntegerField(default=7)
+    r_low_price = models.FloatField(default=100)
+    r_high_price = models.FloatField(default=99999)
+    r_low_bedroom = models.IntegerField(default=1)
+    r_high_bedroom = models.IntegerField(default=12)
     r_furnished = models.IntegerField(choices=LET_FURN_ID, blank=True, null=True)
-    s_low_price = models.FloatField(default=300)
-    s_high_price = models.FloatField(default=90000)
-    s_low_bedroom = models.IntegerField(default=2)
-    s_high_bedroom = models.IntegerField(default=7)
+    s_low_price = models.FloatField(default=100)
+    s_high_price = models.FloatField(default=99999)
+    s_low_bedroom = models.IntegerField(default=1)
+    s_high_bedroom = models.IntegerField(default=12)
 
     def __unicode__(self):
         return self.user.username

@@ -75,12 +75,18 @@
                     {% page_menu "pages/menus/dropdown.html" %}
               </div>
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="/profile/"><img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star_header" title="Click this icon to see all your favourites"></a></li>            
                 {% if user.is_authenticated %}
-                  <li><a href="/accounts/logout/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Your profile
+                    <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="/profile/#favorites_profile">View your favourites <span class="glyphicon glyphicon-star"></span></a></li>
+                      <li><a href="/profile/#save_search_profile">View your saved search <span class="glyphicon glyphicon-search"></span></a></li>
+                      <li><a href="/accounts/logout/">Logout <span class="glyphicon glyphicon-user"></span></a></li>
+                    </ul>
+                  </li>              
                 {% else %}
-                  <li><a href="/accounts/signup/"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                  <li><a href="/accounts/login/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  <li><a href="/accounts/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
                 {% endif %}
               </ul>
         </div>
@@ -240,7 +246,7 @@
         </div>
         <div class="modal-body">
           <p id="favor_msg">This property has been added to your favourites. </p>
-          <a href="/profile">View all of your favourites?</a>
+          <a href="/profile/#favorites_profile">View all of your favourites?</a>
         </div>
       </div>
     </div>

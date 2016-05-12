@@ -54,8 +54,12 @@ def residentiallist(request):
     if request.is_ajax():
         parent_tempate = "ajax.html"
 
-    return render(request, 'residential_property_list.html',
-                  {'residentiallist': residentials, 'favorites': favorites, 'parent_tempate':parent_tempate, 'save_search':save_search})
+    return render(request, 'residential_property_list.html', {
+        'residentiallist': residentials, 
+        'favorites': favorites, 
+        'parent_tempate':parent_tempate, 
+        'save_search':save_search
+        })
 
 
 class ResidentialDetailView(generic.DetailView):
