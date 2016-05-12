@@ -261,7 +261,7 @@ INSTALLED_APPS = (
 
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.google',
 )
 
 AUTH_USER_MODEL = 'client.Client'
@@ -345,5 +345,14 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'jason50010001@gmail.com'
+EMAIL_HOST_PASSWORD = 'password'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'jason50010001@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = "/residential/properties/"
