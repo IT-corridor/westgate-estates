@@ -74,21 +74,6 @@
                     </a>
                     {% page_menu "pages/menus/dropdown.html" %}
               </div>
-              <ul class="nav navbar-nav navbar-right">
-                {% if user.is_authenticated %}
-                  <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Your profile
-                    <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="/profile/#favorites_profile">View your favourites <span class="glyphicon glyphicon-star"></span></a></li>
-                      <li><a href="/profile/#save_search_profile">View your saved search <span class="glyphicon glyphicon-search"></span></a></li>
-                      <li><a href="/accounts/logout/">Logout <span class="glyphicon glyphicon-user"></span></a></li>
-                    </ul>
-                  </li>              
-                {% else %}
-                  <li><a href="/accounts/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-                {% endif %}
-              </ul>
         </div>
     </div>
 </nav>
