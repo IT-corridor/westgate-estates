@@ -6,7 +6,7 @@ $(function() {
   $( "#price-slider-range" ).slider({
     range: true,
     min: 100,
-    max: 99999,
+    max: 200000,
     values: price_range_sale,
     slide: function( event, ui ) {
       val_str = ui.values[ 0 ]+'';
@@ -22,7 +22,7 @@ $(function() {
   $( "#bedroom-slider-range" ).slider({
     range: true,
     min: 1,
-    max: 12,
+    max: 15,
     values: bedroom_range_sale,
     slide: function( event, ui ) {
       $( "#property_bedroom_low" ).val( ui.values[ 0 ] );
@@ -36,7 +36,7 @@ $(function() {
   $( "#rent-price-slider-range" ).slider({
     range: true,
     min: 100,
-    max: 99999,
+    max: 200000,
     values: price_range_rent,
     slide: function( event, ui ) {
       val_str = ui.values[ 0 ]+'';
@@ -52,7 +52,7 @@ $(function() {
   $( "#rent-bedroom-slider-range" ).slider({
     range: true,
     min: 1,
-    max: 12,
+    max: 15,
     values: bedroom_range_rent,
     slide: function( event, ui ) {
       $( "#rent-property_bedroom_low" ).val( ui.values[ 0 ] );
@@ -77,13 +77,22 @@ function login_check(e, logged_in)
 {
   if (logged_in === 'False')
   {
-    e.stopPropagation();
-    var r = confirm("Please login first!");
-    if (r == true) {
-        location.href = '/accounts/login/';
-    } else {
-        return false;
-    }
+    e.stopPropagation();    
+    $( "#dialog-confirm" ).dialog({
+      resizable: false,
+      height:180,
+      modal: true,
+      buttons: {
+        "Login": function() {
+          $( this ).dialog( "close" );
+          location.href = '/accounts/login/';          
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+          return false;
+        }
+      }
+    }); 
   }  
   return true;
 }
@@ -105,12 +114,21 @@ function toggle_favorite(e, obj, id, logged_in, flag_profile)
     return false;
 
   if (flag_profile) {
-    flag = confirm("Are you sure you would like to remove this property from your favourites?");
-    if (flag == true) {
-        e.stopPropagation();
-    } else {
-        return false;
-    }
+    $( "#fav-dialog-confirm" ).dialog({
+      resizable: false,
+      height:180,
+      modal: true,
+      buttons: {
+        "Delete": function() {
+          $( this ).dialog( "close" );
+          e.stopPropagation();     
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+          return false;
+        }
+      }
+    }); 
   }
 
   img = $(obj).attr('src');

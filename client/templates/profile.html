@@ -9,14 +9,14 @@
 		{{ clientform.errors }}
 	</div>	
 	<div class="row">
-	<div class="col-md-10">
+	<div class="col-md-11" style="font-size: 15px;">
 	<form method="post" class="form-horizontal" role="form">
 	  {% csrf_token %}
 
 	  {% for elem in clientform %}
 	  <div class="form-group">
 	    <label class="control-label col-sm-2" for="id_{{elem.name}}">{{elem.label}}</label>
-	    <div class="col-sm-6">
+	    <div class="col-sm-5 ">
 	      {{ elem }}
 	    </div>
 	  </div>	
@@ -38,6 +38,19 @@
 <div class="row" id="save_search_profile">
 <div class="col-md-offset-1 col-md-8">
 	<h3> Save your search </h3>
+    <div class="form-group userprofile-ss-propemail">
+      <label class="col-md-5 control-label" for="userprofile-ss-propemail">Would you like to receive an email containing a list of properties which match your saved search?</label>
+      <div class="col-md-6">
+          <label class="radio-inline" for="userprofile-ss-propemail-0">
+              <input type="radio" name="userprofile-ss-propemail" id="userprofile-ss-propemail-0"
+              value="1" checked="checked" class="">Yes</label>
+          <label class="radio-inline" for="userprofile-ss-propemail-1">
+              <input type="radio" name="userprofile-ss-propemail" id="userprofile-ss-propemail-1"
+              value="2" class="">No</label>
+          <p class="help-block">You can unsubscribe at any time. Please note, this service is not yet
+              active, although you will start to receive the email shortly.</p>
+      </div>
+  </div>
 	{% if save_search %}
           <div class="col-md-5">
           <div class="panel panel-default ">
@@ -138,10 +151,10 @@
     var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
     var let_furn = {{ save_search.r_furnished }};
   {% else %}
-    var price_range_sale = [100, 99999];
-    var bedroom_range_sale = [1, 12];
-    var price_range_rent = [100, 99999];
-    var bedroom_range_rent = [1, 12];
+    var price_range_sale = [100, 200000];
+    var bedroom_range_sale = [1, 15];
+    var price_range_rent = [100, 200000];
+    var bedroom_range_rent = [1, 15];
   {% endif %}
 </script>
 {% endif %}

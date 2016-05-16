@@ -145,7 +145,7 @@
                 <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
                 <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
               </p>         
               <div id="price-slider-range"></div>    
               <br/>
@@ -179,7 +179,7 @@
                 <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
                 <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
               </p>         
               <div id="rent-price-slider-range"></div>    
               <br/>
@@ -251,6 +251,17 @@
       </div>
     </div>
   </div>
+
+  <!-- Login Confirm Modal -->
+  <div id="dialog-confirm" title="Please login first!" style="display:none;">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>You have to login to save your settings.</p>
+  </div>
+
+  <!-- Favorite Delete Confirm Modal -->
+  <div id="fav-dialog-confirm" title="Favorite Remove" style="display:none;">
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you would like to remove this property from your favourites?</p>
+  </div>
+
 </div>
    {% endblock %}
 </div>
