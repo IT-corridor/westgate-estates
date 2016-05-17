@@ -183,6 +183,7 @@ class Save_Search(models.Model):
     s_high_price = models.FloatField(default=99999)
     s_low_bedroom = models.IntegerField(default=1)
     s_high_bedroom = models.IntegerField(default=12)
+    receive_email = models.BooleanField(default=False)
 
     def __unicode__(self):
         return self.user.username

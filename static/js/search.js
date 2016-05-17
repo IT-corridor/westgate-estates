@@ -97,14 +97,23 @@ function login_check(e, logged_in)
   return true;
 }
 
-function save_search(e, form_id, logged_in) {
+function save_search(e, form_id, logged_in, receive_email) {
   if (!login_check(e, logged_in))
     return false;
 
-    $.post('/residential/save_search/', $('#'+form_id).serialize()+'&form_id='+form_id)
+    $.post('/residential/save_search/', $('#'+form_id).serialize()+'&form_id='+form_id+'&receive_email='+receive_email)
     .success(function(result){
       console.log('Search is saved successfully!');
     });
+}
+
+function profile_save_search(e) {
+  receive_email = $('#userprofile-ss-propemail-0').attr('checked');
+  if (receive_email != 'checked')
+    receive_email = 'unchecked';
+  
+  save_search(e, 'rent_form', true, receive_email);
+  save_search(e, 'sale_form', true);
 }
 
 function toggle_favorite(e, obj, id, logged_in, flag_profile)

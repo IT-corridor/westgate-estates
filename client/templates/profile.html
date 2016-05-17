@@ -2,56 +2,132 @@
 {% load staticfiles %} 
 
 {% block meta_main %}
-<div class="row">
-<div class="col-md-offset-1 col-md-10">
-	<h3>Edit your profile</h3>
-	<div class="well well-warning">
-		{{ clientform.errors }}
-	</div>	
-	<div class="row">
-	<div class="col-md-11" style="font-size: 15px;">
-	<form method="post" class="form-horizontal" role="form">
-	  {% csrf_token %}
+<div class="container">
 
-	  {% for elem in clientform %}
-	  <div class="form-group">
-	    <label class="control-label col-sm-2" for="id_{{elem.name}}">{{elem.label}}</label>
-	    <div class="col-sm-5 ">
-	      {{ elem }}
-	    </div>
-	  </div>	
-	  {% endfor %}
+<div class="row" style="margin-top: 50px;">
+{{ clientform.errors }}
+  <form class="form-horizontal userprofile" method="post" action="/profile/">
+    {% csrf_token %}
+    <fieldset>
+      <!-- Form Name -->
+      <legend class="">Edit your profile</legend>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="userprofilename">Name</label>
+        <div class="col-md-4">
+          <input id="userprofilename" name="first_name" type="text" placeholder="Enter your name."
+          class="form-control input-md userprofilename" required="" style="" value="{{ clientform.first_name.value }}">
+        </div>
+      </div>
+      <!-- Appended checkbox -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="userprofileemail-0">Email</label>
+        <div class="col-md-4">
+          <div class="input-group userprofileemail">
+            <input id="userprofileemail-0" name="email" class="form-control"
+            type="text" placeholder="Your email address" required="required" value="{{ clientform.email.value }}"> <span class="input-group-addon">     
+      <input type="checkbox" class="" name="email_contactable" {% if clientform.email_contactable.value %}checked{% endif %}>     
+       </span>
+          </div>
+          <p class="help-block">Can we contact you via email?
+            <br class="">Please check the box above to opt out.</p>
+        </div>
+      </div>
+      <!-- Appended checkbox -->
+      <div class="form-group userprofiletel">
+        <label class="col-md-4 control-label" for="userprofiletel-0">Phone</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input id="userprofiletel-0" name="phone" class="form-control"
+            type="text" placeholder="Your telephone number" value="{{ clientform.phone.value }}"> <span class="input-group-addon">     
+      <input type="checkbox" class="" name="phone_contactable"  {% if clientform.phone_contactable.value %}checked{% endif %}>     
+       </span>
 
-	  <div class="form-group">
-	    <div class="col-sm-offset-2 col-sm-6">
-	      <button type="submit" class="btn btn-warning">Save</button>
-	    </div>
-	  </div>		
+          </div>
+          <p class="help-block">Can we contact you via telephone?
+            <br />Please check the box above to opt out.</p>
+            </div>
+        </div>
+        
+      <!-- Multiple Checkboxes (inline) -->
+            <div class="form-group userprofileproptype">
+              <label class="col-md-4 control-label" for="userprofileproptype">What types of property are you interested in?</label>
+              <div class="col-md-4">
+                {% for item in clientform.interested_property %}
+                  {{ item }}&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+                <p class="help-block">Please check all that apply.</p>
+              </div>
+            </div>
+            
+            <!-- Multiple Checkboxes (inline) -->
+            <div class="form-group userprofileproptype2">
+              <label class="col-md-4 control-label" for="userprofileproptype2">To Rent or To Buy?</label>
+              <div class="col-md-4">
+                {% for item in clientform.interested_action %}
+                  {{ item }}&nbsp;&nbsp;&nbsp;
+                {% endfor %}
+                <p class="help-block">Please check all that apply.</p>
+              </div>
+            </div>
 
-	</form>
-	</div>		
-	</div>
+      <!-- Multiple Radios (inline) -->
+      <div class="form-group userprofilenewsletter">
+        <label class="col-md-4 control-label" for="userprofilenewsletter">Would you like to receive our newsletter for deals, offers and news?</label>
+        <div class="col-md-4">
+          <label class="radio-inline" for="userprofilenewsletter-0">
+            <input type="radio" name="receive_news" id="userprofilenewsletter-0"
+            value="1" {% if clientform.receive_news.value %}checked{% endif %} class="">Yes</label>
+          <label class="radio-inline" for="userprofilenewsletter-1">
+            <input type="radio" name="receive_news" id="userprofilenewsletter-1"
+            value="2" {% if not clientform.receive_news.value %}checked{% endif %} class="">No</label>
+           </div>
+            </div>
+<!-- Multiple Checkboxes -->
+<div class="form-group userprofileservices">
+  <label class="col-md-4 control-label" for="userprofileservices">Are you interested in any of these services?
+    <br class="">Please select all that apply.</label>
+  <div class="col-md-4">
+      {% for item in clientform.interested_service %}
+        <div class="userprofileservices">
+        {{ item }}
+        </div>
+      {% endfor %}
+  </div>
 </div>
+<!-- Submit Button -->
+<div class="form-group userprofilessavesettings">
+  <label class="col-md-4 control-label" for="userprofilessavesettings"></label>
+  <div class="col-md-4">
+    <button id="userprofilessavesettings" name="userprofilessavesettings"
+    class="btn btn-primary userprofilessavesettings">Save your settings</button>
+  </div>
 </div>
-<hr/>
+</fieldset>
+</form>
+</div><br>
+
 {% if flag == 'edit' %}
 <div class="row" id="save_search_profile">
-<div class="col-md-offset-1 col-md-8">
-	<h3> Save your search </h3>
-    <div class="form-group userprofile-ss-propemail">
-      <label class="col-md-5 control-label" for="userprofile-ss-propemail">Would you like to receive an email containing a list of properties which match your saved search?</label>
-      <div class="col-md-6">
-          <label class="radio-inline" for="userprofile-ss-propemail-0">
-              <input type="radio" name="userprofile-ss-propemail" id="userprofile-ss-propemail-0"
-              value="1" checked="checked" class="">Yes</label>
-          <label class="radio-inline" for="userprofile-ss-propemail-1">
-              <input type="radio" name="userprofile-ss-propemail" id="userprofile-ss-propemail-1"
-              value="2" class="">No</label>
-          <p class="help-block">You can unsubscribe at any time. Please note, this service is not yet
-              active, although you will start to receive the email shortly.</p>
-      </div>
-  </div>
+<legend class="">Your saved search</legend>
+<div class="col-md-11">
+      <p class="">NOTES: Please show the settings for the user's saved search below. One
+        entry for to rent, one for to buy. If the user has saved a search for both,
+        please list both.
+        <br class="">The question below should link to the same question above with javascript,
+        so that if one of these questions is changed, the other should change to
+        match. All forms will need to be submitted at the same time to save all
+        settings. If this whole page needs to be a single form, that is fine. Whatever
+        works.
+        <br class="">If the user has not yet saved a search, do not show the saved search settings,
+        show the text below with instructions on how to save a search. If the user
+        has saved a search, instead, show the settings/filters they chose and the
+        instructions below on how to edit a saved search.</p>
 	{% if save_search %}
+    <p class="">Below is your saved search. To edit your search, go to the search form
+        on the right and change your search settings, once you are happy with them,
+        please click the "Save your search" button.</p>
+
           <div class="col-md-5">
           <div class="panel panel-default ">
           <div class="panel-heading">To Buy</div>
@@ -64,7 +140,7 @@
                 <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
                 <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
               </p>         
               <div id="price-slider-range"></div>    
               <br/>
@@ -80,8 +156,6 @@
 
               <input type="hidden" name="trans_type" value="1">
               <input type="hidden" name="let_furn" value="-1">
-
-              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
             </form>
           </div>
           </div>
@@ -98,7 +172,7 @@
                 <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
                 <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
                 <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 45px; padding: 0;">
+                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
               </p>         
               <div id="rent-price-slider-range"></div>    
               <br/>
@@ -114,8 +188,8 @@
 
               <input type="hidden" name="trans_type" value="2">
 
-              <label>Furnished ?</label>
-              <select style="margin-bottom: 12px; margin-left: 12px;" name="let_furn" id="let_furn_rent">
+              <label for="id_furnished">Furnished ?</label>
+              <select name="let_furn" id="let_furn_rent" class="form-control" id="id_furnished">
                 <option value="-1">Please select...</option>
                 <option value="0">Furnished</option>
                 <option value="1">Part Furnished</option>
@@ -123,24 +197,50 @@
                 <option value="3">Not Specified</option>
                 <option value="4">Furnished/ Un Furnished</option>
               </select>      
-
-              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
             </form>
           </div>
           </div>
           </div>
+    <div class="form-group userprofile-ss-propemail">
+      <label class="col-md-5 control-label" for="userprofile-ss-propemail">Would you like to receive an email containing a list of properties which match your saved search?</label>
+      <div class="col-md-6">
+          <label class="radio-inline" for="userprofile-ss-propemail-0">
+          <input type="radio" name="userprofile-ss-propemail" id="userprofile-ss-propemail-0"
+              value="1" {% if save_search.receive_email %}checked{% endif %} class="">Yes</label>
+          <label class="radio-inline" for="userprofile-ss-propemail-1">
+          <input type="radio" name="userprofile-ss-propemail" id="userprofile-ss-propemail-1"
+              value="2" {% if not save_search.receive_email %}checked{% endif %} class="">No</label>
+          <p class="help-block">You can unsubscribe at any time. Please note, this service is not yet
+              active, although you will start to receive the email shortly.</p>
+          <a id="userprofilessavesettings" name="userprofilessavesettings"
+              class="btn btn-primary userprofilessavesettings" onclick="profile_save_search(event);">Save your settings</a>
+      </div>
+    </div>
 
+  {% else %}
+    <p>You have not yet saved a search. To save your search, go to the search
+        form on the right and choose your search options. Once you are happy with
+        your selected search options, click the "Save your search" button at the
+        bottom of the form.</p>
 	{% endif %}
-	<div class="col-md-12">
-	<p>To edit or save a search go to the search page(link to search page), enter your search details and click the 'Save your search' button.</p>
-	</div>
 </div>
-</div>
-<hr/>
+</div><br>
 <div class="row" id="favorites_profile">
-<div class="col-md-offset-1 col-md-8">
-	<h3> Favorite Properties </h3>
-    {% include 'residential_property_list.html' %}
+  <legend class="">Your favourite properties</legend>
+<div class="col-md-10">
+  <p class="">NOTES: Show a list of the user's favourite properties, using a different
+    template to the view that shows the search results (just copy the search
+    results template and rename it). Please write here the name of the template
+    so that I can edit it.</p>
+    {% if favorites %}
+      <p class="">Below is a list of your favourite properties, to add or remove properties,
+    simply click the star icon for each one anywhere you see it in.</p>
+      {% include 'residential_property_list.html' %}
+    {% else %}
+      <p>You have not yet added any properties to your favourites. To add properties
+    to this list, simply search for properties using the form on the right
+    and then click the star icon for each property.</p>
+    {% endif %}
 </div>
 </div>
 <script>
@@ -158,4 +258,5 @@
   {% endif %}
 </script>
 {% endif %}
+</div>
 {% endblock %}

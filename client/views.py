@@ -33,21 +33,17 @@ def profile(request):
 	else:	
 		form = ClientForm(request.POST)
 		if form.is_valid():			
-			post = form.save(commit=False)			
-			client.first_name = post.first_name
-			client.last_name = post.last_name
-			client.email = post.email
-			client.phone = post.phone
-			client.interested_action = post.interested_action
-			client.interested_property = post.interested_property
-			client.other_service = post.other_service
-			client.receive_news = post.receive_news
-			client.contactable = post.contactable
+			client.first_name = form.cleaned_data['first_name']
+			client.email = form.cleaned_data['email']
+			client.phone = form.cleaned_data['phone']
+			client.interested_action = form.cleaned_data['interested_action']
+			client.interested_property = form.cleaned_data['interested_property']
+			client.interested_service = form.cleaned_data['interested_service']
+			client.receive_news = form.cleaned_data['receive_news']
+			client.phone_contactable = form.cleaned_data['phone_contactable']
+			client.email_contactable = form.cleaned_data['email_contactable']
 
 			client.save()
-			# # create save_search model for the client for the first time
-			# if not Save_Search.objects.filter(user=request.user):
-			# 	Save_Search.objects.create(user=request.user)
 
 			return HttpResponseRedirect('/')
 

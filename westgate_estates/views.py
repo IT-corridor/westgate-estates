@@ -110,7 +110,7 @@ def save_search(request):
     high_price = request.POST.get('property_price_high')
     low_bedroom = request.POST.get('property_bedroom_low')
     high_bedroom = request.POST.get('property_bedroom_high')
-
+    receive_email = request.POST.get('receive_email')
     save_search = Save_Search.objects.filter(user=request.user)
 
     if save_search:
@@ -119,6 +119,12 @@ def save_search(request):
         save_search = Save_Search(user=request.user)
 
     save_search.save()
+
+    if receive_email == 'checked':
+        save_search.receive_email = True
+    elif receive_email == 'unchecked':
+        save_search.receive_email = False
+
     if form_id == 'rent_form':
         let_furn = request.POST.get('let_furn')
         if let_furn == '-1':
