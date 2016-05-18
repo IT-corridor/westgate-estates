@@ -17,9 +17,8 @@
 {% endifinstalled %}
 
 {% compress css %}
-<link rel="stylesheet" href="{% static "css/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/bootstrap3.2.css" %}">
 <link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" href="{% static "css/bootstrap-theme.css" %}">
 <link rel="stylesheet" href="{% static "css/flaticon.css" %}">
 {% if LANGUAGE_BIDI %}
 <link rel="stylesheet" href="{% static "css/bootstrap-rtl.css" %}">
@@ -59,54 +58,45 @@
 
 <body id="{% block body_id %}body{% endblock %}">
 
-<nav class="navbar navbar-inverse navbar-fixed-top topnav" role="navigation">
-    <div class="navbar-inner">
-        <div class="container topnav">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">{% trans "Toggle Navigation" %}</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                    <a class="btn btn-link navbar-btn navbar-brand" href="/">
-                        <img alt="Brand" class="img-responsive wg-logo" src="{% static "img/i-logo.png" %}">
-                    </a>
-                    {% page_menu "pages/menus/dropdown.html" %}
-              </div>
-        </div>
+<nav class="navbar navbar-inverse  navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img alt="Brand" class="img-responsive wg-logo" src="{% static "img/i-logo.png" %}"></a>
     </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      {% page_menu "pages/menus/dropdown.html" %}
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Your profile
+            <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="/profile/#favorites_profile">View your favourites <span class="glyphicon glyphicon-star"></span></a></li>
+              <li><a href="/profile/#save_search_profile">View your saved search <span class="glyphicon glyphicon-search"></span></a></li>
+              <li><a href="/accounts/logout/">Logout <span class="glyphicon glyphicon-user"></span></a></li>
+            </ul>
+          </li>              
+        {% else %}
+          <li><a href="/accounts/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
 </nav>
 
+
 {% block meta_main %}
-<div class="container">
 
-{% nevercache %}
-{% if messages %}
-<div class="messages">
-{% for message in messages %}
-<div class="alert alert-dismissable alert-{{ message.tags }}" data-alert="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    {{ message }}
-</div>
-{% endfor %}
-</div>
-{% endif %}
-{% endnevercache %}
-
-<h1>{% block title %}{% endblock %}</h1>
-
-<ul class="breadcrumb">
-{% spaceless %}
-{% endspaceless %}
-</ul>
-
-</div>
-
-<div class="container">
+<div class="container" style="margin-top: 30px;">
 <div class="row">
 
 <div class="col-md-offset-1 col-md-8 middle">
+<h1>{% block title %}{% endblock %}</h1>
     {% block main %}{% endblock %}
 </div>
 
@@ -147,8 +137,8 @@
               <input type="hidden" name="trans_type" value="1">
               <input type="hidden" name="let_furn" value="-1">
 
-              <input type="button" class="btn btn-default" value="Search" onclick="search_residental('sale_form');">
-              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
+              <a class="btn btn-default" onclick="search_residental('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+              <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
             </form>
           </div>
           </div>
@@ -189,9 +179,8 @@
                 <option value="3">Not Specified</option>
                 <option value="4">Furnished/ Un Furnished</option>
               </select>      
-
-              <input type="button" class="btn btn-default" value="Search" onclick="search_residental('rent_form');">
-              <input type="button" class="btn btn-default" value="Save your search" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site.">
+              <a class="btn btn-default" onclick="search_residental('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+              <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
             </form>
           </div>
           </div>

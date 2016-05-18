@@ -1,5 +1,5 @@
 {% extends parent_tempate %}
-
+{% block title %}{% endblock %}
 {% block main %}
 
 <div class="col-md-12 middle">
@@ -8,7 +8,7 @@
         {% endif %}
         {% for property in residentiallist %}
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-4" style="padding-top: 25px;">
               <a href="{% url 'residential_property_detail' property.SLUG %}">
                 <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ property.AGENT_REF }}_IMG_00.JPG">
               </a>
@@ -22,7 +22,7 @@
                 {% endif %}
                 <h4>Bedrooms: {{ property.BEDROOMS }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;£{{ property.PRICE }} {% if property.TRANS_TYPE_ID == 2 %}/ month {% endif %}</h4>
                 <p>{{ property.SUMMARY }}</p>
-                <a href="{% url 'residential_property_detail' property.SLUG %}" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> More details</span></a>
+                <a href="{% url 'residential_property_detail' property.SLUG %}" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> More details</a>
             </div>
         </div>     
         {% empty %}
@@ -58,7 +58,7 @@
                 '"><h5>Bedrooms: '+bedrooms+
                 '</h5><img src="/static/img/d_star.png" class="favorite_star pin star'+id+'" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, '+id+', \'{{ user.is_authenticated }}\');" data-toggle="modal" data-target="#favorite_dlg"><div class="marker_summary">'+summary+
                 '</div><a href="'+url+
-                '" class="btn btn-default btn-xs"> More details</span></a></div> ';
+                '" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-home"></span> More details</span></a></div> ';
 
             var infowindow = new google.maps.InfoWindow({
               content: contentString
