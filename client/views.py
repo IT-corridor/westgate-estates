@@ -45,7 +45,7 @@ def profile(request):
 
 			client.save()
 
-			return HttpResponseRedirect('/')
+			return HttpResponseRedirect('/profile/')
 
 	context = {
 		'clientform': form,

@@ -67,19 +67,14 @@
       }
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
-    <script>
       {% if save_search %}
-        var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
-        var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
-        var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
-        var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
-        var let_furn = {{ save_search.r_furnished }};
-      {% else %}
-        var price_range_sale = [100, 200000];
-        var bedroom_range_sale = [1, 15];
-        var price_range_rent = [100, 200000];
-        var bedroom_range_rent = [1, 15];
-      {% endif %}
-    </script>    
+        {% block slider_js_variable %}
+          var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
+          var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
+          var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
+          var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
+          var let_furn = {{ save_search.r_furnished }};
+        {% endblock %}
+      {% endif %}  
 </div> 
 {% endblock %}

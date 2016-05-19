@@ -111,18 +111,6 @@
 <div class="row" id="save_search_profile">
 <legend class="">Your saved search</legend>
 <div class="col-md-11">
-      <p class="">NOTES: Please show the settings for the user's saved search below. One
-        entry for to rent, one for to buy. If the user has saved a search for both,
-        please list both.
-        <br class="">The question below should link to the same question above with javascript,
-        so that if one of these questions is changed, the other should change to
-        match. All forms will need to be submitted at the same time to save all
-        settings. If this whole page needs to be a single form, that is fine. Whatever
-        works.
-        <br class="">If the user has not yet saved a search, do not show the saved search settings,
-        show the text below with instructions on how to save a search. If the user
-        has saved a search, instead, show the settings/filters they chose and the
-        instructions below on how to edit a saved search.</p>
 	{% if save_search %}
     <p class="">Below is your saved search. To edit your search, go to the search form
         on the right and change your search settings, once you are happy with them,
@@ -243,20 +231,16 @@
     {% endif %}
 </div>
 </div>
-<script>
   {% if save_search %}
-    var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
-    var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
-    var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
-    var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
-    var let_furn = {{ save_search.r_furnished }};
-  {% else %}
-    var price_range_sale = [100, 200000];
-    var bedroom_range_sale = [1, 15];
-    var price_range_rent = [100, 200000];
-    var bedroom_range_rent = [1, 15];
+    {% block slider_js_variable %}
+      var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
+      var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
+      var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
+      var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
+      var let_furn = {{ save_search.r_furnished }};
+    {% endblock %}
   {% endif %}
-</script>
+
 {% endif %}
 </div>
 {% endblock %}

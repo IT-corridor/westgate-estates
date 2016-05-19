@@ -1,7 +1,4 @@
 $(function() {
-  // var price_range = [ 300, 90000 ];
-  // var bedroom_range = [2, 7]
-
   // For price in search form
   $( "#price-slider-range" ).slider({
     range: true,

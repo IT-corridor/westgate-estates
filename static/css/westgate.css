@@ -226,7 +226,7 @@ li.dropdown a {
     margin: 2px 8px 5px 16px;
 }
 
-.panel {
+.tab-content .panel {
     border-top:0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
@@ -256,25 +256,3 @@ li.dropdown a {
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {    background-color: #333333;    
 }
-
-/*.nav > li > a.dropdown-toggle:hover {
-    background-color: #333333;       
-}
-*//*.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
-    background-color: #333333;
-}
-
-.navbar-inverse .navbar-nav > .active > a {
-    background-color: #333333;
-}
-
-
-
-
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    background-color: #333333;       
-}
-
-.navbar-inverse .navbar-nav > li > a {
-    background-color: #333333;          
-}*/
