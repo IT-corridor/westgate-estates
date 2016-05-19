@@ -69,11 +69,13 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
       {% if save_search %}
         {% block slider_js_variable %}
+        <script type="text/javascript">
           var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
           var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
           var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
           var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
           var let_furn = {{ save_search.r_furnished }};
+        </script>
         {% endblock %}
       {% endif %}  
 </div> 

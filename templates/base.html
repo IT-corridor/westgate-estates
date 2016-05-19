@@ -275,14 +275,15 @@
 {% block footer_js %}
 {% include "includes/footer_scripts.html" %}
 {% endblock %}
-<script type="text/javascript">
-    {% block slider_js_variable %}
-        var price_range_sale = [100, 200000];
-        var bedroom_range_sale = [1, 15];
-        var price_range_rent = [100, 200000];
-        var bedroom_range_rent = [1, 15];
-    {% endblock %}
-</script>
+
+{% block slider_js_variable %}
+  <script type="text/javascript">
+    var price_range_sale = [100, 200000];
+    var bedroom_range_sale = [1, 15];
+    var price_range_rent = [100, 200000];
+    var bedroom_range_rent = [1, 15];
+  </script>
+{% endblock %}
 
 </body>
 </html>
