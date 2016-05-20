@@ -1,8 +1,6 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 
