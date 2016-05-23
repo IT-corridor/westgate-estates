@@ -14,7 +14,7 @@
               </a>
             </div>
             <div class="col-sm-8">
-                <a href="{% url 'residential_property_detail' property.SLUG %}"><h3>{{ property.DISPLAY_ADDRESS }}</h3></a>
+                <a href="{% url 'residential_property_detail' property.SLUG %}"><h3>{{ property.ADDRESS_1 }}</h3></a>
                 {% if property.id in favorites %}
                 <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ property.id }}, '{{ user.is_authenticated }}','{{flag}}');" data-toggle="modal" data-target="#favorite_dlg" >
                 {% else %}
