@@ -289,13 +289,17 @@
   </script>
 {% endblock %}
 
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.wgBannerSlider').slick({
-        setting-name: setting-value
-      });
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.wgBannerSlider').slick({
+      dots: true,
+      speed: 300,
+      infinite: true,
+      autoplay: true,
+      autoplaySpeed: 8000,
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
