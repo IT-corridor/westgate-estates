@@ -10,36 +10,40 @@
 <meta name="description" content="{% block meta_description %}{% endblock %}">
 <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
 <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
-<link rel="stylesheet" href="{% static "css/jquery-ui.css" %}">  
+<link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui.css" %}">  
 {% ifinstalled mezzanine.blog %}
 <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
 <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
 {% endifinstalled %}
 
 {% compress css %}
-<link rel="stylesheet" href="{% static "css/bootstrap3.2.css" %}">
-<link rel="stylesheet" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" href="{% static "css/flaticon.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap3.2.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/mezzanine.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/flaticon.css" %}">
 {% if LANGUAGE_BIDI %}
-<link rel="stylesheet" href="{% static "css/bootstrap-rtl.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-rtl.css" %}">
 {% endif %}
 {% ifinstalled cartridge.shop %}
-<link rel="stylesheet" href="{% static "css/cartridge.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/cartridge.css" %}">
 {% if LANGUAGE_BIDI %}
-<link rel="stylesheet" href="{% static "css/cartridge.rtl.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/cartridge.rtl.css" %}">
 {% endif %}
 {% endifinstalled %}
-<link rel="stylesheet" href="{% static "css/westgate.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/westgate.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/slick.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "css/slick-theme.css" %}">
 {% block extra_css %}{% endblock %}
 {% endcompress %}
 
 {% compress js %}
-<script src="{% static "js/jquery.js" %}"></script>
-<script src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-<script src="{% static "js/bootstrap.js" %}"></script>
-<script src="{% static "js/bootstrap-extras.js" %}"></script>
-<script src="{% static "js/jquery-ui.js" %}"></script>
-<script src="{% static "js/search.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap-extras.js" %}"></script>
+<script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
+<script type="text/javascript" src="{% static "js/search.js" %}"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="{% static "js/slick.min.js" %}"></script>
 
 {% block extra_js %}{% endblock %}
 {% endcompress %}
@@ -284,6 +288,14 @@
     var bedroom_range_rent = [1, 15];
   </script>
 {% endblock %}
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.wgBannerSlider').slick({
+        setting-name: setting-value
+      });
+    });
+  </script>
 
 </body>
 </html>
