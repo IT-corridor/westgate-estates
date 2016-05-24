@@ -34,7 +34,7 @@ DATABASES = {
 
 # Domains for public site
 ALLOWED_HOSTS = ["dev.westgate-estate.co.uk"]
-# ALLOWED_HOSTS = ["www.westgate-estate.co.uk"]
+# ALLOWED_HOSTS = ["www.westgate-estate.co.uk", "westgate-estate.co.uk"]
 # These settings are used by the default fabfile.py provided.
 # Check fabfile.py for defaults.
 
