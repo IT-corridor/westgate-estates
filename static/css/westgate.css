@@ -257,9 +257,11 @@ li.dropdown a {
 .navbar-inverse .navbar-nav > .open > a:focus {    background-color: #333333;    
 }
 
+/*
 .carousel {
     height: 50%;
 }
+*/
 
 .item,
 .active,
