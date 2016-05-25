@@ -8,6 +8,25 @@
         <div class="col-md-12">
             <div class="thumbnail">
                 <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
+
+                <!-- Slick Gallery -->
+                <div class="content-section-b">
+                    <div class="container">
+
+                        <div class="slider wgpropertygallery">
+                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
+                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_01.JPG" alt="">
+                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_02.JPG" alt="">
+                        </div>
+                        <div class="slider wgpropertygallery-nav">
+                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
+                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_01.JPG" alt="">
+                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_02.JPG" alt="">
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="caption-full">
                     {% if is_favor %}
                     <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
