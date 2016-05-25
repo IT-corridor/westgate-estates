@@ -30,8 +30,8 @@
 {% endif %}
 {% endifinstalled %}
 <link rel="stylesheet" type="text/css" href="{% static "css/westgate.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/slick.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/slick-theme.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "slick/slick.css" %}">
+<link rel="stylesheet" type="text/css" href="{% static "slick/slick-theme.css" %}">
 {% block extra_css %}{% endblock %}
 {% endcompress %}
 
@@ -43,7 +43,7 @@
 <script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
 <script type="text/javascript" src="{% static "js/search.js" %}"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="{% static "js/slick.min.js" %}"></script>
+<script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>
 
 {% block extra_js %}{% endblock %}
 {% endcompress %}
