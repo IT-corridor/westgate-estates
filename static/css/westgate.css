@@ -259,10 +259,10 @@ li.dropdown a {
 
 .slider {
     width: 100%;
-    margin: 100px auto;
+    margin: 0 auto;
 }
 .slick-slide {
-  margin: 0px 20px;
+  margin: 0;
 }
 .slick-slide img {
   width: 100%;
