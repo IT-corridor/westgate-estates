@@ -22,7 +22,7 @@ def residentiallist(request):
     if request.method == 'GET':
         if client:
             client = client[0]
-            # input extra input for a new client
+            # input extra information for a new client
             if client.phone == None:
                 return HttpResponseRedirect('/profile/')
 
