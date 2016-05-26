@@ -3,53 +3,53 @@
 {% load pages_tags mezzanine_tags i18n staticfiles %}
 
 <head>
-<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
-<meta name="description" content="{% block meta_description %}{% endblock %}">
-<title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
-<link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui.css" %}">  
-{% ifinstalled mezzanine.blog %}
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
-<link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
-{% endifinstalled %}
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+  <meta name="description" content="{% block meta_description %}{% endblock %}">
+  <title>{% block meta_title %}{% endblock %}{% if settings.SITE_TITLE %} | {{ settings.SITE_TITLE }}{% endif %}</title>
+  <link rel="shortcut icon" href="{% static "img/favicon.ico" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/jquery-ui.css" %}">  
+  {% ifinstalled mezzanine.blog %}
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{% url "blog_post_feed" "rss" %}">
+  <link rel="alternate" type="application/atom+xml" title="Atom" href="{% url "blog_post_feed" "atom" %}">
+  {% endifinstalled %}
 
-{% compress css %}
-<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap3.2.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/mezzanine.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "css/flaticon.css" %}">
-{% if LANGUAGE_BIDI %}
-<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-rtl.css" %}">
-{% endif %}
-{% ifinstalled cartridge.shop %}
-<link rel="stylesheet" type="text/css" href="{% static "css/cartridge.css" %}">
-{% if LANGUAGE_BIDI %}
-<link rel="stylesheet" type="text/css" href="{% static "css/cartridge.rtl.css" %}">
-{% endif %}
-{% endifinstalled %}
-<link rel="stylesheet" type="text/css" href="{% static "css/westgate.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "slick/slick.css" %}">
-<link rel="stylesheet" type="text/css" href="{% static "slick/slick-theme.css" %}">
-{% block extra_css %}{% endblock %}
-{% endcompress %}
+  {% compress css %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap3.2.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/mezzanine.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "css/flaticon.css" %}">
+  {% if LANGUAGE_BIDI %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-rtl.css" %}">
+  {% endif %}
+  {% ifinstalled cartridge.shop %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/cartridge.css" %}">
+  {% if LANGUAGE_BIDI %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/cartridge.rtl.css" %}">
+  {% endif %}
+  {% endifinstalled %}
+  <link rel="stylesheet" type="text/css" href="{% static "css/westgate.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "slick/slick.css" %}">
+  <link rel="stylesheet" type="text/css" href="{% static "slick/slick-theme.css" %}">
+  {% block extra_css %}{% endblock %}
+  {% endcompress %}
 
-{% compress js %}
-<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
-<script type="text/javascript" src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
-<script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
-<script type="text/javascript" src="{% static "js/bootstrap-extras.js" %}"></script>
-<script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
-<script type="text/javascript" src="{% static "js/search.js" %}"></script>
-<!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
-<script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>
+  {% compress js %}
+  <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+  <script type="text/javascript" src="{% static "mezzanine/js/"|add:settings.JQUERY_FILENAME %}"></script>
+  <script type="text/javascript" src="{% static "js/bootstrap.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/bootstrap-extras.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/jquery-ui.js" %}"></script>
+  <script type="text/javascript" src="{% static "js/search.js" %}"></script>
+  <!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+  <script type="text/javascript" src="{% static "slick/slick.min.js" %}"></script>
 
-{% block extra_js %}{% endblock %}
-{% endcompress %}
+  {% block extra_js %}{% endblock %}
+  {% endcompress %}
 
-<link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
 <!--[if lt IE 9]>
 <script src="{% static "js/html5shiv.js" %}"></script>
@@ -62,286 +62,286 @@
 
 <body id="{% block body_id %}body{% endblock %}">
 
-<nav class="navbar navbar-inverse  navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="/"><img alt="Brand" class="img-responsive wg-logo" src="{% static "img/i-logo.png" %}"></a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      {% page_menu "pages/menus/dropdown.html" %}
-      <ul class="nav navbar-nav navbar-right">
-        {% if user.is_authenticated %}
+  <nav class="navbar navbar-inverse  navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img alt="Brand" class="img-responsive wg-logo" src="{% static "img/i-logo.png" %}"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        {% page_menu "pages/menus/dropdown.html" %}
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Your profile
-            <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="/profile/#favorites_profile">View your favourites <span class="glyphicon glyphicon-star"></span></a></li>
-              <li><a href="/profile/#save_search_profile">View your saved search <span class="glyphicon glyphicon-search"></span></a></li>
-              <li><a href="/accounts/logout/">Logout <span class="glyphicon glyphicon-user"></span></a></li>
-            </ul>
-          </li>              
-        {% else %}
-          <li><a href="/accounts/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
-        {% endif %}
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
-{% block meta_main %}
-
-<div class="container" style="margin-top: 30px;">
-<div class="row">
-
-<div class="col-md-offset-1 col-md-8 middle">
-<h1>{% block title %}{% endblock %}</h1>
-    {% block main %}{% endblock %}
-</div>
-
-<div class="col-md-3 right">
-  {% block right_panel %}
-    <ul class="nav nav-tabs">
-        <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
-        <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div class="tab-pane fade in active" id="for_sale">
-          <div class="panel panel-default">
-          <div class="panel-body">
-
-            <form id="sale_form">
-              {% csrf_token %}
-              <p>
-                <label>Price : </label>
-                <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-                <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
-                <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
-              </p>         
-              <div id="price-slider-range"></div>    
-              <br/>
-
-              <p>
-                <label>Number of Bedrooms : </label>
-                <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
-                <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-                <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
-              </p>         
-              <div id="bedroom-slider-range"></div>    
-              <br/>
-
-              <input type="hidden" name="trans_type" value="1">
-              <input type="hidden" name="let_furn" value="-1">
-
-              <a class="btn btn-default" onclick="search_residental('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
-              <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
-            </form>
-          </div>
-          </div>
-        </div>
-        <div class="tab-pane fade" id="to_rent">
-          <div class="panel panel-default">
-          <div class="panel-body">
-
-            <form id="rent_form">
-              {% csrf_token %}
-              <p>
-                <label>Price : </label>
-                <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-                <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
-                <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
-              </p>         
-              <div id="rent-price-slider-range"></div>    
-              <br/>
-
-              <p>
-                <label>Number of Bedrooms : </label>
-                <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
-                <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-                <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
-              </p>         
-              <div id="rent-bedroom-slider-range"></div>    
-              <br/>
-
-              <input type="hidden" name="trans_type" value="2">
-
-              <label>Furnished ?</label>
-              <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="let_furn_rent">
-                <option value="-1">Please select...</option>
-                <option value="0">Furnished</option>
-                <option value="1">Part Furnished</option>
-                <option value="2">Unfurnished</option>
-                <option value="3">Not Specified</option>
-                <option value="4">Furnished/ Un Furnished</option>
-              </select>      
-              <a class="btn btn-default" onclick="search_residental('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
-              <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
-            </form>
-          </div>
-          </div>
-        </div>
-    </div>
-
-  <!-- Save Search Modal -->
-  <div class="modal fade" id="save_search_dlg" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Save your search</h4>
-        </div>
-        <div class="modal-body">
-          <p>Your search has been saved. Would you like to receive a weekly email containing a list of properties that match your search? You can unsubscribe at any time. </p>
-          <div><input type="checkbox" class="save_search_chk" style="margin: 5px;"><span>Check the box to receive the email.</span></div>          
-          <small>Please note, this service is not yet active, although you will start to receive the email shortly.</small>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-
-  <!-- Favorite Modal -->
-  <div class="modal fade" id="favorite_dlg" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Favorite</h4>
-        </div>
-        <div class="modal-body">
-          <p id="favor_msg">This property has been added to your favourites. </p>
-          <a href="/profile/#favorites_profile">View all of your favourites?</a>
-        </div>
+              <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/profile/#favorites_profile">View your favourites <span class="glyphicon glyphicon-star"></span></a></li>
+                <li><a href="/profile/#save_search_profile">View your saved search <span class="glyphicon glyphicon-search"></span></a></li>
+                <li><a href="/accounts/logout/">Logout <span class="glyphicon glyphicon-user"></span></a></li>
+              </ul>
+            </li>              
+            {% else %}
+            <li><a href="/accounts/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+            {% endif %}
+          </ul>
       </div>
     </div>
+  </nav>
+
+
+    {% block meta_main %}
+
+    <div class="container" style="margin-top: 30px;">
+      <div class="row">
+
+      <div class="col-md-9 middle">
+          <h1>{% block title %}{% endblock %}</h1>
+          {% block main %}{% endblock %}
+        </div>
+
+        <div class="col-md-3 right">
+          {% block right_panel %}
+          <ul class="nav nav-tabs">
+            <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
+            <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div class="tab-pane fade in active" id="for_sale">
+              <div class="panel panel-default">
+                <div class="panel-body">
+
+                  <form id="sale_form">
+                    {% csrf_token %}
+                    <p>
+                      <label>Price : </label>
+                      <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                      <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                      <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                      <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
+                    </p>         
+                    <div id="price-slider-range"></div>    
+                    <br/>
+
+                    <p>
+                      <label>Number of Bedrooms : </label>
+                      <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                      <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                      <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+                    </p>         
+                    <div id="bedroom-slider-range"></div>    
+                    <br/>
+
+                    <input type="hidden" name="trans_type" value="1">
+                    <input type="hidden" name="let_furn" value="-1">
+
+                    <a class="btn btn-default" onclick="search_residental('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+                    <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="to_rent">
+              <div class="panel panel-default">
+                <div class="panel-body">
+
+                  <form id="rent_form">
+                    {% csrf_token %}
+                    <p>
+                      <label>Price : </label>
+                      <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                      <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                      <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                      <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
+                    </p>         
+                    <div id="rent-price-slider-range"></div>    
+                    <br/>
+
+                    <p>
+                      <label>Number of Bedrooms : </label>
+                      <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                      <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                      <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+                    </p>         
+                    <div id="rent-bedroom-slider-range"></div>    
+                    <br/>
+
+                    <input type="hidden" name="trans_type" value="2">
+
+                    <label>Furnished ?</label>
+                    <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="let_furn_rent">
+                      <option value="-1">Please select...</option>
+                      <option value="0">Furnished</option>
+                      <option value="1">Part Furnished</option>
+                      <option value="2">Unfurnished</option>
+                      <option value="3">Not Specified</option>
+                      <option value="4">Furnished/ Un Furnished</option>
+                    </select>      
+                    <a class="btn btn-default" onclick="search_residental('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+                    <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Save Search Modal -->
+          <div class="modal fade" id="save_search_dlg" role="dialog">
+            <div class="modal-dialog">
+
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Save your search</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Your search has been saved. Would you like to receive a weekly email containing a list of properties that match your search? You can unsubscribe at any time. </p>
+                  <div><input type="checkbox" class="save_search_chk" style="margin: 5px;"><span>Check the box to receive the email.</span></div>          
+                  <small>Please note, this service is not yet active, although you will start to receive the email shortly.</small>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Favorite Modal -->
+          <div class="modal fade" id="favorite_dlg" role="dialog">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Favorite</h4>
+                </div>
+                <div class="modal-body">
+                  <p id="favor_msg">This property has been added to your favourites. </p>
+                  <a href="/profile/#favorites_profile">View all of your favourites?</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Login Confirm Modal -->
+          <div id="dialog-confirm" title="Please login first!" style="display:none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please <a href="/accounts/login/">login</a> to save your settings.</p>
+          </div>
+
+          <!-- Favorite Delete Confirm Modal -->
+          <div id="fav-dialog-confirm" title="Favorite Remove" style="display:none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you would like to remove this property from your favourites?</p>
+          </div>
+        </div>
+
+        {% endblock %}
+      </div>
+
+    </div>
   </div>
 
-  <!-- Login Confirm Modal -->
-  <div id="dialog-confirm" title="Please login first!" style="display:none;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please <a href="/accounts/login/">login</a> to save your settings.</p>
-  </div>
-
-  <!-- Favorite Delete Confirm Modal -->
-  <div id="fav-dialog-confirm" title="Favorite Remove" style="display:none;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you would like to remove this property from your favourites?</p>
-  </div>
-</div>
-
-   {% endblock %}
-</div>
-
-</div>
-</div>
-
-<div class="banner">
+  <div class="banner">
 
     <div class="container">
 
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>Connect with us:</h2>
-            </div>
-            <div class="col-lg-6">
-                <ul class="list-inline banner-social-buttons">
-                    <li>
-                        <a href="https://twitter.com/WestgateEstates" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                    </li>
+      <div class="row">
+        <div class="col-lg-6">
+          <h2>Connect with us:</h2>
+        </div>
+        <div class="col-lg-6">
+          <ul class="list-inline banner-social-buttons">
+            <li>
+              <a href="https://twitter.com/WestgateEstates" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+            </li>
                     <!-- <li>
                         <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-google-plus-official fa-fw"></i> <span class="network-name">Google+</span></a>
-                    </li> -->
-                    <li>
+                      </li> -->
+                      <li>
                         <a href="https://www.facebook.com/Westgate-Estates-283486395319079" class="btn btn-default btn-lg"><i class="fa fa-facebook-official fa-fw"></i> <span class="network-name">Facebook</span></a>
-                    </li>
-                </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.container -->
+
             </div>
-        </div>
+            <!-- /.banner -->
 
-    </div>
-    <!-- /.container -->
-
-</div>
-<!-- /.banner -->
-
-{% endblock %}
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="list-inline">
-                    <li>
+            {% endblock %}
+            <!-- Footer -->
+            <footer>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <ul class="list-inline">
+                      <li>
                         <a href="#">Home</a>
-                    </li>
-                    <li class="footer-menu-divider">&sdot;</li>
-                    <li>
+                      </li>
+                      <li class="footer-menu-divider">&sdot;</li>
+                      <li>
                         <a href="#about">About</a>
-                    </li>
-                    <li class="footer-menu-divider">&sdot;</li>
-                    <li>
+                      </li>
+                      <li class="footer-menu-divider">&sdot;</li>
+                      <li>
                         <a href="#services">Services</a>
-                    </li>
-                    <li class="footer-menu-divider">&sdot;</li>
-                    <li>
+                      </li>
+                      <li class="footer-menu-divider">&sdot;</li>
+                      <li>
                         <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-                <p class="copyright text-muted small">Copyright &copy; Westgate Estates. All Rights Reserved. Website by <a href="rik-deakin">Rik</a></p>
-            </div>
-        </div>
-    </div>
-</footer>
+                      </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; Westgate Estates. All Rights Reserved. Website by <a href="rik-deakin">Rik</a></p>
+                  </div>
+                </div>
+              </div>
+            </footer>
 
-{% block footer_js %}
-{% include "includes/footer_scripts.html" %}
-{% endblock %}
+            {% block footer_js %}
+            {% include "includes/footer_scripts.html" %}
+            {% endblock %}
 
-{% block slider_js_variable %}
-  <script type="text/javascript">
-    var price_range_sale = [100, 200000];
-    var bedroom_range_sale = [1, 15];
-    var price_range_rent = [100, 200000];
-    var bedroom_range_rent = [1, 15];
-  </script>
-{% endblock %}
+            {% block slider_js_variable %}
+            <script type="text/javascript">
+              var price_range_sale = [100, 200000];
+              var bedroom_range_sale = [1, 15];
+              var price_range_rent = [100, 200000];
+              var bedroom_range_rent = [1, 15];
+            </script>
+            {% endblock %}
 
-<script type="text/javascript">
-    $(".wgbannerslider").slick({
-      dots: true,
-      speed: 300,
-      infinite: true,
-      autoplay: true,
-      autoplaySpeed: 8000
-    });
-    $('.wgpropertygallery').slick({
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      arrows: false,
-      fade: true,
-      asNavFor: '.wgpropertygallery-nav'
-    });
-    $('.wgpropertygallery-nav').slick({
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      asNavFor: '.wgpropertygallery',
-      dots: true,
-      centerMode: true,
-      focusOnSelect: true
-    });
-</script>
+            <script type="text/javascript">
+              $(".wgbannerslider").slick({
+                dots: true,
+                speed: 300,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 8000
+              });
+              $('.wgpropertygallery').slick({
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                fade: true,
+                asNavFor: '.wgpropertygallery-nav'
+              });
+              $('.wgpropertygallery-nav').slick({
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                asNavFor: '.wgpropertygallery',
+                dots: true,
+                centerMode: true,
+                focusOnSelect: true
+              });
+            </script>
 
-</body>
-</html>
+          </body>
+          </html>
