@@ -96,161 +96,157 @@
 
     {% block meta_main %}
 
-    <div class="container" style="margin-top: 30px;">
-      <div class="row">
-
+  <div class="container" style="margin-top: 30px;">
+    <div class="row">
       <div class="col-md-9 middle">
-          <h1>{% block title %}{% endblock %}</h1>
-          {% block main %}{% endblock %}
-        </div>
-
-        <div class="col-md-3 right">
-          {% block right_panel %}
-          <ul class="nav nav-tabs">
-            <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
-            <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
-          </ul>
-
-          <!-- Tab panes -->
-          <div class="tab-content">
-            <div class="tab-pane fade in active" id="for_sale">
-              <div class="panel panel-default">
-                <div class="panel-body">
-
-                  <form id="sale_form">
-                    {% csrf_token %}
-                    <p>
-                      <label>Price : </label>
-                      <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-                      <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
-                      <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                      <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
-                    </p>         
-                    <div id="price-slider-range"></div>    
-                    <br/>
-
-                    <p>
-                      <label>Number of Bedrooms : </label>
-                      <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
-                      <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-                      <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
-                    </p>         
-                    <div id="bedroom-slider-range"></div>    
-                    <br/>
-
-                    <input type="hidden" name="trans_type" value="1">
-                    <input type="hidden" name="let_furn" value="-1">
-
-                    <a class="btn btn-default" onclick="search_residental('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
-                    <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
-                  </form>
-                </div>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="to_rent">
-              <div class="panel panel-default">
-                <div class="panel-body">
-
-                  <form id="rent_form">
-                    {% csrf_token %}
-                    <p>
-                      <label>Price : </label>
-                      <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
-                      <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
-                      <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
-                      <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
-                    </p>         
-                    <div id="rent-price-slider-range"></div>    
-                    <br/>
-
-                    <p>
-                      <label>Number of Bedrooms : </label>
-                      <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
-                      <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
-                      <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
-                    </p>         
-                    <div id="rent-bedroom-slider-range"></div>    
-                    <br/>
-
-                    <input type="hidden" name="trans_type" value="2">
-
-                    <label>Furnished ?</label>
-                    <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="let_furn_rent">
-                      <option value="-1">Please select...</option>
-                      <option value="0">Furnished</option>
-                      <option value="1">Part Furnished</option>
-                      <option value="2">Unfurnished</option>
-                      <option value="3">Not Specified</option>
-                      <option value="4">Furnished/ Un Furnished</option>
-                    </select>      
-                    <a class="btn btn-default" onclick="search_residental('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
-                    <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Save Search Modal -->
-          <div class="modal fade" id="save_search_dlg" role="dialog">
-            <div class="modal-dialog">
-
-              <!-- Modal content-->
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Save your search</h4>
-                </div>
-                <div class="modal-body">
-                  <p>Your search has been saved. Would you like to receive a weekly email containing a list of properties that match your search? You can unsubscribe at any time. </p>
-                  <div><input type="checkbox" class="save_search_chk" style="margin: 5px;"><span>Check the box to receive the email.</span></div>          
-                  <small>Please note, this service is not yet active, although you will start to receive the email shortly.</small>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Favorite Modal -->
-          <div class="modal fade" id="favorite_dlg" role="dialog">
-            <div class="modal-dialog modal-sm">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">Favorite</h4>
-                </div>
-                <div class="modal-body">
-                  <p id="favor_msg">This property has been added to your favourites. </p>
-                  <a href="/profile/#favorites_profile">View all of your favourites?</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Login Confirm Modal -->
-          <div id="dialog-confirm" title="Please login first!" style="display:none;">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please <a href="/accounts/login/">login</a> to save your settings.</p>
-          </div>
-
-          <!-- Favorite Delete Confirm Modal -->
-          <div id="fav-dialog-confirm" title="Favorite Remove" style="display:none;">
-            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you would like to remove this property from your favourites?</p>
-          </div>
-        </div>
-
-        {% endblock %}
+        <h1>{% block title %}{% endblock %}</h1>
+        {% block main %}{% endblock %}
       </div>
 
+      <div class="col-md-3 right">
+        {% block right_panel %}
+        <ul class="nav nav-tabs">
+          <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
+          <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade in active" id="for_sale">
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form id="sale_form">
+                  {% csrf_token %}
+                  <p>
+                    <label>Price : </label>
+                    <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                    <input type="text" id="property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                    <input type="text" id="property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
+                  </p>         
+                  <div id="price-slider-range"></div>    
+                  <br/>
+
+                  <p>
+                    <label>Number of Bedrooms : </label>
+                    <input type="text" id="property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                    <input type="text" id="property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+                  </p>         
+                  <div id="bedroom-slider-range"></div>    
+                  <br/>
+
+                  <input type="hidden" name="trans_type" value="1">
+                  <input type="hidden" name="let_furn" value="-1">
+
+                  <a class="btn btn-default" onclick="search_residental('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+                  <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="to_rent">
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form id="rent_form">
+                  {% csrf_token %}
+                  <p>
+                    <label>Price : </label>
+                    <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                    <input type="text" id="rent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                    <input type="text" id="rent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
+                  </p>         
+                  <div id="rent-price-slider-range"></div>    
+                  <br/>
+
+                  <p>
+                    <label>Number of Bedrooms : </label>
+                    <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                    <input type="text" id="rent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+                  </p>         
+                  <div id="rent-bedroom-slider-range"></div>    
+                  <br/>
+
+                  <input type="hidden" name="trans_type" value="2">
+
+                  <label>Furnished ?</label>
+                  <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="let_furn_rent">
+                    <option value="-1">Please select...</option>
+                    <option value="0">Furnished</option>
+                    <option value="1">Part Furnished</option>
+                    <option value="2">Unfurnished</option>
+                    <option value="3">Not Specified</option>
+                    <option value="4">Furnished/ Un Furnished</option>
+                  </select>      
+                  <a class="btn btn-default" onclick="search_residental('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+                  <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Save Search Modal -->
+        <div class="modal fade" id="save_search_dlg" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Save your search</h4>
+              </div>
+              <div class="modal-body">
+                <p>Your search has been saved. Would you like to receive a weekly email containing a list of properties that match your search? You can unsubscribe at any time. </p>
+                <div><input type="checkbox" class="save_search_chk" style="margin: 5px;"><span>Check the box to receive the email.</span></div>          
+                <small>Please note, this service is not yet active, although you will start to receive the email shortly.</small>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Favorite Modal -->
+        <div class="modal fade" id="favorite_dlg" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Favorite</h4>
+              </div>
+              <div class="modal-body">
+                <p id="favor_msg">This property has been added to your favourites. </p>
+                <a href="/profile/#favorites_profile">View all of your favourites?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login Confirm Modal -->
+        <div id="dialog-confirm" title="Please login first!" style="display:none;">
+          <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please <a href="/accounts/login/">login</a> to save your settings.</p>
+        </div>
+
+        <!-- Favorite Delete Confirm Modal -->
+        <div id="fav-dialog-confirm" title="Favorite Remove" style="display:none;">
+          <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you would like to remove this property from your favourites?</p>
+        </div>
+      </div>
+
+      {% endblock %}
     </div>
+
   </div>
 
   <div class="banner">
-
     <div class="container">
-
       <div class="row">
         <div class="col-lg-6">
           <h2>Connect with us:</h2>
@@ -260,21 +256,17 @@
             <li>
               <a href="https://twitter.com/WestgateEstates" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
             </li>
-                    <!-- <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-google-plus-official fa-fw"></i> <span class="network-name">Google+</span></a>
-                      </li> -->
-                      <li>
-                        <a href="https://www.facebook.com/Westgate-Estates-283486395319079" class="btn btn-default btn-lg"><i class="fa fa-facebook-official fa-fw"></i> <span class="network-name">Facebook</span></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-              </div>
-              <!-- /.container -->
-
-            </div>
-            <!-- /.banner -->
+              <!-- <li>
+                <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-google-plus-official fa-fw"></i> <span class="network-name">Google+</span></a>
+              </li> -->
+            <li>
+              <a href="https://www.facebook.com/Westgate-Estates-283486395319079" class="btn btn-default btn-lg"><i class="fa fa-facebook-official fa-fw"></i> <span class="network-name">Facebook</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div><!-- /.container -->
+  </div><!-- /.banner -->
 
             {% endblock %}
             <!-- Footer -->
