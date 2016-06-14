@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
 {% load pages_tags mezzanine_tags i18n staticfiles %}
-
+{% load aggregations %}
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,10 +90,10 @@
             {% endif %}
           </ul>
       </div>
-      <div class="collapse navbar-collapse" id="myContactbar">
+<!--       <div class="collapse navbar-collapse" id="myContactbar">
         <h3><a href="tel:0113 2405088">0113 2405088</a></h3>  
       </div>
-    </div>
+ -->    </div>
   </nav>
 
 
@@ -109,17 +109,25 @@
       <div class="col-md-3 right">
         {% block right_panel %}
         <ul class="nav nav-tabs">
-          <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
-          <li class="nav"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
+          <li class="nav {% if not rescom or rescom < 3 %}active{%endif%}"><a href="#for_res" data-toggle="tab">Residential</a></li>
+          <li class="nav {% if rescom > 2 %}active{%endif%}"><a href="#for_com" data-toggle="tab">Commercial</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade in {% if not rescom or rescom < 3 %}active{%endif%}" id="for_res">
+            <div class="panel panel-default">
+              <div class="panel-body">
+        <ul class="nav nav-tabs">
+          <li class="nav {% if rescom != 2 %}active{%endif%}"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
+          <li class="nav {% if rescom == 2 %}active{%endif%}"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="for_sale">
+          <div class="tab-pane fade in {% if rescom != 2 %}active{%endif%}" id="for_sale">
             <div class="panel panel-default">
               <div class="panel-body">
 
-                <form id="sale_form">
+                <form id="sale_form" action="{% url 'residential_property_list_sale' %}" method="post">
                   {% csrf_token %}
                   <p>
                     <label>Price : </label>
@@ -139,21 +147,17 @@
                   </p>         
                   <div id="bedroom-slider-range"></div>    
                   <br/>
-
-                  <input type="hidden" name="trans_type" value="1">
-                  <input type="hidden" name="let_furn" value="-1">
-
-                  <a class="btn btn-default" onclick="search_residental('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+                  <button class="btn btn-default" onclick="search_residental1('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
                   <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'sale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
                 </form>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="to_rent">
+          <div class="tab-pane fade in {% if rescom == 2 %}active{%endif%}" id="to_rent">
             <div class="panel panel-default">
               <div class="panel-body">
 
-                <form id="rent_form">
+                <form id="rent_form" action="{% url 'residential_property_list_rent' %}" method="post">
                   {% csrf_token %}
                   <p>
                     <label>Price : </label>
@@ -164,7 +168,6 @@
                   </p>         
                   <div id="rent-price-slider-range"></div>    
                   <br/>
-
                   <p>
                     <label>Number of Bedrooms : </label>
                     <input type="text" id="rent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
@@ -173,9 +176,6 @@
                   </p>         
                   <div id="rent-bedroom-slider-range"></div>    
                   <br/>
-
-                  <input type="hidden" name="trans_type" value="2">
-
                   <label>Furnished ?</label>
                   <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="let_furn_rent">
                     <option value="-1">Please select...</option>
@@ -185,9 +185,98 @@
                     <option value="3">Not Specified</option>
                     <option value="4">Furnished/ Un Furnished</option>
                   </select>      
-                  <a class="btn btn-default" onclick="search_residental('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</a>
+                  <button class="btn btn-default" onclick="search_residental1('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
                   <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'rent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
                 </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade in {% if rescom > 2 %}active{%endif%}" id="for_com">
+            <div class="panel panel-default">
+              <div class="panel-body">
+        <ul class="nav nav-tabs">
+          <li class="nav {% if rescom != 5 %}active{%endif%}"><a href="#cfor_sale" data-toggle="tab">For Sale</a></li>
+          <li class="nav {% if rescom == 5 %}active{%endif%}"><a href="#cto_rent" data-toggle="tab">To Rent</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane fade in {% if rescom != 5 %}active{%endif%}" id="cfor_sale">
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form id="csale_form" action="{% url 'commercial_property_list_sale' %}" method="post">
+                  {% csrf_token %}
+                  <p>
+                    <label>Price : </label>
+                    <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                    <input type="text" id="cproperty_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                    <input type="text" id="cproperty_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
+                  </p>         
+                  <div id="cprice-slider-range"></div>    
+                  <br/>
+
+                  <p>
+                    <label>Number of Bedrooms : </label>
+                    <input type="text" id="cproperty_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                    <input type="text" id="cproperty_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+                  </p>         
+                  <div id="cbedroom-slider-range"></div>    
+                  <br/>
+                  <button class="btn btn-default" onclick="search_residental1('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
+                  <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'csale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade in {% if rescom == 5 %}active{%endif%}" id="cto_rent">
+            <div class="panel panel-default">
+              <div class="panel-body">
+
+                <form id="crent_form" action="{% url 'commercial_property_list_rent' %}" method="post">
+                  {% csrf_token %}
+                  <p>
+                    <label>Price : </label>
+                    <span style="border:0; color:#f6931f; font-weight:bold;">£</span>
+                    <input type="text" id="crent-property_price_low" name ="property_price_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 32px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;"> - £</span>
+                    <input type="text" id="crent-property_price_high" name="property_price_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 50px; padding: 0;">
+                  </p>         
+                  <div id="crent-price-slider-range"></div>    
+                  <br/>
+
+                  <p>
+                    <label>Number of Bedrooms : </label>
+                    <input type="text" id="crent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
+                    <span style="border:0; color:#f6931f; font-weight:bold;">- </span>
+                    <input type="text" id="crent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
+                  </p>         
+                  <div id="crent-bedroom-slider-range"></div>    
+                  <br/>
+                  <label>Furnished ?</label>
+                  <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="clet_furn_rent">
+                    <option value="-1">Please select...</option>
+                    <option value="0">Furnished</option>
+                    <option value="1">Part Furnished</option>
+                    <option value="2">Unfurnished</option>
+                    <option value="3">Not Specified</option>
+                    <option value="4">Furnished/ Un Furnished</option>
+                  </select>      
+                  <button class="btn btn-default" onclick="search_residental1('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
+                  <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'crent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+              
               </div>
             </div>
           </div>
@@ -298,12 +387,36 @@
             {% include "includes/footer_scripts.html" %}
             {% endblock %}
 
+            <script type="text/javascript">
+              var sprice_max = {% agg_price 0 1 1 %};
+              var sprice_min = {% agg_price 0 1 0 %};
+              var rprice_max = {% agg_price 0 2 1 %};
+              var rprice_min = {% agg_price 0 2 0 %};
+              var sbedroom_max = {% agg_bedroom 0 1 1 %};
+              var sbedroom_min = {% agg_bedroom 0 1 0 %};
+              var rbedroom_max = {% agg_bedroom 0 2 1 %};
+              var rbedroom_min = {% agg_bedroom 0 2 0 %};              
+              var csprice_max = {% agg_price 1 1 1 %};
+              var csprice_min = {% agg_price 1 1 0 %};
+              var crprice_max = {% agg_price 1 2 1 %};
+              var crprice_min = {% agg_price 1 2 0 %};
+              var csbedroom_max = {% agg_bedroom 1 1 1 %};
+              var csbedroom_min = {% agg_bedroom 1 1 0 %};
+              var crbedroom_max = {% agg_bedroom 1 2 1 %};
+              var crbedroom_min = {% agg_bedroom 1 2 0 %};              
+            </script>
             {% block slider_js_variable %}
             <script type="text/javascript">
-              var price_range_sale = [100, 200000];
-              var bedroom_range_sale = [1, 15];
-              var price_range_rent = [100, 200000];
-              var bedroom_range_rent = [1, 15];
+              var price_range_sale = [sprice_min, sprice_max];
+              var bedroom_range_sale = [sbedroom_min, sbedroom_max];
+              var price_range_rent = [rprice_min, rprice_max];
+              var bedroom_range_rent = [rbedroom_min, rbedroom_max];
+              var cprice_range_sale = [csprice_min, csprice_max];
+              var cbedroom_range_sale = [csbedroom_min, csbedroom_max];
+              var cprice_range_rent = [crprice_min, crprice_max];
+              var cbedroom_range_rent = [crbedroom_min, crbedroom_max];
+              var let_furn = -1;
+              var clet_furn = -1;
             </script>
             {% endblock %}
 

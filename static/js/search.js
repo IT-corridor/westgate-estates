@@ -1,9 +1,9 @@
 $(function() {
-  // For price in search form
+  // For sale price in search form
   $( "#price-slider-range" ).slider({
     range: true,
-    min: 100,
-    max: 200000,
+    min: sprice_min,
+    max: sprice_max,
     values: price_range_sale,
     slide: function( event, ui ) {
       val_str = ui.values[ 0 ]+'';
@@ -15,11 +15,11 @@ $(function() {
   $( "#property_price_low" ).val( $( "#price-slider-range" ).slider( "values", 0 ) );
   $( "#property_price_high" ).val( $( "#price-slider-range" ).slider( "values", 1 ) );
 
-  // for bedroom in search form
+  // for sale bedroom in search form
   $( "#bedroom-slider-range" ).slider({
     range: true,
-    min: 1,
-    max: 15,
+    min: sbedroom_min,
+    max: sbedroom_max,
     values: bedroom_range_sale,
     slide: function( event, ui ) {
       $( "#property_bedroom_low" ).val( ui.values[ 0 ] );
@@ -32,8 +32,8 @@ $(function() {
   // For price in search form for rent
   $( "#rent-price-slider-range" ).slider({
     range: true,
-    min: 100,
-    max: 200000,
+    min: rprice_min,
+    max: rprice_max,
     values: price_range_rent,
     slide: function( event, ui ) {
       val_str = ui.values[ 0 ]+'';
@@ -48,8 +48,8 @@ $(function() {
   // for bedroom in search form for rent
   $( "#rent-bedroom-slider-range" ).slider({
     range: true,
-    min: 1,
-    max: 15,
+    min: rbedroom_min,
+    max: rbedroom_max,
     values: bedroom_range_rent,
     slide: function( event, ui ) {
       $( "#rent-property_bedroom_low" ).val( ui.values[ 0 ] );
@@ -60,6 +60,70 @@ $(function() {
   $( "#rent-property_bedroom_high" ).val( $( "#rent-bedroom-slider-range" ).slider( "values", 1 ) );
 
   $('#let_furn_rent').val(let_furn);
+
+  // Commercial
+  // For sale price in search form
+  $( "#cprice-slider-range" ).slider({
+    range: true,
+    min: csprice_min,
+    max: csprice_max,
+    values: cprice_range_sale,
+    slide: function( event, ui ) {
+      val_str = ui.values[ 0 ]+'';
+      $( "#cproperty_price_low" ).val( val_str );
+      $( "#cproperty_price_low" ).width(8*val_str.length);
+      $( "#cproperty_price_high" ).val( ui.values[ 1 ] );
+    }
+  });
+  $( "#cproperty_price_low" ).val( $( "#cprice-slider-range" ).slider( "values", 0 ) );
+  $( "#cproperty_price_high" ).val( $( "#cprice-slider-range" ).slider( "values", 1 ) );
+
+  // for sale bedroom in search form
+  $( "#cbedroom-slider-range" ).slider({
+    range: true,
+    min: csbedroom_min,
+    max: csbedroom_max,
+    values: cbedroom_range_sale,
+    slide: function( event, ui ) {
+      $( "#cproperty_bedroom_low" ).val( ui.values[ 0 ] );
+      $( "#cproperty_bedroom_high" ).val( ui.values[ 1 ] );
+    }
+  });
+  $( "#cproperty_bedroom_low" ).val( $( "#cbedroom-slider-range" ).slider( "values", 0 ) );
+  $( "#cproperty_bedroom_high" ).val( $( "#cbedroom-slider-range" ).slider( "values", 1 ) );
+
+  // For price in search form for rent
+  $( "#crent-price-slider-range" ).slider({
+    range: true,
+    min: crprice_min,
+    max: crprice_max,
+    values: cprice_range_rent,
+    slide: function( event, ui ) {
+      val_str = ui.values[ 0 ]+'';
+      $( "#crent-property_price_low" ).val( val_str );
+      $( "#crent-property_price_low" ).width(8*val_str.length);
+      $( "#crent-property_price_high" ).val( ui.values[ 1 ] );
+    }
+  });
+  $( "#crent-property_price_low" ).val( $( "#crent-price-slider-range" ).slider( "values", 0 ) );
+  $( "#crent-property_price_high" ).val( $( "#crent-price-slider-range" ).slider( "values", 1 ) );
+
+  // for bedroom in search form for rent
+  $( "#crent-bedroom-slider-range" ).slider({
+    range: true,
+    min: crbedroom_min,
+    max: crbedroom_max,
+    values: cbedroom_range_rent,
+    slide: function( event, ui ) {
+      $( "#crent-property_bedroom_low" ).val( ui.values[ 0 ] );
+      $( "#crent-property_bedroom_high" ).val( ui.values[ 1 ] );
+    }
+  });
+  $( "#crent-property_bedroom_low" ).val( $( "#crent-bedroom-slider-range" ).slider( "values", 0 ) );
+  $( "#crent-property_bedroom_high" ).val( $( "#crent-bedroom-slider-range" ).slider( "values", 1 ) );
+
+  $('#clet_furn_rent').val(clet_furn);
+
 });
 
 function search_residental(form_id)

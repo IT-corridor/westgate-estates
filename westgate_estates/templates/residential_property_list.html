@@ -2,6 +2,12 @@
 {% block title %}{% endblock %}
 {% block main %}
 
+{% if rescom > 2 %}
+  {% url 'commercial_property_list' as base_url %}
+{% else %}
+  {% url 'residential_property_list' as base_url %}
+{% endif %}
+
 <div class="col-md-12 middle">
         {% if residentiallist and not flag %}
             <div id="map" style="height: 500px; margin-bottom: 12px;"></div>
@@ -9,12 +15,12 @@
         {% for property in residentiallist %}
         <div class="row">
             <div class="col-sm-4" style="padding-top: 25px;">
-              <a href="{% url 'residential_property_detail' property.SLUG %}">
+              <a href="{{ base_url }}{{ property.SLUG }}">
                 <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ property.AGENT_REF }}_IMG_00.JPG">
               </a>
             </div>
             <div class="col-sm-8">
-                <a href="{% url 'residential_property_detail' property.SLUG %}"><h3>{{ property.ADDRESS_1 }}</h3></a>
+                <a href="{{ base_url }}{{ property.SLUG }}"><h3>{{ property.ADDRESS_1 }}</h3></a>
                 {% if property.id in favorites %}
                 <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star list star{{property.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ property.id }}, '{{ user.is_authenticated }}','{{flag}}');" data-toggle="modal" data-target="#favorite_dlg" >
                 {% else %}
@@ -22,7 +28,7 @@
                 {% endif %}
                 <h4>Bedrooms: {{ property.BEDROOMS }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;£{{ property.PRICE }} {% if property.TRANS_TYPE_ID == 2 %}/ month {% endif %}</h4>
                 <p>{{ property.SUMMARY }}</p>
-                <a href="{% url 'residential_property_detail' property.SLUG %}" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> More details</a>
+                <a href="{{ base_url }}{{ property.SLUG }}" class="btn btn-default"><span class="glyphicon glyphicon-home"></span> More details</a>
             </div>
         </div>     
         {% empty %}
@@ -41,7 +47,7 @@
         });
         var geocoder = new google.maps.Geocoder();
         {% for property in residentiallist %}
-            geocodeAddress(geocoder, map, "{{ property.DISPLAY_ADDRESS }}","{% url 'residential_property_detail' property.SLUG %}","{{ STATIC_URL }}img/properties/{{ property.AGENT_REF.strip }}_IMG_00.JPG","{{ property.BEDROOMS }}", "{{ property.SUMMARY }}", "{{ property.id }}");
+            geocodeAddress(geocoder, map, "{{ property.DISPLAY_ADDRESS }}","{{ base_url }}{{ property.SLUG }}","{{ STATIC_URL }}img/properties/{{ property.AGENT_REF.strip }}_IMG_00.JPG","{{ property.BEDROOMS }}", "{{ property.SUMMARY }}", "{{ property.id }}");
         {% endfor %}
       }
 
@@ -88,6 +94,11 @@
           var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
           var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
           var let_furn = {{ save_search.r_furnished }};
+          var cprice_range_sale = [{{save_search.cs_low_price}}, {{save_search.cs_high_price}}];
+          var cbedroom_range_sale = [{{save_search.cs_low_bedroom}}, {{save_search.cs_high_bedroom}}];
+          var cprice_range_rent = [{{save_search.cr_low_price}}, {{save_search.cr_high_price}}];
+          var cbedroom_range_rent = [{{save_search.cr_low_bedroom}}, {{save_search.cr_high_bedroom}}];
+          var clet_furn = {{ save_search.cr_furnished }};
         </script>
       {% else %}
         {{ block.super }}

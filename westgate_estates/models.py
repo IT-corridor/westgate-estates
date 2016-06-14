@@ -4,8 +4,13 @@ from autoslug import AutoSlugField
 
 
 TRANS_TYPE_ID = (
-    (1, 'Resale'),
-    (2, 'Lettings'),
+    (1, 'Resale'),      # Sale
+    (2, 'Lettings'),    # Rent
+)
+
+RES_COM = (
+    (0, 'Residential'),      
+    (1, 'Commercial'),    
 )
 
 STATUS_ID = (
@@ -130,39 +135,13 @@ class Residential(models.Model):
     MEDIA_VIRTUAL_TOUR_TEXT_01 = models.CharField(max_length=200, blank=True)
     MEDIA_VIRTUAL_TOUR_02 = models.CharField(max_length=200, blank=True)
     MEDIA_VIRTUAL_TOUR_TEXT_02 = models.CharField(max_length=200, blank=True)
-    
+    RESCOM = models.IntegerField(choices=RES_COM, default=0)
+
     def get_absolute_url(self):
         return reverse('residential_property_detail', args=(self.SLUG,))
         
     def __unicode__(self):
         return self.DISPLAY_ADDRESS
-
-
-class Commercial(models.Model):
-    owner_name = models.CharField(max_length=72)
-    owner_address = models.CharField(max_length=250)
-    property_address = models.CharField(max_length=250)
-    town = models.CharField(max_length=60)
-    postcode1 = models.CharField(max_length=12)
-    postcode2 = models.CharField(max_length=12)
-    summary = models.CharField(max_length=1200)
-    description = models.CharField(max_length=1200)
-    branch_id = models.CharField(max_length=60)
-    status_id = models.CharField(max_length=60)
-    bedrooms = models.CharField(max_length=6)
-    price = models.CharField(max_length=12)
-    price_qualifier = models.CharField(max_length=12)
-    prop_sub_id = models.CharField(max_length=20)
-    create_date = models.CharField(max_length=20)
-    update_date = models.CharField(max_length=20)
-    display_address = models.CharField(max_length=350)
-    published_flag = models.CharField(max_length=8)
-    let_date_available = models.CharField(max_length=30)
-    let_furn_id = models.CharField(max_length=50)
-    let_rent_frequency = models.CharField(max_length=30)
-    
-    def __unicode__(self):
-        return self.name
 
 
 class Residential_Favorite(models.Model):
@@ -171,6 +150,7 @@ class Residential_Favorite(models.Model):
 
     def __unicode__(self):
         return self.user.username+': '+self.residential.DISPLAY_ADDRESS
+
 
 class Save_Search(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
@@ -183,6 +163,15 @@ class Save_Search(models.Model):
     s_high_price = models.FloatField(default=99999)
     s_low_bedroom = models.IntegerField(default=1)
     s_high_bedroom = models.IntegerField(default=12)
+    cr_low_price = models.FloatField(default=100)
+    cr_high_price = models.FloatField(default=99999)
+    cr_low_bedroom = models.IntegerField(default=1)
+    cr_high_bedroom = models.IntegerField(default=12)
+    cr_furnished = models.IntegerField(choices=LET_FURN_ID, blank=True, null=True)
+    cs_low_price = models.FloatField(default=100)
+    cs_high_price = models.FloatField(default=99999)
+    cs_low_bedroom = models.IntegerField(default=1)
+    cs_high_bedroom = models.IntegerField(default=12)
     receive_email = models.BooleanField(default=False)
 
     def __unicode__(self):

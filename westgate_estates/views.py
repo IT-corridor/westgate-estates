@@ -3,13 +3,22 @@ from django.views import generic
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.db.models import Max, Min
+
+import os.path
 
 from .models import *
 from client.models import *
 
 
-def residentiallist(request):
-    residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID__in=[0,1,2])
+def residentiallist(request, rescom):
+    residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID__in=[0,1,2], RESCOM=int(rescom/3))
+    trans_type = rescom % 3
+    if trans_type > 0:
+        residentials = residentials.filter(TRANS_TYPE_ID=trans_type)
+
     client = Client.objects.filter(username=request.user)
     try:
         save_search = Save_Search.objects.filter(user=request.user)
@@ -25,20 +34,13 @@ def residentiallist(request):
             # input extra information for a new client
             if client.phone == None:
                 return HttpResponseRedirect('/profile/')
-
-    if request.POST.get('let_furn'):
+    else:
         price_low = int(request.POST.get('property_price_low'))
         price_high = int(request.POST.get('property_price_high'))
         bedroom_low = int(request.POST.get('property_bedroom_low'))
         bedroom_high = int(request.POST.get('property_bedroom_high'))
-
+        let_furn = int(request.POST.get('let_furn') or -1)
         residentials = residentials.filter(PRICE__lte=price_high, PRICE__gte=price_low, BEDROOMS__lte=bedroom_high, BEDROOMS__gte=bedroom_low)
-
-        trans_type = int(request.POST.get('trans_type'))
-        let_furn = int(request.POST.get('let_furn'))
-
-        if trans_type != -1:
-            residentials = residentials.filter(TRANS_TYPE_ID=trans_type)
 
         if let_furn != -1:
             residentials = residentials.filter(LET_FURN_ID=let_furn)
@@ -56,37 +58,35 @@ def residentiallist(request):
         'residentiallist': residentials, 
         'favorites': favorites, 
         'parent_tempate':parent_tempate, 
-        'save_search':save_search
+        'save_search':save_search,
+        'rescom': rescom        
         })
 
 
-class ResidentialDetailView(generic.DetailView):
+def property_detail(request, slug, rescom):
+    prop = Residential.objects.get(SLUG=slug, RESCOM=int(rescom/2))
+    images = []
+    for i in range(61):
+        filename = '/img/properties/%s_IMG_%02d.JPG' % (prop.AGENT_REF.strip(), i)
+        if os.path.isfile(settings.STATIC_ROOT+filename):
+            images.append(settings.STATIC_URL+filename)
+    try:
+        save_search = Save_Search.objects.filter(user=self.request.user)
+        is_favor = Residential_Favorite.objects.filter(user=self.request.user, residential_id=prop.id).exists()
+    except Exception, e:
+        save_search = None
+        is_favor = False
 
-    model = Residential
-    template_name = 'residential_property_detail.html'
-    slug_field = 'SLUG' # The name of the column that the slug is stored in.
-    slug_url_kwarg = 'slug' # The name of the URLConf keyword argument that contains the slug
-    context_object_name = 'residentialdetail'
+    if save_search:
+        save_search = save_search[0]
 
-    def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
-        context = super(ResidentialDetailView, self).get_context_data(**kwargs)        
-        context['Let_Rent_Period'] = dict(LET_RENT_FREQUENCY).get(kwargs['object'].LET_RENT_FREQUENCY)
-
-        try:
-            save_search = Save_Search.objects.filter(user=self.request.user)
-            is_favor = Residential_Favorite.objects.filter(user=self.request.user, residential_id=kwargs['object'].id).exists()
-        except Exception, e:
-            save_search = None
-            is_favor = False
-
-        context['is_favor'] = is_favor
-
-        if save_search:
-            save_search = save_search[0]
-        context['save_search'] = save_search
-
-        return context
+    return render(request, 'residential_property_detail.html', {
+        'object': prop, 
+        'Let_Rent_Period': dict(LET_RENT_FREQUENCY).get(prop.LET_RENT_FREQUENCY),
+        'images':images, 
+        'is_favor': is_favor,
+        'save_search':save_search,
+        })
 
 
 @csrf_exempt
@@ -104,10 +104,15 @@ def update_residential_favorite(request):
 
 def save_search(request):
     form_id = request.POST.get('form_id')
+    print form_id, '@@@@@@@2'
     low_price = request.POST.get('property_price_low')
     high_price = request.POST.get('property_price_high')
     low_bedroom = request.POST.get('property_bedroom_low')
     high_bedroom = request.POST.get('property_bedroom_high')
+    let_furn = request.POST.get('let_furn')
+    if let_furn == '-1':
+        let_furn = None
+
     receive_email = request.POST.get('receive_email')
     save_search = Save_Search.objects.filter(user=request.user)
 
@@ -124,21 +129,52 @@ def save_search(request):
         save_search.receive_email = False
 
     if form_id == 'rent_form':
-        let_furn = request.POST.get('let_furn')
-        if let_furn == '-1':
-            let_furn = None
-
         save_search.r_low_price = low_price
         save_search.r_high_price = high_price
         save_search.r_low_bedroom = low_bedroom
         save_search.r_high_bedroom = high_bedroom
         save_search.r_furnished = let_furn
         save_search.save()
-    else:
+    elif form_id == 'sale_form':
         save_search.s_low_price = low_price
         save_search.s_high_price = high_price
         save_search.s_low_bedroom = low_bedroom
         save_search.s_high_bedroom = high_bedroom
         save_search.save()
+    elif form_id == 'crent_form':
+        save_search.cr_low_price = low_price
+        save_search.cr_high_price = high_price
+        save_search.cr_low_bedroom = low_bedroom
+        save_search.cr_high_bedroom = high_bedroom
+        save_search.cr_furnished = let_furn
+        save_search.save()
+    else:
+        save_search.cs_low_price = low_price
+        save_search.cs_high_price = high_price
+        save_search.cs_low_bedroom = low_bedroom
+        save_search.cs_high_bedroom = high_bedroom
+        save_search.save()
 
     return HttpResponse('success') 
+
+def get_max_min_price(rescom=0, type=1, max=1):
+    '''
+    default: get max price for sale properties
+    '''
+    residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID__in=[0,1,2], TRANS_TYPE_ID=type, RESCOM=rescom)
+    if max:
+        result = residentials.aggregate(Max('PRICE'))['PRICE__max'] or 10000
+    else:
+        result = residentials.aggregate(Min('PRICE'))['PRICE__min'] or 200
+    return result
+
+def get_max_min_bedroom(rescom=0, type=1, max=1):
+    '''
+    default: get max bedroom for sale properties
+    '''
+    residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID__in=[0,1,2], TRANS_TYPE_ID=type, RESCOM=rescom)
+    if max:
+        result = residentials.aggregate(Max('BEDROOMS'))['BEDROOMS__max'] or 7
+    else:
+        result = residentials.aggregate(Min('BEDROOMS'))['BEDROOMS__min'] or 1
+    return result    

@@ -7,97 +7,95 @@
   <div class="row">
     <div class="col-md-12">
       <div class="thumbnail">
-        <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
-
-                <!-- Slick Gallery 
-                <div class="content-section-b">
-                    <div class="container">
-
-                        <div class="slider wgpropertygallery">
-                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
-                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_01.JPG" alt="">
-                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_02.JPG" alt="">
-                        </div>
-                        <div class="slider wgpropertygallery-nav">
-                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_00.JPG" alt="">
-                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_01.JPG" alt="">
-                          <img class="img-responsive" src="{{ STATIC_URL }}img/properties/{{ object.AGENT_REF }}_IMG_02.JPG" alt="">
-                        </div>
-
-                    </div>
-                  </div>
-                  -->
-                  <div class="caption-full">
-                    {% if is_favor %}
-                    <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
-                    {% else %}
-                    <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
-                    {% endif %}
-                    
-                    <h4><a href="#">{{ object.DISPLAY_ADDRESS }}</a></h4>
-                    <div class="row">
-                      <div class="col-md-4">
-                        <table class="table table-condensed">
-                          <tr>
-                            <td>Bedrooms:</td>
-                            <td>{{ object.BEDROOMS }}</td>
-                          </tr>
-                          {% if object.TRANS_TYPE_ID == 2 %}
-                          <tr>
-                            <td>Rent frequency:</td>
-                            <td>{{ Let_Rent_Period }}</td>
-                          </tr>
-                          {% endif %}
-                          <tr>
-                            <td>Price:</td>
-                            <td>£{{ object.PRICE }}</td>
-                          </tr>                            
-                        </table>
-                      </div>
-                      <div class="col-md-8">
-                        <p>{{ object.DESCRIPTION }}</p>
-                      </div>
-                    </div>
-                    <div id="map" style="height: 300px;"></div>
-                  </div>
-                </div>
+        <div class="content-section-c">
+            <div class="slider wgpropertygallery">
+              {% for image in images %}
+                <img class="img-responsive" src="{{image}}" alt="">
+              {% endfor %}
+            </div>
+            <div class="slider wgpropertygallery-nav">
+              {% for image in images %}
+                <img class="img-responsive" src="{{image}}" alt="">
+              {% endfor %}
+            </div>
+        </div>
+         
+          <div class="caption-full">
+            {% if is_favor %}
+            <img src="{{ STATIC_URL }}img/e_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
+            {% else %}
+            <img src="{{ STATIC_URL }}img/d_star.png" class="favorite_star detail star{{object.id}}" title="Click this icon to add or remove this property in your favourites" onclick="toggle_favorite(event, this, {{ object.id }}, '{{ user.is_authenticated }}');" data-toggle="modal" data-target="#favorite_dlg" >                    
+            {% endif %}
+            
+            <h4><a href="#">{{ object.DISPLAY_ADDRESS }}</a></h4>
+            <div class="row">
+              <div class="col-md-4">
+                <table class="table table-condensed">
+                  <tr>
+                    <td>Bedrooms:</td>
+                    <td>{{ object.BEDROOMS }}</td>
+                  </tr>
+                  {% if object.TRANS_TYPE_ID == 2 %}
+                  <tr>
+                    <td>Rent frequency:</td>
+                    <td>{{ Let_Rent_Period }}</td>
+                  </tr>
+                  {% endif %}
+                  <tr>
+                    <td>Price:</td>
+                    <td>£{{ object.PRICE }}</td>
+                  </tr>                            
+                </table>
+              </div>
+              <div class="col-md-8">
+                <p>{{ object.DESCRIPTION }}</p>
               </div>
             </div>
+            <div id="map" style="height: 300px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-            <script>
-              function initMap() {
-                var map = new google.maps.Map(document.getElementById('map'), {
-                  zoom: 12,        
-                });
-                var geocoder = new google.maps.Geocoder();
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,        
+        });
+        var geocoder = new google.maps.Geocoder();
 
-                var address = "{{ object.DISPLAY_ADDRESS }}";
-                geocoder.geocode({'address': address}, function(results, status) {
-                  if (status === google.maps.GeocoderStatus.OK) {
-                    map.setCenter(results[0].geometry.location);
-                    var marker = new google.maps.Marker({
-                      map: map,
-                      position: results[0].geometry.location
-                    });
-                  } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                  }
-                });
-              }
-            </script>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
-            {% block slider_js_variable %}
-            {% if save_search %}
-            <script type="text/javascript">
-              var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
-              var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
-              var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
-              var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
-              var let_furn = {{ save_search.r_furnished }};
-            </script>
-            {% else %}
-            {{ block.super }}
-            {% endif %}
-            {% endblock %}  
-          </div> 
-          {% endblock %}
+        var address = "{{ object.DISPLAY_ADDRESS }}";
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === google.maps.GeocoderStatus.OK) {
+            map.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: map,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>    
+    {% block slider_js_variable %}
+    {% if save_search %}
+    <script type="text/javascript">
+      var price_range_sale = [{{save_search.s_low_price}}, {{save_search.s_high_price}}];
+      var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
+      var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
+      var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
+      var let_furn = {{ save_search.r_furnished }};
+      var cprice_range_sale = [{{save_search.cs_low_price}}, {{save_search.cs_high_price}}];
+      var cbedroom_range_sale = [{{save_search.cs_low_bedroom}}, {{save_search.cs_high_bedroom}}];
+      var cprice_range_rent = [{{save_search.cr_low_price}}, {{save_search.cr_high_price}}];
+      var cbedroom_range_rent = [{{save_search.cr_low_bedroom}}, {{save_search.cr_high_bedroom}}];
+      var clet_furn = {{ save_search.cr_furnished }};
+    </script>
+    {% else %}
+      {{ block.super }}
+    {% endif %}
+    {% endblock %}  
+  </div> 
+  {% endblock %}

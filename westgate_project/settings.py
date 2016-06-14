@@ -261,7 +261,7 @@ INSTALLED_APPS = (
 
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
-    # 'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.google',
 )
 
 AUTH_USER_MODEL = 'client.Client'

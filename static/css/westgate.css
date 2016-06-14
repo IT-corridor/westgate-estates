@@ -270,3 +270,16 @@ li.dropdown a {
 .slick-prev:before,
 .slick-next:before {
     color: #333;
+}
+
+.wgpropertygallery-nav {
+    margin-top: 10px;
+}
+
+.tab-pane .panel-body {
+    padding: 12px;
+}
+
+.right {
+    padding: 0 10px;
+}
