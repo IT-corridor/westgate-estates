@@ -267,8 +267,8 @@ li.dropdown a {
 .slick-slide img {
   width: 100%;
 }
-.slick-prev:before,
-.slick-next:before {
+
+.slick-prev:before, .slick-next:before {
     color: #333;
 }
 
