@@ -259,7 +259,7 @@ li.dropdown a {
 }
 
 .slider {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 .slick-slide {
@@ -270,7 +270,7 @@ li.dropdown a {
 }
 
 .slick-prev:before, .slick-next:before {
-    color: #333;
+    color: black;
 }
 
 .wgpropertygallery-nav {
