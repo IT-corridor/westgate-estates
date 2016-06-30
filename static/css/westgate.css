@@ -254,18 +254,19 @@ li.dropdown a {
 
 .navbar-inverse .navbar-nav > .open > a,
 .navbar-inverse .navbar-nav > .open > a:hover,
-.navbar-inverse .navbar-nav > .open > a:focus {    background-color: #333333;    
+.navbar-inverse .navbar-nav > .open > a:focus {    
+    background-color: #333;    
 }
 
 .slider {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
 }
 .slick-slide {
-  margin: 0;
+    margin: 0;
 }
 .slick-slide img {
-  width: 100%;
+    width: 100%;
 }
 
 .slick-prev:before, .slick-next:before {
