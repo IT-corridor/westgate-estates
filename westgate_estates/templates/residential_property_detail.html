@@ -54,6 +54,74 @@
             <div id="map" style="height: 300px;"></div>
           </div>
         </div>
+{% if contacted %}
+  {% if is_posted %}
+  <script type="text/javascript">
+    $('#contact-success-modal').modal();    
+  </script>
+  {% endif %}
+{% endif %}
+<hr>
+<h3>Contact us </h3>
+<p>Would you like to book a viewing of this property? Please get in touch with us using the form below and we'll get back to you.</p>
+{% if not user.is_authenticated %}
+<div class="alert alert-info" role="alert">
+  <p><b>You are not signed in!</b><br>
+  If you sign in or register a new account, your contact details will be added to all of our forms automatically, to save you having to type them in again.<br>
+  It's quick and easy and will also allow you to save your search settings and add your favourite properties to a list.</p>
+  <div class="Sign-in-button">
+    <button class="btn btn-primary btn-md" href="#login-register-modal" role="button" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Sign in / register</button>
+  </div>
+</div>
+{% endif %}
+
+  <form class="mezzanine-form" method="post">
+    {{ form.enquiry_property }}
+    {% csrf_token %}
+    
+    <div class="form-group input_id_field_1 charfield">
+        <label class="control-label" for="id_name">Your name:</label>
+        {{ form.name }}
+        <p class="help-block">required</p>
+    </div>
+    
+    <div class="form-group input_id_field_2 emailfield">
+        <label class="control-label" for="id_email">Your email address:</label>
+        {{ form.email }}
+    </div>
+    
+    <div class="form-group input_id_field_3 charfield">
+        <label class="control-label" for="id_phone">Your phone number:</label>
+        {{ form.phone }}
+    </div>
+    
+    <!-- Multiple Checkboxes -->
+    <div class="form-group input_id_field_5">
+      <label class="control-label" for="checkbox">How can we contact you?</label>
+      <div class="checkbox">
+        <label for="id_contact_phone">
+          {{ form.contact_phone }}
+          By phone?
+        </label>
+      </div>
+      <div class="checkbox">
+        <label for="id_contact_email">
+          {{ form.contact_email }}
+          By email?
+        </label>
+      </div>
+    </div>
+    <div class="form-group input_id_field_6 charfield">
+        <label class="control-label" for="id_field_6">Your message:</label>
+        {{ form.message }}
+        <p class="help-block">required</p>
+    </div>
+    
+    <div class="form-actions">
+        <input class="btn btn-primary btn-md" type="submit" value="Send Message">
+    </div>
+</form>
+
       </div>
     </div>
 
@@ -86,16 +154,17 @@
       var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
       var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
       var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
-      var let_furn = {{ save_search.r_furnished }};
+      var let_furn = {% if save_search.r_furnished %} {{ save_search.r_furnished }}{% else %}-1{% endif %};
       var cprice_range_sale = [{{save_search.cs_low_price}}, {{save_search.cs_high_price}}];
       var cbedroom_range_sale = [{{save_search.cs_low_bedroom}}, {{save_search.cs_high_bedroom}}];
       var cprice_range_rent = [{{save_search.cr_low_price}}, {{save_search.cr_high_price}}];
       var cbedroom_range_rent = [{{save_search.cr_low_bedroom}}, {{save_search.cr_high_bedroom}}];
-      var clet_furn = {{ save_search.cr_furnished }};
+      var clet_furn = {% if save_search.cr_furnished %} {{ save_search.cr_furnished }}{% else %}-1{% endif %};
     </script>
     {% else %}
       {{ block.super }}
     {% endif %}
     {% endblock %}  
   </div> 
+
   {% endblock %}

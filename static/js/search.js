@@ -126,6 +126,7 @@ $(function() {
 
 });
 
+// not used
 function search_residental(form_id)
 {
   $.post('/residential/properties/', $('#'+form_id).serialize())
@@ -175,6 +176,8 @@ function profile_save_search(e) {
   
   save_search(e, 'rent_form', true, receive_email);
   save_search(e, 'sale_form', true);
+  save_search(e, 'crent_form', true);
+  save_search(e, 'csale_form', true);
 }
 
 function toggle_favorite(e, obj, id, logged_in, flag_profile)

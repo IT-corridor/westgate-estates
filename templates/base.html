@@ -86,7 +86,7 @@
               </ul>
             </li>              
             {% else %}
-            <li><a href="/accounts/login/"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+            <li><a href="#login-register-modal" role="button" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Login</a></li>
             {% endif %}
           </ul>
       </div>
@@ -96,6 +96,117 @@
  -->    </div>
   </nav>
 
+<div id="login-register-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="login-register-modal" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Sign in / register</h3>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+            <div class="col-md-6">
+                <p>Already have an account..?</p>
+                <button class="btn btn-primary btn-lg" href="#login-modal" role="button" data-dismiss="modal" aria-hidden="true" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Sign in</button>
+            </div>
+            <div class="col-md-6">
+                <p>Register for a new account...</p>
+                <button class="btn btn-primary btn-lg" href="#register-modal" role="button" data-dismiss="modal" aria-hidden="true" data-toggle="modal"><span class="glyphicon glyphicon-cog"></span> Register</button>
+            </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue without signing in</button>
+  </div>
+</div>
+</div>
+</div>
+
+<div id="login-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Sign in</h3>
+  </div>
+  <div class="modal-body">
+    <form class="login" method="POST" action="/accounts/login/">
+      {% csrf_token %}
+      <p><label for="id_login">Username:</label> <input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Username" type="text"></p>
+    <p><label for="id_password">Password:</label> <input id="id_password" name="password" placeholder="Password" type="password"></p>
+    <p><label for="id_remember">Remember Me:</label> <input id="id_remember" name="remember" type="checkbox"></p>
+      
+      <a class="button secondaryAction" href="/accounts/password/reset/">Forgot Password?</a>
+      <button class="primaryAction btn btn-primary" type="submit">Sign In</button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue without signing in</button>
+  </div>
+</div>
+</div>
+</div>
+
+<div id="contact-success-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="contact-success-modal" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Contact us</h3>
+  </div>
+  <div class="modal-body">
+    <p>Thank you for getting in touch with us.</p>
+    <p>A copy of your message has been sent to your email address.</p>
+    <p>We will be in contact with you soon!</p>    
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+  </div>
+</div>
+</div>
+</div>
+
+<div id="register-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="register-modal" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Register</h3>
+  </div>
+  <div class="modal-body">
+    <div class="socialaccount_ballot" style="margin: 30px; ">
+      <div class="btn-group">
+        <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:14px;"></i></a>
+        <a class='btn btn-danger' href='/accounts/google/login/?process=login' style="width:12em;"> Sign in with Google</a>
+      </div>
+      <br /><br />  
+      <div class="btn-group">
+        <a class='btn btn-primary disabled'><i class="fa fa-facebook" style="width:14px;"></i></a>
+        <a class='btn btn-primary ' href='/accounts/facebook/login/?process=login' style="width:12em"> Sign in with Facebook</a>
+      </div>  
+      <br /><br />
+      <div class="btn-group">
+        <a class='btn btn-info disabled'><i class="fa fa-twitter" style="width:14px;"></i></a>
+        <a class='btn btn-info ' href='/accounts/twitter/login/?process=login' style="width:12em"> Sign in with Twitter</a>
+      </div>  
+    </div>
+
+    <form class="signup" id="signup_form" method="post" action="/accounts/signup/">
+      {% csrf_token %}
+      <p><label for="id_username">Username:</label> <input autofocus="autofocus" id="id_username" name="username" placeholder="Username" type="text"></p>
+    <p><label for="id_email">E-mail :</label> <input id="id_email" name="email" placeholder="E-mail address" type="email"></p>
+    <p><label for="id_password1">Password:</label> <input id="id_password1" name="password1" placeholder="Password" type="password"></p>
+    <p><label for="id_password2">Password (again):</label> <input id="id_password2" name="password2" placeholder="Password (again)" type="password"><input id="id_confirmation_key" maxlength="40" name="confirmation_key" type="hidden"></p>
+      
+      <button type="submit" class="btn btn-primary">Sign Up »</button>
+    </form>    
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Continue without signing in</button>
+  </div>
+</div>
+</div>
+</div>
 
     {% block meta_main %}
 

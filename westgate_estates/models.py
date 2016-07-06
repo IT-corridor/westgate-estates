@@ -1,7 +1,9 @@
 from django.db import models
 from django.conf import settings
 from autoslug import AutoSlugField
+import datetime
 
+import client.models
 
 TRANS_TYPE_ID = (
     (1, 'Resale'),      # Sale
@@ -16,10 +18,10 @@ RES_COM = (
 STATUS_ID = (
     (0, 'Available'),
     (1, 'SSTC(Sales only)'),
-    (2, 'SSTCM(Scottish Sales only'),
-    (3, 'Under offer(Sales only'),
-    (4, 'Reserved(Sales only'),
-    (5, 'Let Agreed(Lettings only')
+    (2, 'SSTCM(Scottish Sales only)'),
+    (3, 'Under offer(Sales only)'),
+    (4, 'Reserved(Sales only)'),
+    (5, 'Let Agreed(Lettings only)')
 )
 
 PRICE_QUALIFIER = (
@@ -38,9 +40,6 @@ PRICE_QUALIFIER = (
     (14, 'Equity Loan'),
     (15, 'Offers Invited')    
 )
-
-# class PROP_SUB_ID(models.Model):
-#     value = models.CharField(max_length=50, unique=True)
 
 PUBLISHED_FLAG = (
     (0, 'Hidden/invisible'),
@@ -91,34 +90,34 @@ class Residential(models.Model):
     LET_FURN_ID = models.IntegerField(choices=LET_FURN_ID, blank=True, null=True)
     LET_RENT_FREQUENCY = models.IntegerField(choices=LET_RENT_FREQUENCY, blank=True, null=True)
     TRANS_TYPE_ID = models.IntegerField(choices=TRANS_TYPE_ID, blank=True, null=True)
-    MEDIA_IMAGE_00 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_01 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_02 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_03 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_04 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_05 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_06 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_07 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_08 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_09 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_10 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_11 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_12 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_13 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_14 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_15 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_16 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_17 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_18 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_19 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_00 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_01 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_02 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_03 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_04 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_05 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_06 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_07 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_08 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_09 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_10 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_11 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_12 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_13 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_14 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_15 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_16 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_17 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_18 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_19 = models.FileField(null=True, blank=True)
     MEDIA_FLOOR_PLAN_00 = models.CharField(max_length=200, blank=True)
     MEDIA_FLOOR_PLAN_TEXT_00 = models.CharField(max_length=200, blank=True)
     MEDIA_FLOOR_PLAN_01 = models.CharField(max_length=200, blank=True)
     MEDIA_FLOOR_PLAN_TEXT_01 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_60 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_60 = models.FileField(null=True, blank=True)
     MEDIA_IMAGE_TEXT_60 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_61 = models.CharField(max_length=200, blank=True)
-    MEDIA_IMAGE_TEXT_61 = models.CharField(max_length=200, blank=True)
+    MEDIA_IMAGE_61 = models.FileField(null=True, blank=True)
+    MEDIA_IMAGE_TEXT_61 = models.FileField(null=True, blank=True)
     MEDIA_DOCUMENT_50 = models.CharField(max_length=200, blank=True)
     MEDIA_DOCUMENT_TEXT_50 = models.CharField(max_length=200, blank=True)
     MEDIA_DOCUMENT_51 = models.CharField(max_length=200, blank=True)
@@ -143,13 +142,14 @@ class Residential(models.Model):
     def __unicode__(self):
         return self.DISPLAY_ADDRESS
 
+    class Meta:
+        verbose_name = 'Property'
+        verbose_name_plural = 'Properties'
 
-class Residential_Favorite(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    residential = models.ForeignKey(Residential)
-
-    def __unicode__(self):
-        return self.user.username+': '+self.residential.DISPLAY_ADDRESS
+    def published(self):
+        return self.PUBLISHED_FLAG
+        
+    published.boolean = True
 
 
 class Save_Search(models.Model):
@@ -174,5 +174,103 @@ class Save_Search(models.Model):
     cs_high_bedroom = models.IntegerField(default=12)
     receive_email = models.BooleanField(default=False)
 
+    class Meta:
+        verbose_name = 'Saved Search'
+        verbose_name_plural = 'Saved Searches'
+
     def __unicode__(self):
-        return self.user.username
+        return self.user.first_name + ' ' + self.user.last_name
+
+
+class Property_Enquiry(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    enquiry_property = models.ForeignKey(Residential, null=True)
+    contact_email = models.BooleanField(default=True)
+    contact_phone = models.BooleanField(default=True)
+    message = models.TextField(blank=True, null=True)
+    conversation = models.TextField(default='Not yet replied')
+    created_at = models.DateTimeField(auto_now=True)
+    replied_at = models.DateTimeField(null=True)
+    is_replied = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = 'Property Enquiries'
+
+    def date_replied(self):
+        if self.is_replied:
+            return self.replied_at.strftime('%d/%m/%y %H:%M')
+        return 'Not yet replied'
+
+    def get_user(self):
+        return client.models.Client.objects.get(email=self.email).id
+
+    def __unicode__(self):
+        return self.name
+
+
+class Service_Enquiry(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    enquiry_service = models.ForeignKey(client.models.Service_Type, null=True)
+    contact_email = models.BooleanField(default=True)
+    contact_phone = models.BooleanField(default=True)
+    message = models.TextField(blank=True, null=True)
+    conversation = models.TextField(blank=True, null=True)    
+    created_at = models.DateTimeField(auto_now=True)
+    replied_at = models.DateTimeField(null=True)
+    is_replied = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Service Enquiry'
+        verbose_name_plural = 'Service Enquiries'
+
+    def date_replied(self):
+        if self.is_replied:
+            return self.replied_at.strftime('%d/%m/%y %H:%M')
+        return 'Not yet replied'
+
+    def get_user(self):
+        return client.models.Client.objects.get(email=self.email).id
+
+    def __unicode__(self):
+        return self.name
+
+
+class General_Enquiry(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=100, blank=True, null=True)
+    phone = models.CharField(max_length=100, blank=True, null=True)
+    enquiry_text = models.CharField(max_length=200, null=True, blank=True)
+    contact_email = models.BooleanField(default=True)
+    contact_phone = models.BooleanField(default=True)
+    message = models.TextField(blank=True, null=True)
+    conversation = models.TextField(blank=True, null=True)    
+    created_at = models.DateTimeField(auto_now=True)
+    replied_at = models.DateTimeField(null=True)
+    is_replied = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = 'Contact Form'
+        verbose_name_plural = 'Contact Forms'
+
+    def date_replied(self):
+        if self.is_replied:
+            return self.replied_at.strftime('%d/%m/%y %H:%M')
+        return 'Not yet replied'
+
+    def get_user(self):
+        return client.models.Client.objects.get(email=self.email).id
+        
+    def __unicode__(self):
+        return self.name
+
+
+class Residential_Favorite(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    residential = models.ForeignKey(Residential)
+
+    def __unicode__(self):
+        return self.user.username+': '+self.residential.DISPLAY_ADDRESS

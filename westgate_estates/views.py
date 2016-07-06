@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Max, Min
+from django.shortcuts import get_object_or_404
 
 import os.path
 
 from .models import *
+from .forms import *
 from client.models import *
 
 
@@ -63,31 +65,150 @@ def residentiallist(request, rescom):
         })
 
 
-def property_detail(request, slug, rescom):
+def property_detail(request, slug, rescom):            
+    form = None    
+    if request.method == "POST":
+        form = Property_EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+
     prop = Residential.objects.get(SLUG=slug, RESCOM=int(rescom/2))
     images = []
+
     for i in range(61):
         filename = '/img/properties/%s_IMG_%02d.JPG' % (prop.AGENT_REF.strip(), i)
         if os.path.isfile(settings.STATIC_ROOT+filename):
             images.append(settings.STATIC_URL+filename)
-    try:
-        save_search = Save_Search.objects.filter(user=self.request.user)
-        is_favor = Residential_Favorite.objects.filter(user=self.request.user, residential_id=prop.id).exists()
+
+    try:        
+        save_search = Save_Search.objects.filter(user=request.user)
+        is_favor = Residential_Favorite.objects.filter(user=request.user, residential_id=prop.id).exists()
     except Exception, e:
         save_search = None
         is_favor = False
+
+    try:
+        client = Client.objects.get(username=request.user)
+        contacted = Property_Enquiry.objects.filter(email=client.email, enquiry_property=prop.id).exists()
+    except Exception, e:
+        client = None
+        contacted = False
+
+    if request.method == 'GET':
+        initial_data = {}
+        initial_data['enquiry_property'] = prop.id
+        initial_data['contact_email'] = True
+        initial_data['contact_phone'] = True
+
+        if client:
+            initial_data['contact_phone'] = client.phone_contactable
+            initial_data['contact_email'] = client.email_contactable    
+            initial_data['name'] = client.first_name + ' ' + client.last_name   
+            initial_data['email'] = client.email
+            initial_data['phone'] = client.phone
+
+        form = Property_EnquiryForm(initial=initial_data)
 
     if save_search:
         save_search = save_search[0]
 
     return render(request, 'residential_property_detail.html', {
         'object': prop, 
+        'form': form,
         'Let_Rent_Period': dict(LET_RENT_FREQUENCY).get(prop.LET_RENT_FREQUENCY),
         'images':images, 
         'is_favor': is_favor,
         'save_search':save_search,
-        })
+        'contacted': contacted,
+        'is_posted': request.method == 'POST'
+    })
 
+
+def service(request, slug):            
+    form = None    
+    if request.method == "POST":
+        form = Service_EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    service = get_object_or_404(Service_Type, name__iexact=slug)
+
+    try:
+        client = Client.objects.get(username=request.user)
+        contacted = Service_Enquiry.objects.filter(email=client.email, enquiry_service=service.id).exists()
+    except Exception, e:
+        client = None
+        contacted = False
+
+    if request.method == 'GET':
+        initial_data = {}
+        initial_data['enquiry_service'] = service.id
+        initial_data['contact_email'] = True
+        initial_data['contact_phone'] = True
+
+        if client:
+            initial_data['contact_phone'] = client.phone_contactable
+            initial_data['contact_email'] = client.email_contactable    
+            initial_data['name'] = client.first_name + ' ' + client.last_name   
+            initial_data['email'] = client.email
+            initial_data['phone'] = client.phone
+
+        form = Service_EnquiryForm(initial=initial_data)
+
+    try:        
+        save_search = Save_Search.objects.filter(user=request.user)
+    except Exception, e:
+        save_search = None
+
+    if save_search:
+        save_search = save_search[0]
+
+    return render(request, 'services.html', {
+        'service': service, 
+        'save_search':save_search,
+        'form': form,
+        'contacted': contacted,
+        'is_posted': request.method == 'POST'
+    })
+
+def contactus(request):
+    form = None    
+    if request.method == "POST":
+        form = General_EnquiryForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    try:
+        client = Client.objects.get(username=request.user)
+        contacted = General_Enquiry.objects.filter(email=client.email).exists()
+    except Exception, e:
+        client = None
+        contacted = False
+
+    if request.method == 'GET':
+        initial_data = {}
+
+        if client:
+            initial_data['name'] = client.first_name + ' ' + client.last_name   
+            initial_data['email'] = client.email
+            initial_data['phone'] = client.phone
+
+        form = General_EnquiryForm(initial=initial_data)
+
+    try:        
+        save_search = Save_Search.objects.filter(user=request.user)
+    except Exception, e:
+        save_search = None
+
+    if save_search:
+        save_search = save_search[0]
+
+    return render(request, 'contactus.html', {
+        'save_search':save_search,
+        'form': form,
+        'contacted': contacted,
+        'is_posted': request.method == 'POST'
+    })
 
 @csrf_exempt
 @login_required
@@ -104,7 +225,7 @@ def update_residential_favorite(request):
 
 def save_search(request):
     form_id = request.POST.get('form_id')
-    print form_id, '@@@@@@@2'
+    # print form_id, '@@@@@@@2'
     low_price = request.POST.get('property_price_low')
     high_price = request.POST.get('property_price_high')
     low_bedroom = request.POST.get('property_bedroom_low')

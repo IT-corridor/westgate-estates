@@ -93,12 +93,12 @@
           var bedroom_range_sale = [{{save_search.s_low_bedroom}}, {{save_search.s_high_bedroom}}];
           var price_range_rent = [{{save_search.r_low_price}}, {{save_search.r_high_price}}];
           var bedroom_range_rent = [{{save_search.r_low_bedroom}}, {{save_search.r_high_bedroom}}];
-          var let_furn = {{ save_search.r_furnished }};
+          var let_furn = {% if save_search.r_furnished %} {{ save_search.r_furnished }}{% else %}-1{% endif %};
           var cprice_range_sale = [{{save_search.cs_low_price}}, {{save_search.cs_high_price}}];
           var cbedroom_range_sale = [{{save_search.cs_low_bedroom}}, {{save_search.cs_high_bedroom}}];
           var cprice_range_rent = [{{save_search.cr_low_price}}, {{save_search.cr_high_price}}];
           var cbedroom_range_rent = [{{save_search.cr_low_bedroom}}, {{save_search.cr_high_bedroom}}];
-          var clet_furn = {{ save_search.cr_furnished }};
+          var clet_furn = {% if save_search.cr_furnished %} {{ save_search.cr_furnished }}{% else %}-1{% endif %};
         </script>
       {% else %}
         {{ block.super }}
