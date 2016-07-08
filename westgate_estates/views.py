@@ -131,6 +131,7 @@ def service(request, slug):
         if form.is_valid():
             form.save()
 
+    slug = slug.replace('-', ' ')
     service = get_object_or_404(Service_Type, name__iexact=slug)
 
     try:

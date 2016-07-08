@@ -25,7 +25,8 @@ class Service_Type(models.Model):
     content = models.TextField(null=True, blank=True)
 
     def get_absolute_url(self):
-        return reverse('service', args=(self.name,))
+        slug = self.name.replace(' ', '-').lower()
+        return reverse('service', args=(slug,))
 
     def __unicode__(self):
         return self.name
