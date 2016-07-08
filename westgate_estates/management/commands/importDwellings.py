@@ -76,8 +76,8 @@ class Command(BaseCommand):
         dwelling.TOWN               = dwellingData[5]
         dwelling.POSTCODE1          = dwellingData[6]
         dwelling.POSTCODE2          = dwellingData[7]
-        dwelling.SUMMARY            = dwellingData[8].decode('utf-8', 'replace')
-        dwelling.DESCRIPTION        = dwellingData[9].decode('utf-8', 'replace')
+        dwelling.SUMMARY            = dwellingData[8].decode('utf-8', 'replace').replace(u'\ufffd', '')
+        dwelling.DESCRIPTION        = dwellingData[9].decode('utf-8', 'replace').replace(u'\ufffd', '')
         dwelling.BRANCH_ID          = dwellingData[10]
         dwelling.STATUS_ID          = int(dwellingData[11])
         dwelling.BEDROOMS           = int(dwellingData[12])
