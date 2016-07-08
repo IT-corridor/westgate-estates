@@ -352,7 +352,8 @@ EMAIL_HOST_USER = 'westgate.estate@gmail.com'
 EMAIL_HOST_PASSWORD = '8j3ys3%WHp2fE**FyVPY'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'info@westgate-estate.co.uk'
+# DEFAULT_FROM_EMAIL = 'info@westgate-estate.co.uk'
+DEFAULT_FROM_EMAIL = 'web@westgate-estate.co.uk'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
