@@ -126,6 +126,7 @@ function update_contact()
         <table class="table table-striped table-hover table-sm table-responsive">
           <thead class="thead-default">
               <tr>
+                  <th>Submitted Date</th>
                   <th>Service</th>
                   <th>User</th>
                   <th>Message</th>
@@ -137,6 +138,7 @@ function update_contact()
           <tbody>
             {% for service in services %}
               <tr>
+                  <td>{{ service.created_at }}</td>
                   <td><a href="/en-gb/admin/westgate_estates/service_enquiry/{{service.id}}/change/" >{{service.enquiry_service.name}}</a></td>
                   <td><a href="/en-gb/admin/client/client/{{service.get_user}}/change/" >{{service.name}}</a></td>
                   <td>{{ service.message }}</td>

@@ -126,6 +126,7 @@ function update_contact()
         <table class="table table-striped table-hover table-sm table-responsive">
           <thead class="thead-default">
               <tr>
+                  <th>Submitted Date</th>
                   <th>User</th>
                   <th>Enquiry</th>
                   <th>Message</th>
@@ -137,6 +138,7 @@ function update_contact()
           <tbody>
             {% for contact in contacts %}
               <tr>
+                  <td>{{contact.created_at}}</a></td>
                   <td><a href="/en-gb/admin/client/client/{{contact.get_user}}/change/" >{{contact.name}}</a></td>
                   <td>{{contact.enquiry_text}}</a></td>
                   <td>{{ contact.message }}</td>

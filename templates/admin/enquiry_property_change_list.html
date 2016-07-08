@@ -127,6 +127,7 @@ function update_contact()
           <thead class="thead-default">
               <tr>
                   <th>ID</th>
+                  <th>Submitted Date</th>
                   <th>Property</th>
                   <th>User</th>
                   <th>Message</th>
@@ -139,6 +140,7 @@ function update_contact()
             {% for property in properties %}
               <tr>
                   <td><a href="/en-gb/admin/westgate_estates/property_enquiry/{{property.id}}/change/" >{{property.id}}</a></td>
+                  <td>{{ property.created_at }}</td>
                   <td><a href="/residential/properties/{{property.enquiry_property.SLUG}}/" target="_blank">{{property.enquiry_property.SLUG}}</a></td>
                   <td><a href="/en-gb/admin/client/client/{{property.get_user}}/change/" >{{property.name}}</a></td>
                   <td>{{ property.message }}</td>
