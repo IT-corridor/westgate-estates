@@ -362,16 +362,8 @@
                     <input type="hidden" id="crent-property_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
                     <input type="hidden" id="crent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
                   <div id="crent-bedroom-slider-range" style="display: none;"></div>    
+                  <input type="hidden" value="-1"  name="let_furn" id="clet_furn_rent">
                   <br/>
-                  <label>Furnished ?</label>
-                  <select style="width: 94%; margin-bottom: 10px;" name="let_furn" id="clet_furn_rent">
-                    <option value="-1">Please select...</option>
-                    <option value="0">Furnished</option>
-                    <option value="1">Part Furnished</option>
-                    <option value="2">Unfurnished</option>
-                    <option value="3">Not Specified</option>
-                    <option value="4">Furnished/ Un Furnished</option>
-                  </select>      
                   <button class="btn btn-default" onclick="search_residental1('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
                   <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'crent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
                 </form>
