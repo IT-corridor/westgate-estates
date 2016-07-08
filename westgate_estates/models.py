@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from autoslug import AutoSlugField
+from django.core.urlresolvers import reverse
 import datetime
 
 import client.models

@@ -9,9 +9,13 @@ from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 import westgate_estates.views
 import client.views
+from westgate_estates.sitemaps import WGSitemap
 
 admin.autodiscover()
 
+sitemaps = {
+    'properties': WGSitemap()
+}
 
 urlpatterns = i18n_patterns(
     # Change the admin prefix here to use an alternate URL for the
@@ -25,6 +29,9 @@ if settings.USE_MODELTRANSLATION:
     ]
 
 urlpatterns += [
+    url('^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps':sitemaps}),
+    url('^robots\.txt$', include('robots.urls')),
+
     url("^$", direct_to_template, {"template": "home.html"}, name="home"),
     url('^residential/properties/$', westgate_estates.views.residentiallist, {'rescom': 0}, name='residential_property_list',),
     url('^residential/properties/for-sale/$', westgate_estates.views.residentiallist, {'rescom': 1}, name='residential_property_list_sale',),

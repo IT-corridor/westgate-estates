@@ -21,3 +21,4 @@ django-debug-toolbar>=1.4
 sqlparse>=0.1.16
 wsgiref>=0.1.2
 django-allauth
+django-robots

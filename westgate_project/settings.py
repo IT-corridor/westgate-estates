@@ -254,7 +254,8 @@ INSTALLED_APPS = (
     # "mezzanine.accounts",
     # "mezzanine.mobile",
     'client',
-
+    'robots',
+    
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
