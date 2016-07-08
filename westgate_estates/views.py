@@ -79,7 +79,7 @@ def property_detail(request, slug, rescom):
         form = Property_EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
-            send_email(form.cleaned_data['name'], form.cleaned_data['email'], form.cleaned_data['message'])
+            send_email(form.cleaned_data['name'], settings.EMAIL_HOST_USER, form.cleaned_data['message'])
 
     prop = Residential.objects.get(SLUG=slug, RESCOM=int(rescom/2))
     images = []
@@ -139,7 +139,7 @@ def service(request, slug):
         form = Service_EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
-            send_email(form.cleaned_data['name'], form.cleaned_data['email'], form.cleaned_data['message'])
+            send_email(form.cleaned_data['name'], settings.EMAIL_HOST_USER, form.cleaned_data['message'])
 
     slug = slug.replace('-', ' ')
     service = get_object_or_404(Service_Type, name__iexact=slug)
@@ -188,7 +188,7 @@ def contactus(request):
         form = General_EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
-            send_email(form.cleaned_data['name'], form.cleaned_data['email'], form.cleaned_data['message'])
+            send_email(form.cleaned_data['name'], settings.EMAIL_HOST_USER, form.cleaned_data['message'])
 
     try:
         client = Client.objects.get(username=request.user)
