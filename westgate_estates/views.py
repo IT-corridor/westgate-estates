@@ -7,6 +7,8 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Max, Min
 from django.shortcuts import get_object_or_404
+from django.core.mail import send_mail
+from django.conf import settings
 
 import os.path
 
@@ -14,6 +16,12 @@ from .models import *
 from .forms import *
 from client.models import *
 
+
+def send_email(sender_name, from_address, message, to_address=settings.DEFAULT_FROM_EMAIL):
+    ''' send email '''
+    email_subject = 'Westgate Estates'
+    email_body = "Hi\n\nYou've got a contact request from Customer: %s \nMessage: %s\n\nPlease log in to the site admin to view a new *Contact form submission | Property enquiry | mortgage / Insurance enquiry* and to record the correspondance with the customer" % (sender_name, message)
+    send_mail(email_subject, email_body, from_address, [to_address], fail_silently=False)
 
 def residentiallist(request, rescom):
     residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID__in=[0,1,2], RESCOM=int(rescom/3))
@@ -71,6 +79,7 @@ def property_detail(request, slug, rescom):
         form = Property_EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
+            send_email(form.cleaned_data['name'], form.cleaned_data['email'], form.cleaned_data['message'])
 
     prop = Residential.objects.get(SLUG=slug, RESCOM=int(rescom/2))
     images = []
@@ -130,6 +139,7 @@ def service(request, slug):
         form = Service_EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
+            send_email(form.cleaned_data['name'], form.cleaned_data['email'], form.cleaned_data['message'])
 
     slug = slug.replace('-', ' ')
     service = get_object_or_404(Service_Type, name__iexact=slug)
@@ -178,6 +188,7 @@ def contactus(request):
         form = General_EnquiryForm(request.POST)
         if form.is_valid():
             form.save()
+            send_email(form.cleaned_data['name'], form.cleaned_data['email'], form.cleaned_data['message'])
 
     try:
         client = Client.objects.get(username=request.user)
