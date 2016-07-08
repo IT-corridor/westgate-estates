@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.urlresolvers import reverse
 
 import westgate_estates.models
 
@@ -22,6 +23,9 @@ class Action_Type(models.Model):
 class Service_Type(models.Model):
     name = models.CharField(max_length=50)
     content = models.TextField(null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('service', args=(self.name,))
 
     def __unicode__(self):
         return self.name

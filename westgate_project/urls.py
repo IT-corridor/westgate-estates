@@ -9,12 +9,14 @@ from mezzanine.core.views import direct_to_template
 from mezzanine.conf import settings
 import westgate_estates.views
 import client.views
-from westgate_estates.sitemaps import WGSitemap
+from westgate_estates.sitemaps import *
 
 admin.autodiscover()
 
 sitemaps = {
-    'properties': WGSitemap()
+    'properties': WGSitemap(),
+    'static': StaticPagesSitemap(),
+    'services': ServiceSitemap(),
 }
 
 urlpatterns = i18n_patterns(
@@ -41,7 +43,7 @@ urlpatterns += [
     url('^commercial/properties/to-rent/$', westgate_estates.views.residentiallist, {'rescom': 5}, name='commercial_property_list_rent',),
     url('^residential/properties/(?P<slug>[-\w]+)/$', westgate_estates.views.property_detail, {'rescom': 0}, name='residential_property_detail'),
     url('^commercial/properties/(?P<slug>[-\w]+)/$', westgate_estates.views.property_detail, {'rescom': 2}, name='commercial_property_detail'),
-    url('^services/(?P<slug>[-\w]+)/$', westgate_estates.views.service, name='service'),
+    url('^services/(?P<slug>[- \w]+)/$', westgate_estates.views.service, name='service'),
     url('^residential/favorite/$', westgate_estates.views.update_residential_favorite, name='update_residential_favorite',),    
     url('^residential/save_search/$', westgate_estates.views.save_search, name='save_search',),        
     url('^contactus/$', westgate_estates.views.contactus, name='contactus',),

@@ -138,6 +138,8 @@ class Residential(models.Model):
     RESCOM = models.IntegerField(choices=RES_COM, default=0)
 
     def get_absolute_url(self):
+        if self.RESCOM == 1:
+            return reverse('commercial_property_detail', args=(self.SLUG,))
         return reverse('residential_property_detail', args=(self.SLUG,))
         
     def __unicode__(self):
