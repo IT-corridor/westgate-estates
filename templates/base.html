@@ -130,7 +130,7 @@
       <h3 id="myModalLabel">Sign in</h3>
   </div>
   <div class="modal-body">
-    <form class="login" method="POST" action="/accounts/login/">
+    <form class="login" method="POST" action="/accounts/login/?next={{request.get_full_path}}">
       {% csrf_token %}
       <p><label for="id_login">Username:</label> <input autofocus="autofocus" id="id_login" maxlength="30" name="login" placeholder="Username" type="text"></p>
     <p><label for="id_password">Password:</label> <input id="id_password" name="password" placeholder="Password" type="password"></p>
