@@ -88,11 +88,11 @@
 }
 .slick-prev:before
 {
-    content: '←';
+    content:"\e079";
 }
 [dir='rtl'] .slick-prev:before
 {
-    content: '→';
+    content:"\e080";
 }
 
 .slick-next
@@ -106,11 +106,11 @@
 }
 .slick-next:before
 {
-    content: '→';
+    content:"\e080";
 }
 [dir='rtl'] .slick-next:before
 {
-    content: '←';
+    content:"\e079";
 }
 
 /* Dots */
