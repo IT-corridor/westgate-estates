@@ -244,6 +244,10 @@ li.dropdown a {
     min-height: 69px;
 }
 
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border: 0;
+}
+
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     background-color: #000;    
 }
@@ -260,6 +264,43 @@ li.dropdown a {
 
 .nav > li > a.dropdown-toggle:hover {
     background-color: black;
+}
+
+.wgcontactbar {
+    margin-bottom: 0;
+    background-color: #009900;
+    width: 100%;
+    color: black;
+    border: 0;
+    margin-top: 15px;
+    padding: 0px;
+    min-height: 0;
+}
+
+.wgcontactbar > li > a { 
+    line-height: 20px;
+    font-size: 12px;
+    position: relative;
+    display: block;
+    color: black;
+}
+
+.wgcontactbar-left {
+    margin-left: 50px;
+}
+
+.wgcontactbar-right {
+    float: right;
+}
+
+.wgcontactbar-left a {
+    
+
+}
+
+.wgcontactbar-right a {
+    
+
 }
 
 .slider {
