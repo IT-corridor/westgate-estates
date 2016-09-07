@@ -38,7 +38,7 @@
         <label class="col-md-4 control-label" for="userprofiletel-0">Phone</label>
         <div class="col-md-4">
           <div class="input-group">
-            <input id="userprofiletel-0" name="phone" class="form-control"
+            <input id="userprofiletel-0" name="phone" class="form-control" required
             type="text" placeholder="Your telephone number" value="{{ clientform.phone.value }}"> <span class="input-group-addon">     
       <input type="checkbox" class="" name="phone_contactable"  {% if clientform.phone_contactable.value %}checked{% endif %}>     
        </span>
