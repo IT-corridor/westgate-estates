@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load staticfiles %} 
 
-{% block meta_main %}
+{% block main %}
 
 <!-- Header --><!--
 <a name="about"></a>
 <div class="intro-header">
-    <div class="container">
+    <div class="row">
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">
@@ -32,7 +32,7 @@
 <!-- /.intro-header -->
 
 <!-- Page Content -->        
-<div class="container">
+<div class="row">
 
 {% if messages %}
 <div class="messages">
@@ -48,7 +48,7 @@
 
  <!-- Slider Banner Header -->
 <div class="content-section-b">
-    <div class="container">
+    <div class="row">
         <div class="wgbannerslider slider">
           <div><a href="services/free-valuation/"><img src="{% static "img/sales-banner.jpg" %}" alt="Sales Banner - You can sell your home with a completion fee of only £995 for a limited time only."/></a></div>
           <div><a href="services/free-lettings-appraisal/"><img src="{% static "img/lettings-banner.jpg" %}" alt="Lettings Banner - Landlords, for a limited time only, no set up fee, a no let no fee contract and just 10% commission on let properties." /></a></div>
@@ -217,7 +217,7 @@
 <!-- Page Content -->
 <div class="content-section-b">
 
-    <div class="container">
+    <div class="row">
 
         <div class="row">
             <div class="col-lg-12">
@@ -229,13 +229,13 @@
         </div>
 
     </div>
-    <!-- /.container -->
+    <!-- /.row -->
 
 </div>
 <!-- /.content-section-b -->
 
 <div class="content-section-b">
-    <div class="container">
+    <div class="row">
         <div class="row">
             <div class="col-lg-5 col-sm-6">
                 <div class="clearfix"></div>
@@ -254,7 +254,7 @@
 </div>
 <!--
 <div class="content-section-a">
-    <div class="container">
+    <div class="row">
         <div class="row">
             <div class="col-lg-5 col-sm-6">
                 <div class="clearfix"></div>
@@ -269,10 +269,10 @@
     </div>
 </div>
 -->
-
+<!-- 
 <div class="banner">
 
-    <div class="container">
+    <div class="row">
 
         <div class="row">
             <div class="col-lg-6">
@@ -283,9 +283,9 @@
                     <li>
                         <a href="https://twitter.com/WestgateEstates" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                     </li>
-                    <!-- <li>
+                    <li>
                         <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-google-plus-official fa-fw"></i> <span class="network-name">Google+</span></a>
-                    </li> -->
+                    </li>
                     <li>
                         <a href="https://www.facebook.com/Westgate-Estates-283486395319079" class="btn btn-default btn-lg"><i class="fa fa-facebook-official fa-fw"></i> <span class="network-name">Facebook</span></a>
                     </li>
@@ -294,9 +294,8 @@
         </div>
 
     </div>
-    <!-- /.container -->
 
 </div>
-<!-- /.banner -->
+ --><!-- /.banner -->
 
 {% endblock %}
