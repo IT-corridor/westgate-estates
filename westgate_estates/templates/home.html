@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% load staticfiles %} 
 
-{% block main %}
+{% block meta_main %}
 
 <!-- Header --><!--
 <a name="about"></a>
 <div class="intro-header">
-    <div class="row">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <div class="intro-message">
@@ -32,7 +32,7 @@
 <!-- /.intro-header -->
 
 <!-- Page Content -->        
-<div class="row">
+<div class="container">
 
 {% if messages %}
 <div class="messages">
@@ -48,30 +48,35 @@
 
  <!-- Slider Banner Header -->
 <div class="content-section-b">
-    <div class="row">
+    <div class="container">
         <div class="wgbannerslider slider">
           <div><a href="services/free-valuation/"><img src="{% static "img/sales-banner.jpg" %}" alt="Sales Banner - You can sell your home with a completion fee of only £995 for a limited time only."/></a></div>
           <div><a href="services/free-lettings-appraisal/"><img src="{% static "img/lettings-banner.jpg" %}" alt="Lettings Banner - Landlords, for a limited time only, no set up fee, a no let no fee contract and just 10% commission on let properties." /></a></div>
         </div>
     </div>
 </div>
-<!--
-<div class="col-md-12">
-     <ul class="nav nav-tabs">
-          <li class="nav active"><a href="#for_res" data-toggle="tab">Residential</a></li>
-          <li class="nav "><a href="#for_com" data-toggle="tab">Commercial</a></li>
+<div class="content-section-b">
+    <div class="container">
+
+    <div class="row">
+      <div class="col-md-3">
+        <h2>Search:</h2>
+        <ul class="nav nav-tabs">
+          <li class="nav {% if not rescom or rescom < 3 %}active{%endif%}"><a href="#for_res" data-toggle="tab">Residential</a></li>
+          <li class="nav {% if rescom > 2 %}active{%endif%}"><a href="#for_com" data-toggle="tab">Commercial</a></li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="for_res">
+          <div class="tab-pane fade in {% if not rescom or rescom < 3 %}active{%endif%}" id="for_res">
             <div class="panel panel-default">
               <div class="panel-body">
         <ul class="nav nav-tabs">
-          <li class="nav active"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
-          <li class="nav "><a href="#to_rent" data-toggle="tab">To Rent</a></li>
+          <li class="nav {% if rescom != 2 %}active{%endif%}"><a href="#for_sale" data-toggle="tab">For Sale</a></li>
+          <li class="nav {% if rescom == 2 %}active{%endif%}"><a href="#to_rent" data-toggle="tab">To Rent</a></li>
         </ul>
 
+        <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="for_sale">
+          <div class="tab-pane fade in {% if rescom != 2 %}active{%endif%}" id="for_sale">
             <div class="panel panel-default">
               <div class="panel-body">
 
@@ -101,7 +106,7 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade in " id="to_rent">
+          <div class="tab-pane fade in {% if rescom == 2 %}active{%endif%}" id="to_rent">
             <div class="panel panel-default">
               <div class="panel-body">
 
@@ -148,12 +153,13 @@
             <div class="panel panel-default">
               <div class="panel-body">
         <ul class="nav nav-tabs">
-          <li class="nav active"><a href="#cfor_sale" data-toggle="tab">For Sale</a></li>
-          <li class="nav "><a href="#cto_rent" data-toggle="tab">To Rent</a></li>
+          <li class="nav {% if rescom != 5 %}active{%endif%}"><a href="#cfor_sale" data-toggle="tab">For Sale</a></li>
+          <li class="nav {% if rescom == 5 %}active{%endif%}"><a href="#cto_rent" data-toggle="tab">To Rent</a></li>
         </ul>
 
+        <!-- Tab panes -->
         <div class="tab-content">
-          <div class="tab-pane fade in active" id="cfor_sale">
+          <div class="tab-pane fade in {% if rescom != 5 %}active{%endif%}" id="cfor_sale">
             <div class="panel panel-default">
               <div class="panel-body">
 
@@ -172,14 +178,14 @@
                     <input type="hidden" id="cproperty_bedroom_low" name="property_bedroom_low" readonly style="border:0; color:#f6931f; font-weight:bold; width: 8px; padding: 0;">
                     <input type="hidden" id="cproperty_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
                   <div id="cbedroom-slider-range" style="display: none;"></div>    
-
+                  <br/>
                   <button class="btn btn-default" onclick="search_residental1('sale_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
                   <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'csale_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
                 </form>
               </div>
             </div>
           </div>
-          <div class="tab-pane fade in" id="cto_rent">
+          <div class="tab-pane fade in {% if rescom == 5 %}active{%endif%}" id="cto_rent">
             <div class="panel panel-default">
               <div class="panel-body">
 
@@ -199,6 +205,7 @@
                     <input type="hidden" id="crent-property_bedroom_high" name="property_bedroom_high" readonly style="border:0; color:#f6931f; font-weight:bold; width: 18px; padding: 0;">        
                   <div id="crent-bedroom-slider-range" style="display: none;"></div>    
                   <input type="hidden" value="-1"  name="let_furn" id="clet_furn_rent">
+                  <br/>
                   <button class="btn btn-default" onclick="search_residental1('rent_form');"><span class='glyphicon glyphicon-search'></span> Search</button>
                   <a class="btn btn-default" data-toggle="modal" data-target="#save_search_dlg" onclick="save_search(event, 'crent_form', '{{ user.is_authenticated }}');" title="Click this button to save your search preferences, so that you do not need to enter them next time you visit our site."><span class='glyphicon glyphicon-download-alt'></span> Save search</a>
                 </form>
@@ -211,14 +218,58 @@
             </div>
           </div>
         </div>
-</div>
--->
 
-<!-- Page Content -->
-<div class="content-section-b">
+        <!-- Save Search Modal -->
+        <div class="modal fade" id="save_search_dlg" role="dialog">
+          <div class="modal-dialog">
 
-    <div class="row">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Save your search</h4>
+              </div>
+              <div class="modal-body">
+                <p>Your search has been saved. Would you like to receive a weekly email containing a list of properties that match your search? You can unsubscribe at any time. </p>
+                <div><input type="checkbox" class="save_search_chk" style="margin: 5px;"><span>Check the box to receive the email.</span></div>          
+                <small>Please note, this service is not yet active, although you will start to receive the email shortly.</small>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+            </div>
 
+          </div>
+        </div>
+
+        <!-- Favorite Modal -->
+        <div class="modal fade" id="favorite_dlg" role="dialog">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Favorite</h4>
+              </div>
+              <div class="modal-body">
+                <p id="favor_msg">This property has been added to your favourites. </p>
+                <a href="/profile/#favorites_profile">View all of your favourites?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Login Confirm Modal -->
+        <div id="dialog-confirm" title="Please login first!" style="display:none;">
+          <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Please <a href="/accounts/login/">login</a> to save your settings.</p>
+        </div>
+
+        <!-- Favorite Delete Confirm Modal -->
+        <div id="fav-dialog-confirm" title="Favorite Remove" style="display:none;">
+          <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure you would like to remove this property from your favourites?</p>
+        </div>
+      </div>
+
+      <div class="col-md-9">
         <div class="row">
             <div class="col-lg-12">
                 <div class="clearfix"></div>
@@ -228,33 +279,31 @@
             </div>
         </div>
 
-    </div>
-    <!-- /.row -->
-
-</div>
-<!-- /.content-section-b -->
-
-<div class="content-section-b">
-    <div class="row">
-        <div class="row">
-            <div class="col-lg-5 col-sm-6">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Residential Properties</h2>
-                <p class="lead">Discover an array of remarkable properties to rent, sell or let. Find out how we can help you sell or let your property.</p>
-                <a href="residential/properties/" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> Find out more</span></a>
-            </div>
-            <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                <div class="clearfix"></div>
-                <h2 class="section-heading">Commercial Properties</h2>
-                <p class="lead">We offer a wide selection of commercial properties to suit your needs.</p>
-                <a href="commercial/properties/" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> Find out more</span></a>
-            </div>
+        <div class="content-section-b">
+            <!-- <div class="container"> -->
+                <div class="row">
+                    <div class="col-lg-5 col-sm-6">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Residential Properties</h2>
+                        <p class="lead">Discover an array of remarkable properties to rent, sell or let. Find out how we can help you sell or let your property.</p>
+                        <a href="residential/properties/" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> Find out more</span></a>
+                    </div>
+                    <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                        <div class="clearfix"></div>
+                        <h2 class="section-heading">Commercial Properties</h2>
+                        <p class="lead">We offer a wide selection of commercial properties to suit your needs.</p>
+                        <a href="commercial/properties/" class="btn btn-default btn-lg"><span class="network-name flaticon-home78"> Find out more</span></a>
+                    </div>
+                </div>
+            <!-- </div> -->
         </div>
+      </div>
+    </div>
     </div>
 </div>
 <!--
 <div class="content-section-a">
-    <div class="row">
+    <div class="container">
         <div class="row">
             <div class="col-lg-5 col-sm-6">
                 <div class="clearfix"></div>
@@ -269,10 +318,10 @@
     </div>
 </div>
 -->
-<!-- 
+
 <div class="banner">
 
-    <div class="row">
+    <div class="container">
 
         <div class="row">
             <div class="col-lg-6">
@@ -283,9 +332,9 @@
                     <li>
                         <a href="https://twitter.com/WestgateEstates" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-google-plus-official fa-fw"></i> <span class="network-name">Google+</span></a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="https://www.facebook.com/Westgate-Estates-283486395319079" class="btn btn-default btn-lg"><i class="fa fa-facebook-official fa-fw"></i> <span class="network-name">Facebook</span></a>
                     </li>
@@ -294,8 +343,9 @@
         </div>
 
     </div>
+    <!-- /.container -->
 
 </div>
- --><!-- /.banner -->
+<!-- /.banner -->
 
 {% endblock %}
