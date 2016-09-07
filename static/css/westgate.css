@@ -329,3 +329,7 @@ li.dropdown a {
 .right {
     padding: 0 10px;
 }
+
+#dropdown-menu-home {
+    display: none;
+}
