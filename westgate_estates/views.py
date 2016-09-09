@@ -24,7 +24,7 @@ def send_email(sender_name, from_address, message, to_address=settings.DEFAULT_F
     send_mail(email_subject, email_body, from_address, [to_address], fail_silently=False)
 
 def residentiallist(request, rescom):
-    residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID__in=[0,1,2], RESCOM=int(rescom/3))
+    residentials = Residential.objects.filter(PUBLISHED_FLAG=1, STATUS_ID=0, RESCOM=int(rescom/3))
     trans_type = rescom % 3
     if trans_type > 0:
         residentials = residentials.filter(TRANS_TYPE_ID=trans_type)

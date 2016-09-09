@@ -6,7 +6,7 @@ admin.site.register(Property_Type)
 admin.site.register(Action_Type)
 
 class ClientAdmin(admin.ModelAdmin):
-	fields = ['username', 'is_active', 'first_name', 'last_name', 'email', 'phone', 'email_contactable', 'phone_contactable', 'interested_property', 'interested_action', 'interested_service', 'receive_news']
+	fields = ['username', 'password', 'is_active', 'is_staff', 'is_superuser', 'first_name', 'last_name', 'email', 'groups', 'phone', 'email_contactable', 'phone_contactable', 'interested_property', 'interested_action', 'interested_service', 'receive_news']
 	list_display = ['name']
 	search_fields = ['username', 'first_name', 'last_name', 'email', 'phone']
 	list_per_page = 10

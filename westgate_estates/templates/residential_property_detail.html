@@ -6,6 +6,15 @@
 <div class="col-md-12 middle">
   <div class="row">
     <div class="col-md-12">
+    {% if object.STATUS_ID != 0 or object.PUBLISHED_FLAG != 1 %}
+      <div class="alert alert-danger" role="alert">
+      {% if object.TRANS_TYPE_ID == 1 %}
+        <p>This property is sold!</p>
+      {% else %}
+        <p>This property is rented!</p>
+      {% endif %}
+      </div>
+    {% endif %}
       <div class="thumbnail">
         <div class="content-section-c">
             <div class="slider wgpropertygallery">
@@ -62,6 +71,7 @@
   {% endif %}
 {% endif %}
 <hr>
+{% if object.STATUS_ID == 0 and object.PUBLISHED_FLAG == 1 %}
 <h3>Contact us </h3>
 <p>Would you like to book a viewing of this property? Please get in touch with us using the form below and we'll get back to you.</p>
 {% if not user.is_authenticated %}
@@ -121,7 +131,7 @@
         <input class="btn btn-primary btn-md" type="submit" value="Send Message">
     </div>
 </form>
-
+{% endif %}
       </div>
     </div>
 

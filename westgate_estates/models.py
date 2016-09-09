@@ -52,7 +52,7 @@ LET_FURN_ID = (
     (1, 'Part Furnished'),
     (2, 'Unfurnished'),
     (3, 'Not Specified'),
-    (4, 'Furnished/ Un Furnishedf'),
+    (4, 'Furnished/ Un Furnished'),
 )
 
 LET_RENT_FREQUENCY = (
