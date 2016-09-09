@@ -32,7 +32,7 @@ if settings.USE_MODELTRANSLATION:
 
 urlpatterns += [
     url('^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps':sitemaps}),
-    url('^robots\.txt$', include('robots.urls')),
+    url('^robots\.txt', include('robots.urls')),
 
     url("^$", direct_to_template, {"template": "home.html"}, name="home"),
     url('^residential/properties/$', westgate_estates.views.residentiallist, {'rescom': 0}, name='residential_property_list',),

@@ -28,8 +28,8 @@ class Command(BaseCommand):
     
     def getData(self):
         self.stdout.write('Doing stuff...')
-        f = open("/home/root/blm_data/WG1.BLM", "r")
-        # f = open("/root/WG1.BLM", "r")
+        # f = open("/home/root/blm_data/WG1.BLM", "r")
+        f = open("/root/WG1.BLM", "r")
         file_contents = f.read()
         buffer = re.split('#[A-Z]+#', file_contents)
         header = buffer[2].strip()
@@ -48,27 +48,27 @@ class Command(BaseCommand):
                     self.makeResidential(dwellingData)
     
     def residentialExists(self, dwellingData):
-        if Residential.objects.filter(AGENT_REF=dwellingData[0]).exists():
+        if Residential.objects.filter(AGENT_REF=dwellingData[0].strip()).exists():
             return True
         else:
             return False
     
     def residentailUpdate(self, dwellingData):
         print 'Updateing'
-        dwelling = Residential.objects.get(AGENT_REF=dwellingData[0])
+        dwelling = Residential.objects.get(AGENT_REF=dwellingData[0].strip())
         dwellingPopulated = self.populateResidential(dwelling, dwellingData)
         dwellingPopulated.save()
     
     def makeResidential(self, dwellingData):
         print 'Create'
-        print "\n" + dwellingData[0]  + "//////////////////////////////////////////////////////////" + "\n"
+        print "\n" + dwellingData[0].strip()  + "//////////////////////////////////////////////////////////" + "\n"
         # dwelling = Residential.objects.create()
         dwelling = Residential()
         dwellingPopulated = self.populateResidential(dwelling, dwellingData)
         dwellingPopulated.save()
     
     def populateResidential(self, dwelling, dwellingData):
-        dwelling.AGENT_REF          = dwellingData[0]
+        dwelling.AGENT_REF          = dwellingData[0].strip()
         dwelling.ADDRESS_1          = dwellingData[1]
         dwelling.ADDRESS_2          = dwellingData[2]
         dwelling.ADDRESS_3          = dwellingData[3]
