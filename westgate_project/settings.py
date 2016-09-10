@@ -127,7 +127,6 @@ SITE_ID = 1
 # to load the internationalization machinery.
 USE_I18N = False
 
-AUTHENTICATION_BACKENDS = ("mezzanine.core.auth_backends.MezzanineBackend",)
 
 # The numeric mode to set newly-uploaded files to. The value should be
 # a mode you'd pass directly to os.chmod.
@@ -221,8 +220,8 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
+    # 'django.contrib.auth.backends.ModelBackend',
+    'mezzanine.core.auth_backends.MezzanineBackend',
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
