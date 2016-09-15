@@ -4,10 +4,15 @@ upstream %(proj_name)s {
 }
 
 server {
+server_name www.westgate-estate.co.uk;
+rewrite ^/(.*)$ http://westgate-estate.co.uk/$1 permanent;
+}
+
+server {
 
     listen 80;
     %(ssl_disabled)s listen 443 ssl;
-    server_name %(domains_nginx)s;
+    server_name westgate-estate.co.uk;
     client_max_body_size 10M;
     keepalive_timeout    15;
     error_log /home/%(user)s/logs/%(proj_name)s_error_nginx.log info;
